@@ -3,3 +3,9 @@ export class ServerMisconfigurationException extends Error {
         super(message)
     }
 }
+
+export class AuthException extends Error {
+    constructor(message = 'Authentication is required') { 
+        super(message)
+    }
+}

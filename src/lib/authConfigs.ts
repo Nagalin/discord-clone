@@ -30,36 +30,37 @@ export const authConfigs: AuthOptions = {
 
     callbacks: {
         async jwt({ token, user }) {
-            try {
-                if (user) {
-                    const { id, name, email, image } = user
-
-                    await upsertUser(id, name as string, image as string, email as string)
+            if (user) {
+                const { id, name, email, image } = user
+                try {
+                    await upsertUser(id, name as string, email as string, image as string)
                     token.userId = id
+                } catch (error) {
+                    console.error('Error upserting user: ', error)
                 }
-
-            } catch (error) {
-                console.error('Error upserting user: ', error)
             }
             return token
         },
 
         async session({ session, token }) {
             const userId = token.userId as string
-            const user = await getUserInfoWithId(userId)
-
-            if (session.user) {
-                session.user.userId = userId
-                session.user.name = user?.username
-                session.user.email = user?.email
-                session.user.image = user?.image
-            } else {
-                session.user = {
-                    userId: userId,
-                    name: user?.username,
-                    email: user?.email,
-                    image: user?.image
+            try {
+                const user = await getUserInfoWithId(userId)
+                if (session.user) {
+                    session.user.userId = userId
+                    session.user.name = user?.username
+                    session.user.email = user?.email
+                    session.user.image = user?.image
+                } else {
+                    session.user = {
+                        userId: userId,
+                        name: user?.username,
+                        email: user?.email,
+                        image: user?.image
+                    }
                 }
+            } catch (error) {
+                console.error('Error fetching user info: ', error)
             }
             return session
         }

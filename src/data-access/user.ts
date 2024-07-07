@@ -26,5 +26,6 @@ export async function  getUserInfoWithId(userId: string) {
             userId: userId
         }
     })
+    console.log("here", user)
     return user? createUserDTO(user) : null
 }

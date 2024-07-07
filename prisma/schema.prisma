@@ -18,4 +18,38 @@ model User {
   username String
   image String
   email String
+
+  serversOwned Server[] @relation("server-owner-relation")
+  serverMembers Server[]
+
+  channelMembers Channel[]
+}
+
+model Server {
+  serverId String @id @default(uuid())
+  serverName String
+  serverImage String
+
+  owner User @relation("server-owner-relation", fields: [ownerId], references: [userId])
+  ownerId String
+
+  members User[]
+  
+  channels Channel[]
+}
+
+enum ChannelType {
+  Text
+  Voice
+}
+
+model Channel {
+  channelId String @id @default(uuid())
+  channelName String
+  channelType ChannelType
+
+  server Server @relation(fields: [serverId], references: [serverId])
+  serverId String
+
+  members User[]
 }

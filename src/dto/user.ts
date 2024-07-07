@@ -10,6 +10,7 @@ const userSchema = z.object({
 type UserType = z.infer<typeof userSchema>
 
 export function createUserDTO(user: UserType) {
+    console.log('email: ', user.email)
     return userSchema.parse({
         userId: user.userId,
         username: user.username,

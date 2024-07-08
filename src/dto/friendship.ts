@@ -1,18 +1,17 @@
 import { z } from "zod";
+import { userSchema } from "./user";
 
-const pendingFriendshipSchema = z.object({
+const friendshipSchema = z.object({
     friendshipId: z.string().uuid(),
     requesterId: z.string(),
     recipientId: z.string(),
-    status: z.enum(['Friend', 'Pending'])
+    status: z.enum(['Friend', 'Pending']),
+    requester: userSchema.optional(),
+    recipient: userSchema.optional()
 })
 
-type PendingFriendshipType = z.infer<typeof pendingFriendshipSchema>
-export async function createPendingFriendshipDTO(pendingFriendship: PendingFriendshipType) {
-    return pendingFriendshipSchema.parse({
-        friendshipId: pendingFriendship.friendshipId,
-        requesterId: pendingFriendship.requesterId,
-        recipientId: pendingFriendship.recipientId,
-        status: pendingFriendship.status
-    })
+type FriendshipType = z.infer<typeof friendshipSchema>
+
+export function createFriendshipDTO(friendship: FriendshipType) {
+    return friendshipSchema.parse(friendship)
 }

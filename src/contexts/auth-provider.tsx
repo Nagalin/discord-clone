@@ -1,5 +1,6 @@
 import { AuthException } from '@/lib/exception'
 import { useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 import React, { createContext, ReactNode, useContext } from 'react'
 
 type AuthContextType = {
@@ -24,6 +25,11 @@ export const useAuth = () => {
 
 const AuthProvider = ({ children }: AuthProviderPropsType) => {
     const { data: session, status } = useSession()
+    const pathname = usePathname()
+
+    if (pathname === '/') 
+        return <>{children}</>
+    
     if (status === 'loading') return
     if (!session) throw new AuthException()
 

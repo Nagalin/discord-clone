@@ -1,13 +1,13 @@
 import z from 'zod'
 
-const userSchema = z.object({
+export const userSchema = z.object({
     userId: z.string(),
     username: z.string(),
     email: z.string().email(),
     image: z.string().url()
 })
 
-type UserType = z.infer<typeof userSchema>
+export type UserType = z.infer<typeof userSchema>
 
 export function createUserDTO(user: UserType) {
     return userSchema.parse({

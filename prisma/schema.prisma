@@ -19,12 +19,32 @@ model User {
   image String
   email String
 
+  requester Friendship[] @relation("requester-relation")
+  recipient Friendship[] @relation("recipient-relation")
+
   serversOwned Server[] @relation("server-owner-relation")
   serverMembers Server[]
 
   channelMembers Channel[]
 }
 
+
+enum StatusType {
+  Pending
+  Friend
+}
+
+model Friendship {
+  friendshipId String @id @default(uuid())
+
+  requester   User   @relation("requester-relation", fields: [requesterId], references: [userId])
+  recipient   User   @relation("recipient-relation", fields: [recipientId], references: [userId])
+  requesterId String
+  recipientId String
+
+  status StatusType
+
+}
 model Server {
   serverId String @id @default(uuid())
   serverName String

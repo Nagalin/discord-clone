@@ -8,6 +8,8 @@ import { EdgeStoreProvider } from '@/lib/edgestore'
 import ServerList from '@/app/server-list'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
+import AuthContextProivder from '@/contexts/auth-provider'
+import Profile from '@/app/profile'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,17 +24,24 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <SessionProvider>
-        <EdgeStoreProvider>
-          <QueryClientProvider client={queryClient}>
+          <AuthContextProivder>
+            <EdgeStoreProvider>
+              <QueryClientProvider client={queryClient}>
 
-            <div className='flex'>
-              {pathname !== '/' && <ServerList />}
-              {children}
-              <Toaster/>
-            </div>
+                <div className='flex'>
+                  {pathname !== '/' &&
+                    <div className='relative'>
+                      <ServerList />
+                      <Profile/>
+                    </div>
+                  }
+                  {children}
+                  <Toaster />
+                </div>
 
-          </QueryClientProvider>
-        </EdgeStoreProvider>
+              </QueryClientProvider>
+            </EdgeStoreProvider>
+          </AuthContextProivder>
         </SessionProvider>
       </body>
     </html>

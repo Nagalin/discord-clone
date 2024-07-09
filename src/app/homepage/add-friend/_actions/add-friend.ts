@@ -23,13 +23,11 @@ export const addFriendAction = actionClient
             if (existFriendship?.status === 'Friend') return { error: 'This user is already your friend' }
             if (existFriendship?.status === 'Pending') return { error: 'Already sent friend request' }
 
-
             await createFriendship(requesterId, recipient.userId)
-
             return { success: 'Friend request sent!!' }
 
         } catch (error) {
             console.error('Error adding friend: ', error)
-            return { error: 'Error occurs' }
+            return { error: 'Failed to add friend, please try again later' }
         }
     })

@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 import { getFriendsAction } from '@/app/homepage/friend/_actions/get-friends'
 import UserCard from '@/components/user-card'
 import { Skeleton } from '@/components/ui/skeleton'
+import Alert from '@/components/alert'
+
 
 const FriendPage = () => {
   const { data: friends, isFetching } = useQuery({
@@ -13,11 +15,14 @@ const FriendPage = () => {
   })
 
   if (isFetching) return <FriendLoading />
-  if (friends?.data?.error) return
+  if (friends?.data?.error) return <Alert> {friends.data.error} </Alert>
+
 
   return (
     <div>
       <div className='text-2xl mb-3'>Friends</div>
+
+      {!friends?.data?.info?.length && <div>No friends ......</div>}
 
       {friends?.data?.info?.map(currFriend => (
         <UserCard

@@ -6,6 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { getPendingFriendRequestsAction } from '@/app/homepage/pending/_actions/get-pending-friend-requests'
 import SentFriendRequestCard from '@/app/homepage/pending/sent-frient-request-card'
 import ReceiveFriendRequestCard from '@/app/homepage/pending/received-friend-request-card'
+import Alert from '@/components/alert'
 
 const PendingFriendRequestPage = () => {
     const { data: pendingFriendRequests, isFetching } = useQuery({
@@ -14,13 +15,18 @@ const PendingFriendRequestPage = () => {
     })
 
     if (isFetching) return <PendingFriendRequestLoading />
-    if (pendingFriendRequests?.data?.error)
-        return <div className='text-2x'>{pendingFriendRequests?.data?.error}</div>
-
+    if (pendingFriendRequests?.data?.error) 
+        return <Alert> {pendingFriendRequests.data.error}</Alert>
+        
     return (
         <div className='flex flex-col gap-5'>
 
             <div className='text-2xl'>Pending request</div>
+
+            {!pendingFriendRequests?.data?.info?.length &&
+                <div>no pending friend request .....</div>
+            }
+
             {pendingFriendRequests?.data?.info?.map(curr => (
                 <div key={curr.friendshipId}>
                     {curr.requester &&
@@ -36,7 +42,7 @@ const PendingFriendRequestPage = () => {
                         />}
                 </div>
             ))}
-            
+
         </div>
     )
 }

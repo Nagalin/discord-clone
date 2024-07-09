@@ -37,9 +37,7 @@ const ReceiveFriendRequestCard = ({ friendshipId, requester }: ReceivedFriendReq
     return (
         <div className='flex justify-between'>
             <UserCard
-                userId={requester.userId}
-                username={requester.username}
-                image={requester.image}
+                user={requester}
             />
 
             <div className='flex items-center gap-3'>

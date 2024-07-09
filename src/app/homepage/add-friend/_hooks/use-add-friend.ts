@@ -12,7 +12,7 @@ const useAddFriend = () => {
     const {
         register,
         handleSubmit,
-        formState: { isSubmitting }
+        formState: { isSubmitting, errors }
     } = useForm<AddFriendFormType>()
 
     const { mutate: addFriend } = useMutation({
@@ -36,7 +36,8 @@ const useAddFriend = () => {
         register,
         handleSubmit,
         isSubmitting,
-        addFriend
+        addFriend,
+        errors
     }
 }
 

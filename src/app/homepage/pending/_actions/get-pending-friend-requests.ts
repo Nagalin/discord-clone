@@ -11,6 +11,6 @@ export const getPendingFriendRequestsAction = actionClient.action(async () => {
         return {info: pendingFriendRequests}
     } catch (error) {
         console.error('Error getting pending friend requests: ',error)
-        return {error: 'Error occurs'}
+        return {error: 'Failed to get pending friend request ...'}
     }
 })

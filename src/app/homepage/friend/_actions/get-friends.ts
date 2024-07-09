@@ -11,6 +11,6 @@ export const getFriendsAction = actionClient.action(async () => {
         return { info: friends }
     } catch (error) {
         console.error('Error getting friends: ', error)
-        return { error: 'Error occurs' }
+        return { error: 'Failed to get friends .....' }
     }
 })

@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getPendingFriendRequestsAction } from '@/app/homepage/pending/_actions/get-pending-friend-requests'
 import SentFriendRequestCard from '@/app/homepage/pending/sent-frient-request-card'
-import ReceiveFriendRequestCard from '@/app/homepage/pending/receive-friend-request-card'
+import ReceiveFriendRequestCard from '@/app/homepage/pending/received-friend-request-card'
 
 const PendingFriendRequestPage = () => {
     const { data: pendingFriendRequests, isFetching } = useQuery({
@@ -24,9 +24,8 @@ const PendingFriendRequestPage = () => {
                 <div key={curr.friendshipId}>
                     {curr.requester &&
                         <ReceiveFriendRequestCard
-                            userId={curr.requester.userId}
-                            username={curr.requester.username}
-                            image={curr.requester.image}
+                            friendshipId={curr.friendshipId}
+                            requester={curr.requester}
                         />
                     }
                     {curr.recipient &&

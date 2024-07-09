@@ -25,7 +25,9 @@ const useCreateServer = (closeDialog: () => void) => {
         mutationFn: async (serverName: string) => {
             if (file) {
                 const res = await edgestore.publicFiles.upload({ file })
-                const result = await createServerAction({ serverName: serverName, serverImage: res.url })
+                const result = await createServerAction({ 
+                    serverName: serverName, serverImage: res.url 
+                })
 
                 if (result?.data?.success) {
                     closeDialog()
@@ -33,7 +35,7 @@ const useCreateServer = (closeDialog: () => void) => {
                         title: 'Horayyyy',
                         description: result.data.success
                     })
-
+                    queryClient.invalidateQueries({ queryKey: ['servers'] })
                 } else {
                     toast({
                         title: 'Oops ...',
@@ -41,7 +43,6 @@ const useCreateServer = (closeDialog: () => void) => {
                         description: result?.data?.error ?? 'Something went wrong'
                     })
                 }
-                queryClient.invalidateQueries({ queryKey: ['servers'] })
             }
         }
     })

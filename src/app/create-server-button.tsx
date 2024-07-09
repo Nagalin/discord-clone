@@ -12,7 +12,6 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog'
 
-
 const CreateServerButton = () => {
     const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -43,12 +42,12 @@ type CreateServerFormPropsType = {
 }
 
 const CreateServerForm = ({ closeDialog }: CreateServerFormPropsType) => {
-    const { 
-        handleSubmit, 
-        createServer, 
-        register, 
-        isPending, 
-        setFile 
+    const {
+        handleSubmit,
+        createServer,
+        register,
+        isPending,
+        setFile
     } = useCreateServer(closeDialog)
 
     return (

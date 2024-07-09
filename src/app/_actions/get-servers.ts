@@ -8,10 +8,9 @@ export const getServersAction = actionClient.action(async () => {
     try {
         const userId = await getUserIdFromSession()
         const servers = await getServers(userId)
-        return  {info: servers}
-        
+        return { info: servers }
     } catch (error) {
         console.error('Error getting servers: ', error)
-        return {error: 'Error occurs'}
+        return { error: 'Error occurs' }
     }
 })

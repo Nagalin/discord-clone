@@ -9,7 +9,7 @@ export default withAuth({
 
 export const config = {
     matcher: [
-        // '/homepage/(.*)',
+        '/homepage/(.*)',
         '/homepage'
     ]
 }

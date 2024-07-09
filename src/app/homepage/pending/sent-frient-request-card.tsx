@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { UserType } from '@/dto/user'
-import UserCard from '@/app/user-card'
+import UserCard from '@/components/user-card'
 import { Button } from '@/components/ui/button'
-import { cancelFriendRequestAction } from './_actions/cancel-friend-request'
+import { cancelFriendRequestAction } from '@/app/homepage/pending/_actions/cancel-friend-request'
 import { useQueryClient } from '@tanstack/react-query'
 
 type SentFriendRequestCardPropsType = {

@@ -1,7 +1,7 @@
-import { useMutation } from "@tanstack/react-query"
-import { useForm } from "react-hook-form"
-import { addFriendAction } from "@/app/homepage/add-friend/_actions/add-friend"
-import { useToast } from "@/components/ui/use-toast"
+import { useMutation } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { addFriendAction } from '@/app/homepage/add-friend/_actions/add-friend'
+import { useToast } from '@/components/ui/use-toast'
 
 type AddFriendFormType = {
     username: string

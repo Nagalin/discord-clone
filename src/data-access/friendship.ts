@@ -1,5 +1,6 @@
-import { createFriendshipDTO } from '@/dto/friendship';
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
+import { createFriendshipDTO } from '@/dto/friendship'
+import { createUserDTO } from '@/dto/user'
 
 export async function createFriendship(requesterId: string, recipientId: string) {
     await prisma.friendship.create({
@@ -28,20 +29,45 @@ export async function getFriendship(
             ]
         },
     })
-
     return friendship ? createFriendshipDTO(friendship) : null
+}
+
+export async function getFriendsByUserId(userId: string) {
+    const friends = await prisma.friendship.findMany({
+        where: {
+            OR: [
+                { requesterId: userId },
+                { recipientId: userId },
+            ],
+            status: 'Friend'
+        },
+
+        include: {
+            requester: true,
+            recipient: true
+        }
+    })
+
+    return friends.map(currFriend => {
+        const isRequester = currFriend.requesterId === userId
+        return isRequester ?
+            createUserDTO(currFriend.recipient) : createUserDTO(currFriend.requester)
+    })
 }
 
 export async function getPendingFriendship(requesterId: string) {
     const pendingFriendRequests = await prisma.friendship.findMany({
         where: {
-            OR: [{
-                requesterId: requesterId,
-            }, {
-                recipientId: requesterId
-            }],
+            OR: [
+                {
+                    requesterId: requesterId,
+                },
+                {
+                    recipientId: requesterId
+                }],
             status: 'Pending'
         },
+
         include: {
             requester: true,
             recipient: true
@@ -57,7 +83,7 @@ export async function getPendingFriendship(requesterId: string) {
     })
 }
 
-export async function acceptFriendRequest(
+export async function updateFriendship(
     friendshipId: string, requesterId: string, recipientId: string
 ) {
     await prisma.friendship.update({
@@ -67,13 +93,16 @@ export async function acceptFriendRequest(
             recipientId: recipientId,
             status: 'Pending'
         },
-        
+
         data: {
             status: 'Friend'
         }
     })
 }
-export async function deleteFriendship(friendshipId: string, requesterId: string, recipientId: string) {
+
+export async function deleteFriendship(
+    friendshipId: string, requesterId: string, recipientId: string
+) {
     await prisma.friendship.delete({
         where: {
             friendshipId: friendshipId,

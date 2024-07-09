@@ -19,7 +19,8 @@ const PendingFriendRequestPage = () => {
 
     return (
         <div className='flex flex-col gap-5'>
-            <div className="text-2xl">Pending request</div>
+
+            <div className='text-2xl'>Pending request</div>
             {pendingFriendRequests?.data?.info?.map(curr => (
                 <div key={curr.friendshipId}>
                     {curr.requester &&
@@ -35,6 +36,7 @@ const PendingFriendRequestPage = () => {
                         />}
                 </div>
             ))}
+            
         </div>
     )
 }
@@ -42,12 +44,12 @@ const PendingFriendRequestPage = () => {
 const PendingFriendRequestLoading = () => {
     return (
         <div>
-            <div className="text-2xl mb-3">Pending request</div>
+            <div className='text-2xl mb-3'>Pending request</div>
 
-            <div className="flex items-center space-x-4">
-                <Skeleton className="h-12 w-12 rounded-full" />
-                <div className="space-y-2">
-                    <Skeleton className="h-4 w-[200px]" />
+            <div className='flex items-center space-x-4'>
+                <Skeleton className='h-12 w-12 rounded-full' />
+                <div className='space-y-2'>
+                    <Skeleton className='h-4 w-[200px]' />
                 </div>
             </div>
         </div>

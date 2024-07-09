@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import useAddFriend from './_hooks/use-add-friend'
+import useAddFriend from '@/app/homepage/add-friend/_hooks/use-add-friend'
 
 const AddFriendForm = () => {
     const { register, addFriend, handleSubmit, isSubmitting } = useAddFriend()

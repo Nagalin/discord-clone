@@ -1,20 +1,19 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { UserType } from '@/dto/user'
 
-type UserCardPropsType = {
-    userId: string
-    username: string
-    image: string
+type UserPropsType = {
+    user: Omit<UserType, 'userId' | 'email'>
 }
 
-const UserCard = ({ userId, username, image }: UserCardPropsType) => {
+const UserCard = ({ user }: UserPropsType) => {
     return (
         <div className='flex items-center gap-2'>
             <Avatar>
-                <AvatarImage src={image} />
+                <AvatarImage src={user.image} />
                 <AvatarFallback />
             </Avatar>
-            <div>{username}</div>
+            <div>{user.username}</div>
         </div>
     )
 }

@@ -1,7 +1,10 @@
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
 
 export async function createChannel(
-    serverId: string, memberId: string, channelName: string, channelType: 'Text' | 'Voice'
+    serverId: string, 
+    ownerId: string, 
+    channelName: string, 
+    channelType: 'Text' | 'Voice'
 ) {
     await prisma.channel.create({
         data: {
@@ -10,7 +13,7 @@ export async function createChannel(
             channelType: channelType,
             members: {
                 connect: {
-                    userId: memberId
+                    userId: ownerId
                 }
             }
         }

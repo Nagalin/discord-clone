@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { userSchema } from "./user";
+import z from 'zod'
+import { userSchema } from '@/dto/user'
 
 const friendshipSchema = z.object({
     friendshipId: z.string().uuid(),

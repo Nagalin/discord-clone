@@ -1,5 +1,6 @@
 import { createServerDTO } from '@/dto/server'
 import prisma from '@/lib/prisma'
+import { createChannelDTO } from '../dto/channel';
 
 export async function getServers(userId: string) {
     const servers = await prisma.server.findMany({
@@ -9,10 +10,28 @@ export async function getServers(userId: string) {
                     userId: userId
                 }
             }
+        },
+
+        include: {
+            channels: true
         }
     })
 
-    return servers.map(currServer => createServerDTO(currServer))
+    return servers.map(currServer => (
+        {
+            ...createServerDTO(currServer),
+            generalChannelId: currServer.channels.find(currChannel => currChannel.channelName === 'General')!.channelId
+        }
+    ))
+}
+
+export async function getServer(serverId: string) {
+    const server = await prisma.server.findFirst({
+        where: {
+            serverId: serverId
+        }
+    })
+    return server ? createServerDTO(server) : null
 }
 
 export async function createServer(

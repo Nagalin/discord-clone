@@ -1,9 +1,10 @@
+import { createChannelDTO } from '@/dto/channel'
 import prisma from '@/lib/prisma'
 
 export async function createChannel(
-    serverId: string, 
-    ownerId: string, 
-    channelName: string, 
+    serverId: string,
+    ownerId: string,
+    channelName: string,
     channelType: 'Text' | 'Voice'
 ) {
     await prisma.channel.create({
@@ -18,4 +19,19 @@ export async function createChannel(
             }
         }
     })
+}
+
+export async function getChannels(serverId: string, userId: string) {
+    const channels = await prisma.channel.findMany({
+        where: {
+            serverId: serverId,
+            members: {
+                some: {
+                    userId: userId
+                }
+            }
+        },
+    })
+
+    return channels.map(channel => createChannelDTO(channel))
 }

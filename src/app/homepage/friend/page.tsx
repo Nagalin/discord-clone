@@ -7,7 +7,6 @@ import UserCard from '@/components/user-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
 
-
 const FriendPage = () => {
   const { data: friends, isFetching } = useQuery({
     queryKey: ['friends'],
@@ -16,7 +15,6 @@ const FriendPage = () => {
 
   if (isFetching) return <FriendLoading />
   if (friends?.data?.error) return <Alert> {friends.data.error} </Alert>
-
 
   return (
     <div>

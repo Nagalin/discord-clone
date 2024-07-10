@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getServersAction } from '@/app/_actions/get-servers'
@@ -12,9 +14,10 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import { useRouter } from 'next/navigation'
 
 const ServerList = () => {
-
+  const router = useRouter()
   const { toast } = useToast()
   const { data: servers, isFetching } = useQuery({
     queryKey: ['servers'],
@@ -34,9 +37,14 @@ const ServerList = () => {
   if (isFetching) return <ServerListLoading />
 
   return (
-    <div className='bg-discord-server-list h-screen w-20 flex flex-col  gap-2 items-center pt-2'>
+    <div
+      className='bg-discord-server-list h-screen w-20 flex flex-col  gap-2 items-center pt-2'
+    >
       {servers?.data?.info?.map(currServer => (
-        <div key={currServer.serverId}>
+        <div
+          onClick={() => router.push(`/server/${currServer.serverId}/channel/${currServer.generalChannelId}`)}
+          key={currServer.serverId}
+        >
           <ServerCard
             server={currServer}
           />

@@ -1,6 +1,6 @@
 import z from 'zod'
 
-const serverSchema = z.object({
+export const serverSchema = z.object({
     serverId: z.string().uuid(),
     serverName: z.string(),
     serverImage: z.string().url(),

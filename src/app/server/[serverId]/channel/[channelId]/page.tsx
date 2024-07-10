@@ -1,9 +1,14 @@
 import React from 'react'
+import Channels from './channels'
+import ServerHeader from './server-header'
 
 const ServerPage = () => {
    
   return (
-    <div>ServerPage</div>
+    <div>
+      <ServerHeader/>
+      <Channels/>
+    </div>
   )
 }
 

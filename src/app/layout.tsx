@@ -10,6 +10,7 @@ import { Toaster } from '@/components/ui/toaster'
 import AuthContextProivder from '@/contexts/auth-provider'
 import Profile from '@/app/profile'
 import './globals.css'
+import PusherProvider from '@/contexts/pusher-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,18 +28,21 @@ export default function RootLayout({
           <AuthContextProivder>
             <EdgeStoreProvider>
               <QueryClientProvider client={queryClient}>
+                <PusherProvider>
 
-                <div className='flex'>
-                  {pathname !== '/' &&
-                    <div className='relative'>
-                      <ServerList />
-                      <Profile />
-                    </div>
-                  }
-                  {children}
-                  <Toaster />
-                </div>
 
+                  <div className='flex'>
+                    {pathname !== '/' &&
+                      <div className='relative'>
+                        <ServerList />
+                        <Profile />
+                      </div>
+                    }
+                    {children}
+                    <Toaster />
+                  </div>
+
+                </PusherProvider>
               </QueryClientProvider>
             </EdgeStoreProvider>
           </AuthContextProivder>

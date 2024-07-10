@@ -18,16 +18,15 @@ model User {
   username String
   image String
   email String
-
   requester Friendship[] @relation("requester-relation")
   recipient Friendship[] @relation("recipient-relation")
-
   serversOwned Server[] @relation("server-owner-relation")
   serverMembers Server[]
-
   channelMembers Channel[]
+  messagesender    PrivateMessage[] @relation("message-sender-relation")
+  messagerecipient PrivateMessage[] @relation("message-recipient-relation")
+  chatParticipants PrivateChat[] 
 }
-
 
 enum StatusType {
   Pending
@@ -36,25 +35,20 @@ enum StatusType {
 
 model Friendship {
   friendshipId String @id @default(uuid())
-
   requester   User   @relation("requester-relation", fields: [requesterId], references: [userId])
   recipient   User   @relation("recipient-relation", fields: [recipientId], references: [userId])
   requesterId String
   recipientId String
-
   status StatusType
-
 }
+
 model Server {
   serverId String @id @default(uuid())
   serverName String
   serverImage String
-
   owner User @relation("server-owner-relation", fields: [ownerId], references: [userId])
   ownerId String
-
   members User[]
-  
   channels Channel[]
 }
 
@@ -67,9 +61,31 @@ model Channel {
   channelId String @id @default(uuid())
   channelName String
   channelType ChannelType
-
   server Server @relation(fields: [serverId], references: [serverId])
   serverId String
-
   members User[]
+}
+
+model PrivateChat {
+  privateChatId  String           @id @default(uuid())
+  privateMessage PrivateMessage[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  participants   User[]
+}
+
+model PrivateMessage {
+  privateMessageId String   @id @default(uuid())
+  content        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  sender   User   @relation("message-sender-relation", fields: [senderId], references: [userId])
+  senderId String
+
+  recipient   User   @relation("message-recipient-relation", fields: [recipientId], references: [userId])
+  recipientId String
+
+  privateChat   PrivateChat @relation(fields: [privateChatId], references: [privateChatId])
+  privateChatId String
 }

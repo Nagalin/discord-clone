@@ -1,8 +1,8 @@
 'use server'
 
-import { getServer } from "@/data-access/server";
-import { actionClient } from "@/lib/safe-action";
-import { z } from "zod";
+import { getServer } from '@/data-access/server'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
 
 const schema = z.object({
     serverId: z.string().uuid()

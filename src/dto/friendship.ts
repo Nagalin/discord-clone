@@ -1,4 +1,4 @@
-import z from 'zod'
+import { z } from 'zod'
 import { userSchema } from '@/dto/user'
 
 const friendshipSchema = z.object({

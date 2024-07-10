@@ -1,6 +1,6 @@
-import z from 'zod'
-import { serverSchema } from './server'
-import { userSchema } from "./user"
+import { z } from 'zod'
+import { serverSchema } from '@/dto/server'
+import { userSchema } from "@/dto/user"
 
 const channelSchema = z.object({
     channelId: z.string().uuid(),
@@ -14,13 +14,5 @@ const channelSchema = z.object({
 export type ChannelType = z.infer<typeof channelSchema>
 
 export function createChannelDTO(channel: ChannelType) {
-    return channelSchema.parse({
-        channelId: channel.channelId,
-        channelName: channel.channelName,
-        channelType: channel.channelType,
-        server: channel.server,
-        serverId: channel.serverId,
-        members: channel.members
-
-    })
+    return channelSchema.parse(channel)
 }

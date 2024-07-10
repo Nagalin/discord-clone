@@ -6,10 +6,10 @@ type AlertPropsType = {
     children: ReactNode
 }
 
-const Alert = ({children}: AlertPropsType) => {
+const Alert = ({ children }: AlertPropsType) => {
     return (
-        <ShadcnAlert className='w-1/2' variant="destructive">
-            <AlertCircle className="h-4 w-4" />
+        <ShadcnAlert className='w-1/2' variant='destructive'>
+            <AlertCircle className='h-4 w-4' />
             <AlertTitle>{children}</AlertTitle>
         </ShadcnAlert>
     )

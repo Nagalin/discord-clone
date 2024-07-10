@@ -1,5 +1,5 @@
-import { createChannelDTO } from '@/dto/channel'
 import prisma from '@/lib/prisma'
+import { createChannelDTO } from '@/dto/channel'
 
 export async function createChannel(
     serverId: string,

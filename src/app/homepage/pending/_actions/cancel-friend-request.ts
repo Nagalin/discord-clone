@@ -1,6 +1,6 @@
 'use server'
 
-import z from 'zod'
+import { z } from 'zod'
 import { deleteFriendship } from '@/data-access/friendship'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
 import { actionClient } from '@/lib/safe-action'

@@ -1,4 +1,4 @@
-import z from 'zod'
+import { z } from 'zod'
 
 export const serverSchema = z.object({
     serverId: z.string().uuid(),
@@ -10,10 +10,5 @@ export const serverSchema = z.object({
 export type ServerType = z.infer<typeof serverSchema>
 
 export function createServerDTO(server: ServerType) {
-    return serverSchema.parse({
-        serverId: server.serverId,
-        serverName: server.serverName,
-        serverImage: server.serverImage,
-        ownerId: server.ownerId
-    })
+    return serverSchema.parse(server)
 }

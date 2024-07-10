@@ -1,9 +1,9 @@
 'use server'
 
-import { getUserIdFromSession } from "@/lib/getUserIdFromSession"
-import { actionClient } from "@/lib/safe-action"
-import { z } from "zod"
-import { getChannels } from "@/data-access/channel";
+import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
+import { getChannels } from '@/data-access/channel'
 
 const shchema = z.object({
     serverId: z.string().uuid()

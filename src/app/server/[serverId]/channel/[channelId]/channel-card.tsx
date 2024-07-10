@@ -5,7 +5,7 @@ type ChannelCardPropsType = {
   channel: ChannelType
 }
 
-const ChannelCard = ({channel}: ChannelCardPropsType) => {
+const ChannelCard = ({ channel }: ChannelCardPropsType) => {
   return (
     <div>{channel.channelName}</div>
   )

@@ -1,6 +1,6 @@
 'use server'
 
-import z from 'zod'
+import { z } from 'zod'
 import { createFriendship, getFriendship } from '@/data-access/friendship'
 import { getUserInfoWithName } from '@/data-access/user'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'

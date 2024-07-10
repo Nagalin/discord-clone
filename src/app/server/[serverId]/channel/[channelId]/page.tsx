@@ -1,6 +1,6 @@
 import React from 'react'
-import Channels from './channels'
-import ServerHeader from './server-header'
+import Channels from '@/app/server/[serverId]/channel/[channelId]/channels'
+import ServerHeader from '@/app/server/[serverId]/channel/[channelId]/server-header'
 
 const ServerPage = () => {
    

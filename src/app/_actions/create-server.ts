@@ -1,6 +1,6 @@
 'use server'
 
-import z from 'zod'
+import { z } from 'zod'
 import { createChannel } from '@/data-access/channel'
 import { createServer } from '@/data-access/server'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'

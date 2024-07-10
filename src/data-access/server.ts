@@ -1,6 +1,5 @@
-import { createServerDTO } from '@/dto/server'
 import prisma from '@/lib/prisma'
-import { createChannelDTO } from '../dto/channel';
+import { createServerDTO } from '@/dto/server'
 
 export async function getServers(userId: string) {
     const servers = await prisma.server.findMany({

@@ -3,8 +3,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import React from 'react'
-import { getChannelsAction } from './_actions/get-channels'
-import ChannelCard from './channel-card'
+import { getChannelsAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/get-channels'
+import ChannelCard from '@/app/server/[serverId]/channel/[channelId]/channel-card'
 
 const Channels = () => {
   const params = useParams()
@@ -23,7 +23,7 @@ const Channels = () => {
   return (
     <div>
       <div>
-        <div className="text-2xl">
+        <div className='text-2xl'>
           Text channel
         </div>
         {textChannels?.map(currTextChannel => (
@@ -35,7 +35,7 @@ const Channels = () => {
       </div>
 
       <div>
-        <div className="text-2xl">
+        <div className='text-2xl'>
           Voice channel
         </div>
         {voiceChannels?.map(currTextChannel => (

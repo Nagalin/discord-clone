@@ -28,8 +28,8 @@ const AddFriendForm = () => {
 
             {
                 errors.username &&
-                <Alert className='w-3/4' variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
+                <Alert className='w-3/4' variant='destructive'>
+                    <AlertCircle className='h-4 w-4' />
                     <AlertTitle>Username field is required</AlertTitle>
                 </Alert>
             }

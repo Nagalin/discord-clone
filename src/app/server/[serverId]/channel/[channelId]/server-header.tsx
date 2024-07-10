@@ -1,15 +1,15 @@
 'use client'
 
 import React from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
+import { getServerAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/get-server'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import { getServerAction } from './_actions/get-server'
+} from '@/components/ui/accordion'
 
 type ServerHeader = {
   serverName: string
@@ -18,16 +18,16 @@ type ServerHeader = {
 const ServerHeader = () => {
   const params = useParams()
   const serverId = params.serverId
-  const {data: server, isFetching } = useQuery({
+  const { data: server, isFetching } = useQuery({
     queryKey: [serverId],
-    queryFn: async () => await getServerAction({serverId: serverId})
+    queryFn: async () => await getServerAction({ serverId: serverId })
   })
 
-  if(isFetching) return 
+  if (isFetching) return
   return (
-    <Accordion type="single" collapsible >
+    <Accordion type='single' collapsible >
 
-      <AccordionItem value="item-3">
+      <AccordionItem value='item-3'>
         <AccordionTrigger>{server?.data?.info?.serverName}</AccordionTrigger>
         <AccordionContent>
           Add people

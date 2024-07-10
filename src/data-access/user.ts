@@ -1,5 +1,5 @@
-import { createUserDTO } from '@/dto/user'
 import prisma from '@/lib/prisma'
+import { createUserDTO } from '@/dto/user'
 
 export async function upsertUser(
     userId: string, username: string, email: string, image: string

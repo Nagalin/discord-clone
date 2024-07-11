@@ -23,7 +23,7 @@ const SentFriendRequestCard = ({ friendshipId, user }: SentFriendRequestCardProp
     
     return (
         <div className='flex justify-between'>
-            <UserCard userId={user.userId} username={user.username} image={user.image} />
+            <UserCard user={user} />
 
             <div className='flex items-center gap-3'>
                 <div>Pending ...</div>

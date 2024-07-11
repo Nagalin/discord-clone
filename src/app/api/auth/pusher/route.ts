@@ -14,22 +14,17 @@ export async function POST(req: NextRequest) {
         const session = await getServerSession(authConfigs)
         if (!session) return NextResponse.json('Unauthorized user', { status: 403 })
 
-        const { userId, name, email, image } = session?.user
+        const { userId, name, image } = session?.user
 
         const userData: PresenceChannelData = {
             user_id: userId,
             user_info: {
-                name: name,
-                email: email,
+                username: name,
                 image: image
             }
         }
 
-        console.log('channelname: ',channelName)
-
         const authResponse = pusherServer.authorizeChannel(socketId, channelName, userData)
-
-        console.log('here')
         return NextResponse.json(authResponse)
     } catch (error) {
         console.error(error)

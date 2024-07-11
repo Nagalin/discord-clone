@@ -6,12 +6,15 @@ import { getFriendsAction } from '@/app/homepage/friend/_actions/get-friends'
 import UserCard from '@/components/user-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
+import { usePusherContext } from '@/contexts/pusher-provider'
 
 const FriendPage = () => {
   const { data: friends, isFetching } = useQuery({
     queryKey: ['friends'],
     queryFn: async () => getFriendsAction({})
   })
+
+  const { onlineUsers } = usePusherContext()
 
   if (isFetching) return <FriendLoading />
   if (friends?.data?.error) return <Alert> {friends.data.error} </Alert>
@@ -22,11 +25,16 @@ const FriendPage = () => {
 
       {!friends?.data?.info?.length && <div>No friends ......</div>}
 
-      {friends?.data?.info?.map(currFriend => (
-        <UserCard
-          user={currFriend}
-        />
-      ))}
+      <div className='flex flex-col gap-3' >
+        {friends?.data?.info?.map(currFriend => (
+
+          <UserCard
+            online={!!onlineUsers.find(currOnlineUser => currOnlineUser.userId === currFriend.userId)}
+            key={currFriend.userId}
+            user={currFriend}
+          />
+        ))}
+      </div>
 
     </div>
   )

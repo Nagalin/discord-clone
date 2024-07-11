@@ -1,8 +1,8 @@
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { UserType } from '@/dto/user'
 import { pusherClient } from '@/lib/pusher'
 import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
 type ChannelInfoType = {
     members: { [key: string]: MemberInfoType }
@@ -23,7 +23,7 @@ type MemberInfoType = {
 
 type PusherContextType = {
     onlineUsers: Omit<UserType, 'email'>[]
-
+    isUserOnline: (userId: string) => boolean
 }
 
 const PusherContext = createContext<PusherContextType | undefined>(undefined)
@@ -42,8 +42,11 @@ type PusherProviderPropsType = {
 const PusherProvider = ({ children }: PusherProviderPropsType) => {
     const [isSubscribed, setIsSubscribed] = useState(false)
     const [onlineUsers, setOnlineUsers] = useState<Omit<UserType, 'email'>[]>([])
-    const pathname = usePathname()
     const { data: session } = useSession()
+
+    const isUserOnline = (userId: string) => {
+        return !!onlineUsers.find(currOnlineUser => currOnlineUser.userId === userId)
+    }
 
     useEffect(() => {
         if (!session || isSubscribed) return
@@ -81,12 +84,10 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
             presenceChannel.unbind_all()
         }
 
-    }, [pathname])
+    }, [])
 
     return (
-        <PusherContext.Provider value={{
-            onlineUsers: onlineUsers
-        }}>
+        <PusherContext.Provider value={{ onlineUsers, isUserOnline }}>
             {children}
         </PusherContext.Provider>
     )

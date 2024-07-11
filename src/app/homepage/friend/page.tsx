@@ -14,26 +14,37 @@ const FriendPage = () => {
     queryFn: async () => getFriendsAction({})
   })
 
-  const { onlineUsers } = usePusherContext()
+  const { isUserOnline } = usePusherContext()
 
   if (isFetching) return <FriendLoading />
   if (friends?.data?.error) return <Alert> {friends.data.error} </Alert>
 
   return (
     <div>
-      <div className='text-2xl mb-3'>Friends</div>
 
-      {!friends?.data?.info?.length && <div>No friends ......</div>}
+      {friends?.data?.info?.length ?
+        <div className='text-2xl mb-3'>
+          All friends: {friends?.data?.info?.length}
+        </div> :
+
+        <div className='text-2xl mb-3'>
+          No friends ......
+        </div>
+      }
 
       <div className='flex flex-col gap-3' >
-        {friends?.data?.info?.map(currFriend => (
+        {friends?.data?.info?.map(currFriend => {
+          const online = isUserOnline(currFriend.userId)
 
-          <UserCard
-            online={!!onlineUsers.find(currOnlineUser => currOnlineUser.userId === currFriend.userId)}
-            key={currFriend.userId}
-            user={currFriend}
-          />
-        ))}
+          return (
+            <UserCard
+              online={online}
+              key={currFriend.userId}
+              user={currFriend}
+            />
+
+          )
+        })}
       </div>
 
     </div>

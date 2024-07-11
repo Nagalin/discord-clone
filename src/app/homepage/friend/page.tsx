@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getFriendsAction } from '@/app/homepage/friend/_actions/get-friends'
+import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
 import UserCard from '@/components/user-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'

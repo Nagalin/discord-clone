@@ -79,13 +79,10 @@ model PrivateMessage {
   content        String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-
   sender   User   @relation("message-sender-relation", fields: [senderId], references: [userId])
   senderId String
-
   recipient   User   @relation("message-recipient-relation", fields: [recipientId], references: [userId])
   recipientId String
-
   privateChat   PrivateChat @relation(fields: [privateChatId], references: [privateChatId])
   privateChatId String
 }

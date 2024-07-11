@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
     try {
         const data = await req.text()
         const [socketId, channelName] = data
-            .split("&")
-            .map(str => str.split("=")[1])
+            .split('&')
+            .map(str => str.split('=')[1])
 
         const session = await getServerSession(authConfigs)
         if (!session) return NextResponse.json('Unauthorized user', { status: 403 })

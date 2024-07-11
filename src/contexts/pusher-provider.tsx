@@ -2,7 +2,6 @@ import React, { createContext, ReactNode, useContext, useEffect, useState } from
 import { UserType } from '@/dto/user'
 import { pusherClient } from '@/lib/pusher'
 import { useSession } from 'next-auth/react'
-import { usePathname } from 'next/navigation'
 
 type ChannelInfoType = {
     members: { [key: string]: MemberInfoType }
@@ -56,8 +55,6 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
         const presenceChannel = pusherClient.subscribe('presence-online-user')
 
         presenceChannel.bind('pusher:subscription_succeeded', (channelInfo: ChannelInfoType) => {
-            console.log(channelInfo)
-
             Object.keys(channelInfo.members).forEach(memberId => {
                 const member = channelInfo.members[memberId]
                 setOnlineUsers(prev => {

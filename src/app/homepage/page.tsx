@@ -3,7 +3,7 @@
 import { usePusherContext } from '@/contexts/pusher-provider'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { getFriendsAction } from './friend/_actions/get-friends'
+import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
 import UserCard from '@/components/user-card'
 
 const Homepage = () => {

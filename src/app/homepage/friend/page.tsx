@@ -3,46 +3,38 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
-import UserCard from '@/components/user-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
 import { usePusherContext } from '@/contexts/pusher-provider'
+import FriendCard from '../_components/friend-card'
+import FriendsHeader from './friends-header'
 
 const FriendPage = () => {
   const { data: friends, isFetching } = useQuery({
     queryKey: ['friends'],
     queryFn: async () => getFriendsAction({})
   })
-
   const { isUserOnline } = usePusherContext()
+
 
   if (isFetching) return <FriendLoading />
   if (friends?.data?.error) return <Alert> {friends.data.error} </Alert>
 
   return (
     <div>
-
-      {friends?.data?.info?.length ?
-        <div className='text-2xl mb-3'>
-          All friends: {friends?.data?.info?.length}
-        </div> :
-
-        <div className='text-2xl mb-3'>
-          No friends ......
-        </div>
-      }
+      <FriendsHeader
+        hasFriend={!!friends?.data?.info?.length}
+        onlineFriendsNum={friends?.data?.info?.length as number}
+      />
 
       <div className='flex flex-col gap-3' >
+
         {friends?.data?.info?.map(currFriend => {
           const online = isUserOnline(currFriend.userId)
-
           return (
-            <UserCard
-              online={online}
-              key={currFriend.userId}
-              user={currFriend}
-            />
-
+            <div>
+              <FriendCard friend={currFriend} online={online} />
+            </div>
           )
         })}
       </div>

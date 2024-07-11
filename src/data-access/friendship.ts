@@ -44,7 +44,7 @@ export async function getFriendsByUserId(userId: string) {
 
         include: {
             requester: true,
-            recipient: true
+            recipient: true  
         }
     })
 

@@ -85,4 +85,5 @@ model PrivateMessage {
   recipientId String
   privateChat   PrivateChat @relation(fields: [privateChatId], references: [privateChatId])
   privateChatId String
+  read Boolean @default(true)
 }

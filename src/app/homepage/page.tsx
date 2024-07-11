@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
 import UserCard from '@/components/user-card'
+import FriendCard from './_components/friend-card'
+import OnlineFriendHeader from './online-friend-header'
 
 const Homepage = () => {
   const { data: friends } = useQuery({
@@ -15,28 +17,21 @@ const Homepage = () => {
   const { onlineUsers, isUserOnline } = usePusherContext()
   return (
     <div>
-      {onlineUsers.length > 1 ? (
-        <div className='text-2xl mb-3'>
-          Online friends: {onlineUsers.length - 1}
-        </div>
-      ) : (
-        <div className='text-2xl mb-3'>
-          No one is online ......
-        </div>
-      )}
+      <OnlineFriendHeader
+        isFriendsOnline={!!(onlineUsers.length - 1)}
+        onlineFriendsNum={onlineUsers.length - 1}
+      />
 
       <div className='flex flex-col gap-3'>
-        {friends?.data?.info?.map(currFriend => {
-          const isOnline = isUserOnline(currFriend.userId)
+        {friends?.data?.info?.map(currFriends => {
+
+          const userOnline = isUserOnline(currFriends.userId)
 
           return (
-            isOnline && (
-              <UserCard
-                online
-                key={currFriend.userId}
-                user={currFriend}
-              />
-            )
+            <div>
+              {userOnline && <FriendCard friend={currFriends} online />}
+            </div>
+
           )
         })}
       </div>

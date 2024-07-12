@@ -15,11 +15,15 @@ const PendingFriendRequestPage = () => {
     })
 
     if (isFetching) return <PendingFriendRequestLoading />
-    if (pendingFriendRequests?.data?.error) 
-        return <Alert> {pendingFriendRequests.data.error}</Alert>
-        
+    if (pendingFriendRequests?.data?.error)
+        return (
+            <div className='p-3 text-xl'>
+                <Alert> {pendingFriendRequests.data.error}</Alert>
+            </div>
+        )
+
     return (
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-5 p-3'>
 
             <div className='text-2xl'>Pending request</div>
 
@@ -49,7 +53,7 @@ const PendingFriendRequestPage = () => {
 
 const PendingFriendRequestLoading = () => {
     return (
-        <div>
+        <div className='p-3'>
             <div className='text-2xl mb-3'>Pending request</div>
 
             <div className='flex items-center space-x-4'>

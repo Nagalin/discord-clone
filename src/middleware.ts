@@ -11,6 +11,7 @@ export const config = {
     matcher: [
         '/homepage/(.*)',
         '/homepage',
-        '/server'
+        '/server',
+        '/server/(.*)'
     ]
 }

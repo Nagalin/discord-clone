@@ -9,10 +9,9 @@ import { useRouter } from 'next/navigation'
 
 type FriendCardPropsType = {
     friend: UserType
-    online: boolean
 }
 
-const FriendCard = ({ friend, online }: FriendCardPropsType) => {
+const FriendCard = ({ friend }: FriendCardPropsType) => {
     const router = useRouter()
 
     const handleGoToChat = async (recipientId: string) => {
@@ -21,12 +20,8 @@ const FriendCard = ({ friend, online }: FriendCardPropsType) => {
 
     return (
         <div>
-            <div key={friend.userId} className='flex justify-between items-center'>
-                <UserCard
-                    online={online}
-                    key={friend.userId}
-                    user={friend}
-                />
+            <div  className='flex justify-between items-center'>
+                <UserCard user={friend}/>
                 <Image
                     onClick={() => handleGoToChat(friend.userId)}
                     className='cursor-pointer'

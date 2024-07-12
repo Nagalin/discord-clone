@@ -3,7 +3,7 @@ import AddFriendForm from '@/app/homepage/add-friend/add-friend-form'
 
 const AddFriendPage = () => {
     return (
-        <div>
+        <div className='p-3'>
             <div className='text-2xl'>
                 Add friend
             </div>

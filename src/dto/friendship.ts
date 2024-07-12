@@ -26,11 +26,10 @@ export function createUserFriendDTO(friendship: FriendshipType[], userId: string
 
 export function createPendingFriendRequestDTO(pendingFriendRequests: FriendshipType[], requesterId: string) {
     return pendingFriendRequests.map(curr => {
-        const friendshipDTO = createFriendshipDTO(curr)
         curr.requesterId === requesterId ?
-            delete friendshipDTO.requester :
-            delete friendshipDTO.recipient
-
-        return friendshipDTO
+            delete curr.requester :
+            delete curr.recipient
+            
+        return createFriendshipDTO(curr)
     })
 }

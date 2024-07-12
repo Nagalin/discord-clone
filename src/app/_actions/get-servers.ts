@@ -11,6 +11,6 @@ export const getServersAction = actionClient.action(async () => {
         return { info: servers }
     } catch (error) {
         console.error('Error getting servers: ', error)
-        return { error: 'Failed to get servers' }
+        return { error: 'Failed to get your servers' }
     }
 })

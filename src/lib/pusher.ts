@@ -1,16 +1,14 @@
 import PusherClient from 'pusher-js'
 import PusherServer from 'pusher'
+import { ServerMisconfigurationException } from '@/lib/exception'
 
-const pusherClientKey = process.env. NEXT_PUBLIC_PUSHER_CLIENT_KEY
+const pusherClientKey = process.env.NEXT_PUBLIC_PUSHER_CLIENT_KEY
 const pusherServerAppId = process.env.NEXT_PUBLIC_PUSHER_SERVER_APP_ID
 const pusherServerKey = process.env.NEXT_PUBLIC_PUSHER_SERVER_KEY
 const pusherServerSecret = process.env.NEXT_PUBLIC_PUSHER_SERVER_SECRET
 
-if (!pusherClientKey) throw new Error('Missing PUSHER_CLIENT_KEY')
-if(!pusherServerAppId)  throw new Error('Missing PUSHER_SERVER_APP_ID')
-if(!pusherServerKey) throw new Error('Missing PUSHER_SERVER_KEY')
-if(!pusherServerSecret) throw new Error('Missing PUSHER_SERVER_SECRET')
-
+if (!pusherClientKey || !pusherServerAppId || !pusherServerKey || !pusherServerSecret) 
+    throw new ServerMisconfigurationException()
 
 export const pusherServer = new PusherServer({
     appId: pusherServerAppId,

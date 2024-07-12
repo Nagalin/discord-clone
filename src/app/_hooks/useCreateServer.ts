@@ -25,8 +25,8 @@ const useCreateServer = (closeDialog: () => void) => {
         mutationFn: async (serverName: string) => {
             if (file) {
                 const res = await edgestore.publicFiles.upload({ file })
-                const result = await createServerAction({ 
-                    serverName: serverName, serverImage: res.url 
+                const result = await createServerAction({
+                    serverName: serverName, serverImage: res.url
                 })
 
                 if (result?.data?.success) {
@@ -47,12 +47,13 @@ const useCreateServer = (closeDialog: () => void) => {
         }
     })
 
+    const onSubmit = handleSubmit(data => createServer(data.serverName))
+
     return {
-        createServer,
+        onSubmit,
         isPending,
         setFile,
         register,
-        handleSubmit
     }
 }
 

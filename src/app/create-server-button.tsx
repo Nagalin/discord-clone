@@ -43,8 +43,7 @@ type CreateServerFormPropsType = {
 
 const CreateServerForm = ({ closeDialog }: CreateServerFormPropsType) => {
     const {
-        handleSubmit,
-        createServer,
+        onSubmit,
         register,
         isPending,
         setFile
@@ -52,7 +51,7 @@ const CreateServerForm = ({ closeDialog }: CreateServerFormPropsType) => {
 
     return (
         <form
-            onSubmit={handleSubmit(data => createServer(data.serverName))}
+            onSubmit={onSubmit}
             className='grid gap-4 py-4'
         >
             <div className='grid grid-cols-4 items-center gap-4'>

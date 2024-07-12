@@ -1,5 +1,5 @@
-import { createPrivateMessageDTO } from "@/dto/private-message";
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
+import { createPrivateMessageDTO } from '@/dto/private-message'
 
 export async function getPrivateMessages(privateChatId: string) {
     const privateMessages = await prisma.privateMessage.findMany({

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { userSchema } from '@/dto/user'
-import  {serverSchema}  from '@/dto/server'
+import { serverSchema } from '@/dto/server'
 
 const channelSchemaBase = z.object({
     channelId: z.string().uuid(),
@@ -11,13 +11,12 @@ const channelSchemaBase = z.object({
 })
 
 type channelSchemaBaaseType = z.infer<typeof channelSchemaBase> & {
-    server?: z.infer<typeof serverSchema> 
+    server?: z.infer<typeof serverSchema>
 }
 
 export const channelSchema: z.Schema<channelSchemaBaaseType> = channelSchemaBase.extend({
-    server: serverSchema.optional()
+    server: z.lazy(() => serverSchema).optional()
 })
-
 
 export type ChannelType = z.infer<typeof channelSchema>
 

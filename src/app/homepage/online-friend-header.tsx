@@ -1,16 +1,16 @@
+'use client'
+
+import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import React from 'react'
 
-type OnlineFriendHeaderPropsType = {
-    isFriendsOnline: boolean
-    onlineFriendsNum: number
-}
-
-const OnlineFriendHeader = ({isFriendsOnline, onlineFriendsNum}: OnlineFriendHeaderPropsType) => {
+const OnlineFriendHeader = () => {
+  const { getUserOnlineNum } = useOnlineUserContext()
+ 
   return (
     <div>
-         {isFriendsOnline? (
+      {!!getUserOnlineNum() ? (
         <div className='text-2xl mb-3'>
-          Online friends: {onlineFriendsNum}
+          Online friends: {getUserOnlineNum()}
         </div>
       ) : (
         <div className='text-2xl mb-3'>

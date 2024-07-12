@@ -6,7 +6,6 @@ const serverSchemaBase = z.object({
     serverName: z.string(),
     serverImage: z.string().url(),
     ownerId: z.string(),
-    
 })
 
 type ServerSchemaBaseType = z.infer<typeof serverSchemaBase> & {
@@ -14,13 +13,13 @@ type ServerSchemaBaseType = z.infer<typeof serverSchemaBase> & {
 }
 
 export const serverSchema: z.Schema<ServerSchemaBaseType> = serverSchemaBase.extend({
-    channels: channelSchema.array().optional()
+    channels: z.lazy(() => channelSchema.array()).optional()
 })
 
-export type ServerType = z.infer<typeof serverSchema>;
+export type ServerType = z.infer<typeof serverSchema>
 
 export function createServerDTO(server: ServerType) {
-    return serverSchema.parse(server);
+    return serverSchema.parse(server)
 }
 
 export function createServerWithGeneralChannelIdDTO(servers: ServerType[]) {

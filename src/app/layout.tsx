@@ -7,10 +7,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EdgeStoreProvider } from '@/lib/edgestore'
 import ServerList from '@/app/server-list'
 import { Toaster } from '@/components/ui/toaster'
-import AuthContextProivder from '@/contexts/auth-provider'
+import AuthProvider from '@/contexts/auth-provider'
+import OnlineUserProvider from '@/contexts/online-user-provider'
 import Profile from '@/app/profile'
 import './globals.css'
-import PusherProvider from '@/contexts/pusher-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,11 +25,10 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <SessionProvider>
-          <AuthContextProivder>
+          <AuthProvider>
             <EdgeStoreProvider>
               <QueryClientProvider client={queryClient}>
-                <PusherProvider>
-
+                <OnlineUserProvider>
 
                   <div className='flex'>
                     {pathname !== '/' &&
@@ -42,10 +41,10 @@ export default function RootLayout({
                     <Toaster />
                   </div>
 
-                </PusherProvider>
+                </OnlineUserProvider>
               </QueryClientProvider>
             </EdgeStoreProvider>
-          </AuthContextProivder>
+          </AuthProvider>
         </SessionProvider>
       </body>
     </html>

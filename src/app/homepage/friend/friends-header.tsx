@@ -2,15 +2,15 @@ import React from 'react'
 
 type FriendsHeaderPropsType = {
     hasFriend: boolean
-    onlineFriendsNum: number
+    friendsNum: number
 }
 
-const FriendsHeader = ({ hasFriend, onlineFriendsNum }: FriendsHeaderPropsType) => {
+const FriendsHeader = ({ hasFriend, friendsNum }: FriendsHeaderPropsType) => {
     return (
         <div>
             {hasFriend ?
                 <div className='text-2xl mb-3'>
-                    All friends: {onlineFriendsNum}
+                    All friends: {friendsNum}
                 </div> :
 
                 <div className='text-2xl mb-3'>

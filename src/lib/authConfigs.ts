@@ -10,7 +10,7 @@ const discordClientId = process.env.DISCORD_CLIENT_ID
 const discordClientSecret = process.env.DISCORD_CLIENT_SECRET
 
 
-if (!googleClientId || !googleClientSecret || !discordClientId || !discordClientSecret) 
+if (!googleClientId || !googleClientSecret || !discordClientId || !discordClientSecret)
     throw new ServerMisconfigurationException()
 
 export const authConfigs: AuthOptions = {

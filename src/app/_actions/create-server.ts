@@ -24,6 +24,6 @@ export const createServerAction = actionClient
 
         } catch (error) {
             console.error('Error creating server: ', error)
-            return { error: 'Error occurs' }
+            return { error: 'Failed to create server ...' }
         }
     })

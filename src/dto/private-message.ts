@@ -1,14 +1,18 @@
 import { z } from 'zod'
+import { userSchema } from '@/dto/user'
 
-export const privateMessage = z.object({
+export const privateMessageSchema = z.object({
     privateMessageId: z.string().uuid(),
     content: z.string(),
     createdAt: z.date(),
     updatedAt: z.date(),
+    read: z.boolean(),
+    sender: userSchema.optional(),
+    recipient: userSchema.optional()
 })
 
-type PrivateMessageType = z.infer<typeof privateMessage>
+type PrivateMessageType = z.infer<typeof privateMessageSchema>
 
-export function createPrivateMessageDTO(privateMessaeg: PrivateMessageType) {
-    return privateMessage.parse(privateMessaeg)
+export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
+    return privateMessageSchema.parse(privateMessage)
 }

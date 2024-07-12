@@ -23,15 +23,16 @@ type MemberInfoType = {
 type PusherContextType = {
     onlineUsers: Omit<UserType, 'email'>[]
     isUserOnline: (userId: string) => boolean
+    getUserOnlineNum: () => number
 }
 
-const PusherContext = createContext<PusherContextType | undefined>(undefined)
+const OnlineUserContext = createContext<PusherContextType | undefined>(undefined)
 
-export const usePusherContext = () => {
-    const pusherContext = useContext(PusherContext)
-    if (!pusherContext) throw new Error('Context is not initiailized')
+export const useOnlineUserContext = () => {
+    const context = useContext(OnlineUserContext)
+    if (!context) throw new Error('Context is not initiailized')
 
-    return pusherContext
+    return context
 }
 
 type PusherProviderPropsType = {
@@ -46,6 +47,8 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
     const isUserOnline = (userId: string) => {
         return !!onlineUsers.find(currOnlineUser => currOnlineUser.userId === userId)
     }
+
+    const getUserOnlineNum = () => onlineUsers.length - 1
 
     useEffect(() => {
         if (!session || isSubscribed) return
@@ -84,9 +87,9 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
     }, [])
 
     return (
-        <PusherContext.Provider value={{ onlineUsers, isUserOnline }}>
+        <OnlineUserContext.Provider value={{ onlineUsers, isUserOnline, getUserOnlineNum }}>
             {children}
-        </PusherContext.Provider>
+        </OnlineUserContext.Provider>
     )
 }
 

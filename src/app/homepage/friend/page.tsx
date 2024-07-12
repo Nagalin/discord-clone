@@ -6,8 +6,8 @@ import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
 import { usePusherContext } from '@/contexts/pusher-provider'
-import FriendCard from '../_components/friend-card'
-import FriendsHeader from './friends-header'
+import FriendCard from '@/app/homepage/friend-card'
+import FriendsHeader from '@/app/homepage/friend/friends-header'
 
 const FriendPage = () => {
   const { data: friends, isFetching } = useQuery({

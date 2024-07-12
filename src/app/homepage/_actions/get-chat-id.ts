@@ -1,9 +1,9 @@
 'use server'
 
-import { createPrivateChat, getPrivateChat } from "@/data-access/private-chat";
-import { getUserIdFromSession } from "@/lib/getUserIdFromSession";
-import { actionClient } from "@/lib/safe-action";
-import { z } from "zod";
+import { createPrivateChat, getPrivateChat } from '@/data-access/private-chat'
+import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
 
 const schema = z.object({
     recipientId: z.string()

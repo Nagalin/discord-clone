@@ -4,9 +4,8 @@ import { usePusherContext } from '@/contexts/pusher-provider'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
-import UserCard from '@/components/user-card'
-import FriendCard from './_components/friend-card'
-import OnlineFriendHeader from './online-friend-header'
+import FriendCard from '@/app/homepage/friend-card'
+import OnlineFriendHeader from '@/app/homepage/online-friend-header'
 
 const Homepage = () => {
   const { data: friends } = useQuery({

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import chatLogo from '@/assets/chat.svg'
 import { useQueryClient } from '@tanstack/react-query'
-import { getChatIdActions } from '../_actions/get-chat-id'
+import { getChatIdActions } from '@/app/homepage/_actions/get-chat-id'
 import { useRouter } from 'next/navigation'
 
 type FriendCardPropsType = {
@@ -22,8 +22,7 @@ const FriendCard = ({ friend, online }: FriendCardPropsType) => {
             queryKey: ['chatId'],
             queryFn: async () => {
                 const res = await getChatIdActions({ recipientId: recipientId })
-                console.log(res)
-                router.push(`/chat/${res?.data?.info}`)
+                router.push(`/homepage/chat/${res?.data?.info}`)
             }
         })
     }

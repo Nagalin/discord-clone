@@ -15,7 +15,7 @@ const Layout = ({ children }: LayoutPropsType) => {
       <div className='flex flex-col'>
         <Navbar />
 
-        <div className='w-[calc(100vw-42rem)] p-3'>
+        <div className='w-[calc(100vw-42rem)]'>
           {children}
         </div>
 

@@ -1,3 +1,4 @@
+import { createPrivateMessageDTO } from "@/dto/private-message";
 import prisma from "@/lib/prisma";
 
 export async function getPrivateMessages(privateChatId: string) {
@@ -12,5 +13,5 @@ export async function getPrivateMessages(privateChatId: string) {
         }
     })
 
-    return privateMessages
+    return privateMessages.map(curr => createPrivateMessageDTO(curr))
 }

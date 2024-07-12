@@ -1,13 +1,11 @@
+'use client'
 
 import UserCard from '@/components/user-card'
 import { UserType } from '@/dto/user'
 import Image from 'next/image'
 import React from 'react'
 import chatLogo from '@/assets/chat.svg'
-import { useQueryClient } from '@tanstack/react-query'
-import { getPrivateChatAction } from '@/app/homepage/_actions/get-chat-id'
 import { useRouter } from 'next/navigation'
-import { usePrivateChatStore } from './_zustand/privat-chat'
 
 type FriendCardPropsType = {
     friend: UserType
@@ -38,7 +36,6 @@ const FriendCard = ({ friend, online }: FriendCardPropsType) => {
                     alt='chat logo'
                 />
             </div>
-
         </div>
     )
 }

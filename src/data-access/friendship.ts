@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { createFriendshipDTO } from '@/dto/friendship'
+import { createFriendshipDTO, createPendingFriendRequestDTO, createUserFriendDTO } from '@/dto/friendship'
 import { createUserDTO } from '@/dto/user'
 
 export async function createFriendship(requesterId: string, recipientId: string) {
@@ -48,11 +48,7 @@ export async function getFriendsByUserId(userId: string) {
         }
     })
 
-    return friends.map(currFriend => {
-        const isRequester = currFriend.requesterId === userId
-        return isRequester ?
-            createUserDTO(currFriend.recipient) : createUserDTO(currFriend.requester)
-    })
+    return createUserFriendDTO(friends, userId)
 }
 
 export async function getPendingFriendship(requesterId: string) {
@@ -73,14 +69,7 @@ export async function getPendingFriendship(requesterId: string) {
             recipient: true
         }
     })
-    return pendingFriendRequests.map(curr => {
-        const friendshipDTO = createFriendshipDTO(curr)
-        curr.requesterId === requesterId ?
-            delete friendshipDTO.requester :
-            delete friendshipDTO.recipient
-
-        return friendshipDTO
-    })
+    return createPendingFriendRequestDTO(pendingFriendRequests, requesterId)
 }
 
 export async function updateFriendship(

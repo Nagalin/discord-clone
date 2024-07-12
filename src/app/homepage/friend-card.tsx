@@ -5,8 +5,9 @@ import Image from 'next/image'
 import React from 'react'
 import chatLogo from '@/assets/chat.svg'
 import { useQueryClient } from '@tanstack/react-query'
-import { getChatIdActions } from '@/app/homepage/_actions/get-chat-id'
+import { getPrivateChatAction } from '@/app/homepage/_actions/get-chat-id'
 import { useRouter } from 'next/navigation'
+import { usePrivateChatStore } from './_zustand/privat-chat'
 
 type FriendCardPropsType = {
     friend: UserType
@@ -14,17 +15,10 @@ type FriendCardPropsType = {
 }
 
 const FriendCard = ({ friend, online }: FriendCardPropsType) => {
-    const queryClient = useQueryClient()
     const router = useRouter()
 
     const handleGoToChat = async (recipientId: string) => {
-        await queryClient.fetchQuery({
-            queryKey: ['chatId'],
-            queryFn: async () => {
-                const res = await getChatIdActions({ recipientId: recipientId })
-                router.push(`/homepage/chat/${res?.data?.info}`)
-            }
-        })
+        router.push(`/homepage/chat/${recipientId}`)
     }
 
     return (

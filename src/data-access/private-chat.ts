@@ -42,7 +42,13 @@ export async function getPrivateChat(senderId: string, recipientId: string) {
             participants: true
         }
     })
-    return privateChat?  createPrivateChatDTO(privateChat) : null
+
+    if (privateChat) {
+        privateChat.participants = privateChat.participants.filter(participant => participant.userId !== senderId)
+        return createPrivateChatDTO(privateChat)
+    }
+
+    return null
 }
 
 export async function getRecipientInfo(privateChatId: string, senderId: string) {

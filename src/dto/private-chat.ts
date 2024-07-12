@@ -5,10 +5,10 @@ const privateChatSchema = z.object({
     privateChatId: z.string().uuid(),
     createdAt: z.date(),
     updatedAt: z.date(),
-    participant: userSchema.array().optional()
+    participants: userSchema.array().optional()
 })
 
-type PrivateChatType = z.infer<typeof privateChatSchema>
+export type PrivateChatType = z.infer<typeof privateChatSchema>
 
 export function createPrivateChatDTO(privateChat: PrivateChatType) {
     return privateChatSchema.parse(privateChat)

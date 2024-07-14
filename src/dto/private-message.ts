@@ -11,7 +11,7 @@ export const privateMessageSchema = z.object({
     recipient: userSchema.optional()
 })
 
-type PrivateMessageType = z.infer<typeof privateMessageSchema>
+export type PrivateMessageType = z.infer<typeof privateMessageSchema>
 
 export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
     return privateMessageSchema.parse(privateMessage)

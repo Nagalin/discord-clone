@@ -1,19 +1,18 @@
 'use server'
 
-import { getRecipientInfo } from '@/data-access/private-chat'
+import { z } from 'zod'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
 import { actionClient } from '@/lib/safe-action'
-import { z } from 'zod'
+import { getUserInfoWithId } from '@/data-access/user'
 
 const schema = z.object({
-    privateChatId: z.string().uuid()
+    recipientId: z.string().uuid()
 })
 
 export const getRecipientAction = actionClient
-.schema(schema).action(async ({parsedInput: {privateChatId}}) => {
+.schema(schema).action(async ({parsedInput: {recipientId}}) => {
     try {
-        const senderId = await getUserIdFromSession()
-        const recipient = await getRecipientInfo(privateChatId, senderId)
+        const recipient = await getUserInfoWithId(recipientId)
         return { info: recipient}
         
     } catch (error) {

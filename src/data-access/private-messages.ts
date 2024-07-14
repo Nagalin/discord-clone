@@ -15,3 +15,16 @@ export async function getPrivateMessages(privateChatId: string) {
 
     return privateMessages.map(curr => createPrivateMessageDTO(curr))
 }
+
+export async function createPrivateMessage(
+    privateChatId: string, senderId: string, recipientId: string, message: string
+) {
+    await prisma.privateMessage.create({
+        data: {
+            privateChatId: privateChatId,
+            senderId: senderId,
+            recipientId: recipientId,
+            content: message,
+        }
+    })
+}

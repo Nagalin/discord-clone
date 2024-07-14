@@ -4,6 +4,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPrivateChatAction } from '../../_actions/get-private-chat'
 import UserCard from '@/components/user-card'
+import MessageForm from './message-form'
 
 type PrivateMessagePagePropsType = {
     params: {
@@ -21,7 +22,8 @@ const PrivateMessagePage = ({ params }: PrivateMessagePagePropsType) => {
     if (isFetching) return
     return (
         <div>
-            <UserCard online user={privateChat?.data?.info?.participants![0]!} />
+            {/* <UserCard user={privateChat?.data?.info?.participants![0]!} /> */}
+            <MessageForm privateChatId={privateChat?.data?.info?.privateChatId!}/>
         </div>
     )
 }

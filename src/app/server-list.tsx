@@ -31,7 +31,7 @@ const ServerList = () => {
 
   return (
     <div
-      className='bg-discord-server-list h-screen w-20 flex flex-col  gap-2 items-center pt-2'
+      className='bg-discord-server-list h-screen w-20 flex flex-col  gap-2 items-center'
     >
       {servers?.data?.info?.map(currServer => (
         <div

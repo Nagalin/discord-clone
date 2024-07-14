@@ -27,14 +27,17 @@ const useSendMessage = (privateChatId: string, recipientId: string) => {
     }, [privateChatId])
 
 
-    const { register, handleSubmit } = useForm<ChatFormType>()
+    const { register, handleSubmit, reset } = useForm<ChatFormType>()
 
     const { mutate: sendMessage } = useMutation({
         mutationFn: async ({ privateChatId, message, recipientId }: { privateChatId: string, message: string, recipientId: string }) =>
             await sendMessageAction({ privateChatId, recipientId, message })
     })
 
-    const onSubmit = handleSubmit(data => sendMessage({ privateChatId, message: data.message, recipientId }))
+    const onSubmit = handleSubmit(data => {
+        sendMessage({ privateChatId, message: data.message, recipientId })
+        reset()
+    })
 
     return {
         register,

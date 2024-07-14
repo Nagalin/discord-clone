@@ -1,12 +1,11 @@
 'use server'
 
-import { createPrivateMessage } from "@/data-access/private-messages"
-import { PrivateChatType } from "@/dto/private-chat"
-import { PrivateMessageType } from "@/dto/private-message"
-import { getUserIdFromSession } from "@/lib/getUserIdFromSession"
-import { pusherServer } from "@/lib/pusher"
-import { actionClient } from "@/lib/safe-action"
-import { z } from "zod"
+import { createPrivateMessage } from '@/data-access/private-messages'
+import { PrivateMessageType } from '@/dto/private-message'
+import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { pusherServer } from '@/lib/pusher'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
 
 const schema = z.object({
     privateChatId: z.string().uuid(),

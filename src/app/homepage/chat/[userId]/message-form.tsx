@@ -21,24 +21,21 @@ const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
             const messages = await getPrivateMessagesAction({
                 privateChatId: privateChatId
             })
-            setMessages(initialMessages?.data?.info!)
+            if (messages?.data?.info)
+                useMessageStore.getState().setMessages(messages.data.info)
             return messages
         }
     })
 
     const { onSubmit, register } = useSendMessage(privateChatId, recipientId)
-    const { setMessages, messages } = useMessageStore()
-
-    useEffect(() => console.log(messages))
 
     if (isFetching) return
     if (initialMessages?.data?.error) return
-    if(!messages) return
 
 
     return (
         <form onSubmit={onSubmit}>
-            <MessageCard/>
+            <MessageCard />
             <Input {...register('message')} required placeholder='Send your messages' />
             <Button className='hidden' />
         </form>

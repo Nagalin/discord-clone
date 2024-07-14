@@ -11,6 +11,7 @@ import AuthProvider from '@/contexts/auth-provider'
 import OnlineUserProvider from '@/contexts/online-user-provider'
 import Profile from '@/app/profile'
 import './globals.css'
+import DiscordLogo from './discord-logo'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,7 +33,10 @@ export default function RootLayout({
 
                   <div className='flex'>
                     {pathname !== '/' &&
-                      <div className='relative'>
+                      <div
+                        className='bg-discord-server-list relative h-screen w-20 flex flex-col  gap-2 items-center pt-2'
+                      >
+                        <DiscordLogo />
                         <ServerList />
                         <Profile />
                       </div>

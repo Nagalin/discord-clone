@@ -56,7 +56,7 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
         setIsSubscribed(true)
 
         const presenceChannel = pusherClient.subscribe('presence-online-user')
-
+        
         presenceChannel.bind('pusher:subscription_succeeded', (channelInfo: ChannelInfoType) => {
             Object.keys(channelInfo.members).forEach(memberId => {
                 const member = channelInfo.members[memberId]

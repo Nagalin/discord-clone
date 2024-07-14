@@ -1,35 +1,44 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { getPrivateMessagesAction } from './_actions/get-private-messages'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import useSendMessage from './_hooks/send-message'
-import { useParams } from 'next/navigation'
 import MessageCard from '@/app/homepage/chat/[userId]/message-card'
+import { useMessageStore } from './_zustand/messages-store'
 
 type MessagePropsType = {
     privateChatId: string
+    recipientId: string
 }
-const MessageForm = ({ privateChatId }: MessagePropsType) => {
-    const { data: messages, isFetching } = useQuery({
+const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
+
+    const { data: initialMessages, isFetching } = useQuery({
         queryKey: ['private-messages'],
-        queryFn: async () => getPrivateMessagesAction({ privateChatId: privateChatId })
+        queryFn: async () => {
+            const messages = await getPrivateMessagesAction({
+                privateChatId: privateChatId
+            })
+            setMessages(initialMessages?.data?.info!)
+            return messages
+        }
     })
 
-
-    const params = useParams()
-    const recipientId = params.userId as string
     const { onSubmit, register } = useSendMessage(privateChatId, recipientId)
-    if (isFetching) return
-    if (messages?.data?.error) return
+    const { setMessages, messages } = useMessageStore()
 
+    useEffect(() => console.log(messages))
+
+    if (isFetching) return
+    if (initialMessages?.data?.error) return
+    if(!messages) return
 
 
     return (
         <form onSubmit={onSubmit}>
-            <MessageCard messages={messages?.data?.info!} />
+            <MessageCard/>
             <Input {...register('message')} required placeholder='Send your messages' />
             <Button className='hidden' />
         </form>

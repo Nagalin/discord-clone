@@ -12,15 +12,16 @@ import OnlineUserProvider from '@/contexts/online-user-provider'
 import Profile from '@/app/profile'
 import './globals.css'
 import DiscordLogo from './discord-logo'
+import NotificationMessage from './notification-message'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const queryClient = new QueryClient()
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = new QueryClient()
   const pathname = usePathname()
   return (
     <html lang='en'>
@@ -37,6 +38,7 @@ export default function RootLayout({
                         className='bg-discord-server-list relative h-screen w-20 flex flex-col  gap-2 items-center pt-2'
                       >
                         <DiscordLogo />
+                        <NotificationMessage/>
                         <ServerList />
                         <Profile />
                       </div>

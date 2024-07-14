@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { QueryClient, useQuery } from '@tanstack/react-query'
 import { getPrivateChatAction } from '../../_actions/get-private-chat'
 import MessageForm from './message-form'
 

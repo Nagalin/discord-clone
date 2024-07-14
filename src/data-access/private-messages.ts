@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { createPrivateMessageDTO } from '@/dto/private-message'
+import { createPrivateMessageDTO, createUnreadMessagesDTO } from '@/dto/private-message'
 
 export async function getPrivateMessages(privateChatId: string) {
     const privateMessages = await prisma.privateMessage.findMany({
@@ -31,4 +31,38 @@ export async function createPrivateMessage(
         }
     })
     return createPrivateMessageDTO(privateMessage)
+}
+
+export async function getUnreadMessages(recipientId: string) {
+    const unreadMessages = await prisma.privateMessage.findMany({
+        where: {
+            recipientId: recipientId,
+            read: false
+        },
+        include: {
+            sender: true
+        }
+    })
+    return createUnreadMessagesDTO(unreadMessages)
+}
+
+export async function updatePrivateMessage(privateMessageId: string) {
+    const privateMessage = await prisma.privateMessage.findUnique({
+        where: {
+            privateMessageId: privateMessageId,
+            read: false
+        }
+    })
+    if(!privateMessage) return
+    console.log('debug: ',privateMessage)
+    await prisma.privateMessage.update({
+        where: {
+            privateMessageId: privateMessageId,
+            read: false
+        },
+
+        data: {
+            read: true
+        }
+    })
 }

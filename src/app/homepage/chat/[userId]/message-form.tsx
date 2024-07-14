@@ -1,6 +1,6 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
 import { getPrivateMessagesAction } from './_actions/get-private-messages'
 import { Input } from '@/components/ui/input'
@@ -14,6 +14,7 @@ type MessagePropsType = {
     recipientId: string
 }
 const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
+    const queryClient = useQueryClient()
 
     const { data: initialMessages, isFetching } = useQuery({
         queryKey: ['private-messages'],
@@ -21,15 +22,19 @@ const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
             const messages = await getPrivateMessagesAction({
                 privateChatId: privateChatId
             })
+            await queryClient.invalidateQueries({ queryKey: ['unread-messages'] })
             if (messages?.data?.info)
                 useMessageStore.getState().setMessages(messages.data.info)
+            console.log('invalidate')
+
+
             return messages
         }
     })
 
     const { onSubmit, register } = useSendMessage(privateChatId, recipientId)
 
-    if (isFetching) return
+    if (isFetching) return <div>waitttt</div>
     if (initialMessages?.data?.error) return
 
 

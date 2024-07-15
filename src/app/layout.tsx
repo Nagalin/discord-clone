@@ -13,6 +13,7 @@ import Profile from '@/app/profile'
 import './globals.css'
 import DiscordLogo from './discord-logo'
 import NotificationMessage from './notification-message'
+import UnreadMessagesProvider from '@/contexts/unread-messages-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,28 +27,31 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+
         <SessionProvider>
           <AuthProvider>
             <EdgeStoreProvider>
               <QueryClientProvider client={queryClient}>
-                <OnlineUserProvider>
+                <UnreadMessagesProvider>
+                  <OnlineUserProvider>
 
-                  <div className='flex'>
-                    {pathname !== '/' &&
-                      <div
-                        className='bg-discord-server-list relative h-screen w-20 flex flex-col  gap-2 items-center pt-2'
-                      >
-                        <DiscordLogo />
-                        <NotificationMessage/>
-                        <ServerList />
-                        <Profile />
-                      </div>
-                    }
-                    {children}
-                    <Toaster />
-                  </div>
+                    <div className='flex'>
+                      {pathname !== '/' &&
+                        <div
+                          className='bg-discord-server-list relative h-screen w-20 flex flex-col  gap-2 items-center pt-2'
+                        >
+                          <DiscordLogo />
+                          <NotificationMessage />
+                          <ServerList />
+                          <Profile />
+                        </div>
+                      }
+                      {children}
+                      <Toaster />
+                    </div>
 
-                </OnlineUserProvider>
+                  </OnlineUserProvider>
+                </UnreadMessagesProvider>
               </QueryClientProvider>
             </EdgeStoreProvider>
           </AuthProvider>

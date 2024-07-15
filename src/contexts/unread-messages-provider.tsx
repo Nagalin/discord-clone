@@ -1,5 +1,7 @@
+import { useMessageNotiStore } from '@/app/_zustand/message-noti-store'
 import { pusherClient } from '@/lib/pusher'
 import { useSession } from 'next-auth/react'
+import { useParams, usePathname } from 'next/navigation'
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
 type UnreadMessagesProviderPropsType = {
@@ -20,9 +22,30 @@ export const useUnreadMessageContext = () => {
 }
 const UnreadMessagesProvider = ({ children }: UnreadMessagesProviderPropsType) => {
   const { data: session } = useSession()
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  const incrementUnreadMessageCount = useMessageNotiStore((state) => state.incrementUnreadMessageCount)
+  const pathname = usePathname()
 
-  
+  useEffect(() => {
+    console.log('mounted')
+    if (!session) return
+
+    pusherClient.subscribe(`notification-${session.user.userId}`)
+
+    pusherClient.bind('noti-message', (payload: any) => {
+      console.log(payload.sender.userId)
+      console.log(pathname.includes('chat') && pathname.includes(payload.sender.userId))
+      if (pathname.includes('chat') && pathname.includes(payload.sender.userId)) return
+      incrementUnreadMessageCount(payload.sender)
+    })
+
+    return () => {
+      pusherClient.unsubscribe(`notification-${session.user.userId}`)
+      pusherClient.unbind('noti-message')
+    }
+
+  }, [pathname])
+
+
   return (
     <UnreadMessageContext.Provider value={{}}>
       {children}

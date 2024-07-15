@@ -46,10 +46,11 @@ export async function getUnreadMessages(recipientId: string) {
     return createUnreadMessagesDTO(unreadMessages)
 }
 
-export async function updatePrivateMessage(privateMessageId: string) {
+export async function updatePrivateMessage(privateMessageId: string, recipientId: string) {
     const privateMessage = await prisma.privateMessage.findUnique({
         where: {
             privateMessageId: privateMessageId,
+            recipientId: recipientId,
             read: false
         }
     })

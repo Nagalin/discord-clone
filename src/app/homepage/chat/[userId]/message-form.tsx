@@ -25,8 +25,6 @@ const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
             await queryClient.invalidateQueries({ queryKey: ['unread-messages'] })
             if (messages?.data?.info)
                 useMessageStore.getState().setMessages(messages.data.info)
-            console.log('invalidate')
-
 
             return messages
         }

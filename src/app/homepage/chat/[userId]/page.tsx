@@ -18,7 +18,7 @@ const PrivateMessagePage = ({ params }: PrivateMessagePagePropsType) => {
         queryFn: async () => await getPrivateChatIdAction({ recipientId: userId })
     })
 
-    if (isFetching) return
+    if (isFetching) return 
     return (
         <div>
             <MessageForm
@@ -28,5 +28,6 @@ const PrivateMessagePage = ({ params }: PrivateMessagePagePropsType) => {
         </div>
     )
 }
+
 
 export default PrivateMessagePage

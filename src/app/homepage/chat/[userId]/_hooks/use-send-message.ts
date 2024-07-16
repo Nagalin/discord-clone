@@ -21,7 +21,7 @@ const useSendMessage = (privateChatId: string, recipientId: string) => {
 
         return () => {
             pusherClient.unsubscribe(`channel-${privateChatId}`)
-            pusherClient.unbind('message')
+            pusherClient.unbind('incoming-message')
         }
 
     }, [privateChatId])

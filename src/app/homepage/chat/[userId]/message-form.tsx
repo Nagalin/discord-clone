@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import useSendMessage from '@/app/homepage/chat/[userId]/_hooks/use-send-message'
 import MessageCard from '@/app/homepage/chat/[userId]/message-card'
 import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-store'
+import { Skeleton } from '@/components/ui/skeleton'
 
 type MessagePropsType = {
     privateChatId: string
@@ -33,15 +34,101 @@ const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
 
     const { onSubmit, register } = useSendMessage(privateChatId, recipientId)
 
-    if (isFetching) return <div>waitttt</div>
+    if (isFetching) return <MessageFormLoading />
     if (initialMessages?.data?.error) return
 
     return (
         <form onSubmit={onSubmit}>
             <MessageCard />
-            <Input {...register('message')} required placeholder='Send your messages' />
+            <Input
+                className='w-3/4 ms-4'
+                {...register('message')}
+                required
+                placeholder='Send your messages'
+            />
             <Button className='hidden' />
         </form>
+    )
+}
+
+const MessageFormLoading = () => {
+    return (
+        <div className='flex flex-col gap-5 p-3'>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+
+
+        </div>
     )
 }
 

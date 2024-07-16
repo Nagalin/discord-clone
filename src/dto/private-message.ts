@@ -26,7 +26,6 @@ export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
 }
 
 export function createUnreadMessagesDTO(unreadMessages: PrivateMessageType[]) {
-    console.log('here', unreadMessages)
     const userUnreadMessagesMap: Record<string, { user: UserType, unreadMessagesCount: number }> = {}
 
     unreadMessages.forEach(message => {

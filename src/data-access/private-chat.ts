@@ -46,3 +46,36 @@ export async function getPrivateChat(senderId: string, recipientId: string) {
     return privateChat ?
         createPrivateChatWithOutSenderInfoDTO(privateChat, senderId) : null
 }
+
+export async function getPrivateChatHistory(userId: string) {
+    const privateChats = await prisma.privateChat.findMany({
+        where: {
+            participants: {
+                some: {
+                    userId: userId
+                }
+            }
+        },
+
+        include: {
+            participants: true
+        },
+
+        orderBy: {
+            updatedAt: 'desc'
+        }
+    })
+
+    return privateChats.map(curr => createPrivateChatWithOutSenderInfoDTO(curr, userId))
+}
+export async function updatePrivateChatDate(privateChatId: string) {
+    await prisma.privateChat.update({
+        where: {
+            privateChatId: privateChatId
+        },
+
+        data: {
+            updatedAt: new Date()
+        }
+    })
+}

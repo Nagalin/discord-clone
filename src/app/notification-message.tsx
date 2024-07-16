@@ -20,11 +20,6 @@ const NotificationMessage = () => {
 
   })
 
-  useEffect(() => {
-    console.log(unreadMessage)
-
-  },)
-
   if (isFetching) return
 
   if (unreadMessages?.data?.error) return

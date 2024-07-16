@@ -1,5 +1,6 @@
 'use server'
 
+import { updatePrivateChatDate } from '@/data-access/private-chat'
 import { createPrivateMessage } from '@/data-access/private-messages'
 import { PrivateMessageType } from '@/dto/private-message'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
@@ -19,6 +20,7 @@ export const sendMessageAction = actionClient
         try {
             const senderId = await getUserIdFromSession()
             const newMessage =  await createPrivateMessage(privateChatId, senderId, recipientId, message)
+            await updatePrivateChatDate(privateChatId)
 
             const payload: PrivateMessageType = {
                 ...newMessage

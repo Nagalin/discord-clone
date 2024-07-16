@@ -26,14 +26,11 @@ const UnreadMessagesProvider = ({ children }: UnreadMessagesProviderPropsType) =
   const pathname = usePathname()
 
   useEffect(() => {
-    console.log('mounted')
     if (!session) return
 
     pusherClient.subscribe(`notification-${session.user.userId}`)
 
     pusherClient.bind('noti-message', (payload: any) => {
-      console.log(payload.sender.userId)
-      console.log(pathname.includes('chat') && pathname.includes(payload.sender.userId))
       if (pathname.includes('chat') && pathname.includes(payload.sender.userId)) return
       incrementUnreadMessageCount(payload.sender)
     })

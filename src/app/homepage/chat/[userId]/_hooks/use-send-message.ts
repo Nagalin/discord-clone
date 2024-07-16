@@ -1,9 +1,9 @@
+import { useEffect } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { sendMessageAction } from '../_actions/send-message'
-import { useEffect } from 'react'
+import { sendMessageAction } from '@/app/homepage/chat/[userId]/_actions/send-message'
 import { pusherClient } from '@/lib/pusher'
-import { useMessageStore } from '../_zustand/messages-store'
+import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-store'
 import { PrivateMessageType } from '@/dto/private-message'
 
 type ChatFormType = {
@@ -11,12 +11,12 @@ type ChatFormType = {
 }
 
 const useSendMessage = (privateChatId: string, recipientId: string) => {
-    const { addMessage } = useMessageStore()
+    const addMessage = useMessageStore(state => state.addMessage)
 
     useEffect(() => {
         pusherClient.subscribe(`channel-${privateChatId}`)
-        pusherClient.bind('message', (content: PrivateMessageType) => {
-            addMessage(content)
+        pusherClient.bind('incoming-message', (payload: PrivateMessageType) => {
+            addMessage(payload)
         })
 
         return () => {

@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { createFriendship, getFriendship } from '@/data-access/friendship'
-import { getUserInfoWithName } from '@/data-access/user'
+import { getUserInfoByName } from '@/data-access/user'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
 import { actionClient } from '@/lib/safe-action'
 
@@ -14,7 +14,7 @@ export const addFriendAction = actionClient
     .schema(schema).action(async ({ parsedInput: { username } }) => {
         try {
             const requesterId = await getUserIdFromSession()
-            const recipient = await getUserInfoWithName(username)
+            const recipient = await getUserInfoByName(username)
 
             if (!recipient) return { error: 'Recipient not found' }
 

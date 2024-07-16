@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import React, {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState
+} from 'react'
 import { UserType } from '@/dto/user'
 import { pusherClient } from '@/lib/pusher'
 import { useSession } from 'next-auth/react'
@@ -20,13 +26,13 @@ type MemberInfoType = {
     image: string
 }
 
-type PusherContextType = {
+type OnlineUserContextType = {
     onlineUsers: Omit<UserType, 'email'>[]
     isUserOnline: (userId: string) => boolean
     getUserOnlineNum: () => number
 }
 
-const OnlineUserContext = createContext<PusherContextType | undefined>(undefined)
+const OnlineUserContext = createContext<OnlineUserContextType | undefined>(undefined)
 
 export const useOnlineUserContext = () => {
     const context = useContext(OnlineUserContext)
@@ -56,7 +62,7 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
         setIsSubscribed(true)
 
         const presenceChannel = pusherClient.subscribe('presence-online-user')
-        
+
         presenceChannel.bind('pusher:subscription_succeeded', (channelInfo: ChannelInfoType) => {
             Object.keys(channelInfo.members).forEach(memberId => {
                 const member = channelInfo.members[memberId]

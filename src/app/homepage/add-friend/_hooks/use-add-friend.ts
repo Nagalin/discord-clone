@@ -32,11 +32,12 @@ const useAddFriend = () => {
         }
     })
 
+    const onSubmit = handleSubmit(data => addFriend(data.username))
+
     return {
         register,
-        handleSubmit,
+        onSubmit,
         isSubmitting,
-        addFriend,
         errors
     }
 }

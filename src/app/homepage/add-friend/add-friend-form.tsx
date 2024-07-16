@@ -3,17 +3,17 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import useAddFriend from '@/app/homepage/add-friend/_hooks/use-add-friend'
 import { Alert, AlertTitle } from '@/components/ui/alert'
 import { AlertCircle } from 'lucide-react'
+import useAddFriend from '@/app/homepage/add-friend/_hooks/use-add-friend'
 
 const AddFriendForm = () => {
-    const { register, addFriend, handleSubmit, isSubmitting, errors } = useAddFriend()
+    const { register, onSubmit, isSubmitting, errors } = useAddFriend()
 
     return (
         <div>
             <form
-                onSubmit={handleSubmit(data => addFriend(data.username))}
+                onSubmit={onSubmit}
                 className='flex gap-5 mb-5'
             >
                 <Input

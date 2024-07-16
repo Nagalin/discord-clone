@@ -18,6 +18,7 @@ const unreadMessagesSchema = z.object({
     unreadMessagesCount: z.number()
 
 })
+
 export type PrivateMessageType = z.infer<typeof privateMessageSchema>
 export type UnreadMessagesType = z.infer<typeof unreadMessagesSchema>
 
@@ -25,12 +26,16 @@ export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
     return privateMessageSchema.parse(privateMessage)
 }
 
+function createUserUnreadMessagesDTO(unreadMessages: UnreadMessagesType[]) {
+    return unreadMessagesSchema.parse(unreadMessages)
+}
+
 export function createUnreadMessagesDTO(unreadMessages: PrivateMessageType[]) {
     const userUnreadMessagesMap: Record<string, { user: UserType, unreadMessagesCount: number }> = {}
 
     unreadMessages.forEach(message => {
         if (message.sender) {
-            const senderId = message.senderId;
+            const senderId = message.senderId
             if (!userUnreadMessagesMap[senderId]) {
                 userUnreadMessagesMap[senderId] = {
                     user: message.sender,
@@ -41,6 +46,6 @@ export function createUnreadMessagesDTO(unreadMessages: PrivateMessageType[]) {
         }
     })
 
-    return Object.values(userUnreadMessagesMap)
+    return createUserUnreadMessagesDTO(Object.values(userUnreadMessagesMap))
 }
 

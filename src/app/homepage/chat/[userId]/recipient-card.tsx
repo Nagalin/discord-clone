@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getRecipientAction } from './_actions/get-recipient'
+import { getRecipientAction } from '@/app/homepage/chat/[userId]/_actions/get-recipient'
 import UserCard from '@/components/user-card'
 
 type RecipientCardPropsType = {

@@ -9,16 +9,16 @@ const schema = z.object({
     recipientId: z.string()
 })
 
-export const getPrivateChatAction = actionClient
+export const getPrivateChatIdAction = actionClient
     .schema(schema).action(async ({ parsedInput: { recipientId } }) => {
         try {
             const senderId = await getUserIdFromSession()
             const privateChat = await getPrivateChat(senderId, recipientId)
             if (privateChat) {
-                return { info: privateChat }
+                return { info: privateChat.privateChatId }
             }
             const newPrivateChat = await createPrivateChat(senderId, recipientId)
-            return { info: newPrivateChat }
+            return { info: newPrivateChat?.privateChatId }
 
         } catch (error) {
             console.error('Error getting chat id: ', error)

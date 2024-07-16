@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useEffect } from 'react'
-import { getUnreadMessagesAction } from './_actions/get-unread-message'
+import React from 'react'
+import { getUnreadMessagesAction } from '@/app/_actions/get-unread-message'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Link from 'next/link'
-import { useMessageNotiStore } from './_zustand/message-noti-store'
+import { useMessageNotiStore } from '@/app/_zustand/message-noti-store'
 
 const NotificationMessage = () => {
   const unreadMessage = useMessageNotiStore((state) => state.unreadMessages)
@@ -28,7 +28,7 @@ const NotificationMessage = () => {
     <div className='flex flex-col gap-2'>
       {unreadMessage.map(curr => (
         <div className='relative'>
-          <Link href="/homepage/chat/[userId]" as={`/homepage/chat/${curr.user.userId}`}>
+          <Link href='/homepage/chat/[userId]' as={`/homepage/chat/${curr.user.userId}`}>
             <Avatar className='w-12 h-12'>
               <AvatarImage src={curr.user.image} />
               <AvatarFallback />

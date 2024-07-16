@@ -1,6 +1,9 @@
 import prisma from '@/lib/prisma'
-import { createFriendshipDTO, createPendingFriendRequestDTO, createUserFriendDTO } from '@/dto/friendship'
-import { createUserDTO } from '@/dto/user'
+import { 
+    createFriendshipDTO, 
+    createPendingFriendRequestDTO, 
+    createUserFriendDTO 
+} from '@/dto/friendship'
 
 export async function createFriendship(requesterId: string, recipientId: string) {
     await prisma.friendship.create({
@@ -24,7 +27,7 @@ export async function getFriendship(
                 },
                 {
                     requesterId: recipientId,
-                    recipientId: recipientId
+                    recipientId: requesterId
                 }
             ]
         },

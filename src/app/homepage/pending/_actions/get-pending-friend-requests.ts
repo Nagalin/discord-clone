@@ -8,9 +8,9 @@ export const getPendingFriendRequestsAction = actionClient.action(async () => {
     try {
         const requesterId = await getUserIdFromSession()
         const pendingFriendRequests = await getPendingFriendship(requesterId)
-        return {info: pendingFriendRequests}
+        return { info: pendingFriendRequests }
     } catch (error) {
-        console.error('Error getting pending friend requests: ',error)
-        return {error: 'Failed to get pending friend request ...'}
+        console.error('Error getting pending friend requests: ', error)
+        return { error: 'Failed to get pending friend request ...' }
     }
 })

@@ -13,23 +13,20 @@ export const useMessageNotiStore = create<MessageNotiStoreType>((set) => ({
     setUnreadMessage: (initialUnreadMessages: UnreadMessagesType[]) =>
         set({ unreadMessages: initialUnreadMessages }),
     incrementUnreadMessageCount: (sender: UserType) =>
-        set((state) => {
+        set(state => {
             const existingUnreadMessage = state.unreadMessages.find(
-                (unreadMessage) => unreadMessage.user.userId === sender.userId
+                unreadMessage => unreadMessage.user.userId === sender.userId
             )
 
             if (existingUnreadMessage) {
                 return {
-                    unreadMessages: state.unreadMessages.map((unreadMessage) =>
-                        unreadMessage.user.userId === sender.userId
-                            ? { ...unreadMessage, unreadMessagesCount: unreadMessage.unreadMessagesCount + 1 }
-                            : unreadMessage
+                    unreadMessages: state.unreadMessages.map(curr =>
+                        curr.user.userId === sender.userId
+                            ? { ...curr, unreadMessagesCount: curr.unreadMessagesCount + 1 }
+                            : curr
                     )
                 }
             } else {
-                // If sender does not exist, append a new unread message
-
-                // Assuming you have a way to get sender's details or a default structure
                 const newUnreadMessage: UnreadMessagesType = {
                     user: {
                         userId: sender.userId,
@@ -38,11 +35,11 @@ export const useMessageNotiStore = create<MessageNotiStoreType>((set) => ({
                         email: sender.email
                     },
                     unreadMessagesCount: 1,
-                };
+                }
 
-                return { unreadMessages: [...state.unreadMessages, newUnreadMessage] };
+                return { unreadMessages: [...state.unreadMessages, newUnreadMessage] }
             }
         })
-    
-   
+
+
 }))

@@ -1,12 +1,12 @@
 'use server'
 
+import { z } from 'zod'
 import { updatePrivateChatDate } from '@/data-access/private-chat'
 import { createPrivateMessage } from '@/data-access/private-messages'
 import { PrivateMessageType } from '@/dto/private-message'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
 import { pusherServer } from '@/lib/pusher'
 import { actionClient } from '@/lib/safe-action'
-import { z } from 'zod'
 
 const schema = z.object({
     privateChatId: z.string().uuid(),
@@ -25,13 +25,9 @@ export const sendMessageAction = actionClient
             const payload: PrivateMessageType = {
                 ...newMessage
             }
-            pusherServer.trigger(`channel-${privateChatId}`, 'message',payload)  
+            pusherServer.trigger(`channel-${privateChatId}`, 'incoming-message',payload)  
             pusherServer.trigger(`notification-${recipientId}`, 'noti-message', {sender: newMessage.sender})
-
-
         } catch (error) {
             console.error(error)
-            
         }
-        
     })

@@ -55,7 +55,6 @@ export async function updatePrivateMessage(privateMessageId: string, recipientId
         }
     })
     if(!privateMessage) return
-    console.log('debug: ',privateMessage)
     await prisma.privateMessage.update({
         where: {
             privateMessageId: privateMessageId,

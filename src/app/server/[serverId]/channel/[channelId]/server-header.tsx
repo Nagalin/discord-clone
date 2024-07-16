@@ -19,7 +19,7 @@ const ServerHeader = () => {
   const params = useParams()
   const serverId = params.serverId
   const { data: server, isFetching } = useQuery({
-    queryKey: [serverId],
+    queryKey: ['server',serverId],
     queryFn: async () => await getServerAction({ serverId: serverId })
   })
 

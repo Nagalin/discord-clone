@@ -3,4 +3,4 @@ import { authConfigs } from '@/lib/authConfigs'
 
 const handler = NextAuth(authConfigs)
 
-export { handler as GET, handler as POST}
+export { handler as GET, handler as POST }

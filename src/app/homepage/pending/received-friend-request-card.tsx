@@ -1,48 +1,36 @@
 'use client'
 
+import React from 'react'
 import UserCard from '@/components/user-card'
 import { Button } from '@/components/ui/button'
 import { UserType } from '@/dto/user'
-import React from 'react'
-import { acceptFriendRequestAction, rejectFriendRequestAction } from '@/app/homepage/pending/_actions/handle-friend-request'
-import { useQueryClient } from '@tanstack/react-query'
-import { useToast } from '@/components/ui/use-toast'
+import useHandleFriendRequests from '@/app/homepage/pending/_hooks/use-handle-friend-requests'
 
 type ReceivedFriendRequestCardPropsType = {
     friendshipId: string
     requester: Omit<UserType, 'email'>
 
 }
+
 const ReceiveFriendRequestCard = ({ friendshipId, requester }: ReceivedFriendRequestCardPropsType) => {
-    const queryClient = useQueryClient()
-    const { toast } = useToast()
-
-    const handleFriendRequest = async (action: 'Accept' | 'Reject') => {
-        const actionFunction = action === 'Accept' ? acceptFriendRequestAction : rejectFriendRequestAction
-        const res = await actionFunction({
-            friendshipId: friendshipId, requesterId: requester.userId
-        })
-
-        if (!res?.data?.error) {
-            queryClient.invalidateQueries({ queryKey: ['pendingFriendRequests'] })
-        } else {
-            toast({
-                title: 'Oops ...',
-                description: res.data.error,
-                variant: 'destructive'
-            })
-        }
-    }
+    const { handleFriendRequest } = useHandleFriendRequests()
 
     return (
         <div className='flex justify-between'>
-            <UserCard
-                user={requester}
-            />
+            <UserCard user={requester} />
 
             <div className='flex items-center gap-3'>
-                <Button onClick={() => handleFriendRequest('Accept')}> Accept </Button>
-                <Button onClick={() => handleFriendRequest('Reject')} variant='destructive'> Reject </Button>
+                <Button
+                    onClick={() => handleFriendRequest('Accept', friendshipId, requester.userId)}
+                >
+                    Accept
+                </Button>
+                <Button
+                    onClick={() => handleFriendRequest('Reject', friendshipId, requester.userId)}
+                    variant='destructive'
+                >
+                    Reject
+                </Button>
             </div>
         </div>
     )

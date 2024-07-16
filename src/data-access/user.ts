@@ -20,7 +20,7 @@ export async function upsertUser(
     })
 }
 
-export async function getUserInfoWithId(userId: string) {
+export async function getUserInfoById(userId: string) {
     const user = await prisma.user.findFirst({
         where: {
             userId: userId
@@ -29,7 +29,7 @@ export async function getUserInfoWithId(userId: string) {
     return user ? createUserDTO(user) : null
 }
 
-export async function getUserInfoWithName(username: string) {
+export async function getUserInfoByName(username: string) {
     const user = await prisma.user.findFirst({
         where: {
             username: username

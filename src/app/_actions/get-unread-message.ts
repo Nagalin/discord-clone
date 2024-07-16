@@ -1,8 +1,8 @@
 'use server'
 
-import { getUnreadMessages } from "@/data-access/private-messages";
-import { getUserIdFromSession } from "@/lib/getUserIdFromSession";
-import { actionClient } from "@/lib/safe-action";
+import { getUnreadMessages } from '@/data-access/private-messages'
+import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { actionClient } from '@/lib/safe-action'
 
 export const getUnreadMessagesAction = actionClient
 .action(async () => {

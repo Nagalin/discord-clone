@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
-import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import FriendCard from '@/app/homepage/friend-card'
 import FriendsHeader from '@/app/homepage/friend/friends-header'
 
@@ -56,6 +55,7 @@ const FriendLoading = () => {
           <Skeleton className='h-4 w-[200px]' />
         </div>
       </div>
+      
     </div>
   )
 

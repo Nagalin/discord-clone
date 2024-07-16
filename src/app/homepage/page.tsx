@@ -16,10 +16,10 @@ const Homepage = () => {
 
   const { isUserOnline } = useOnlineUserContext()
 
-  if(isFetching) return <HomepageLoading/>
-  if(friends?.data?.error) 
+  if (isFetching) return <HomepageLoading />
+  if (friends?.data?.error)
     return <div className='text-2xl p-3 '>{friends.data.error}</div>
-    
+
   return (
     <div className='p-3'>
       <OnlineFriendHeader />

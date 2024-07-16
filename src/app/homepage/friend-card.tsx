@@ -1,9 +1,9 @@
 'use client'
 
+import React from 'react'
+import Image from 'next/image'
 import UserCard from '@/components/user-card'
 import { UserType } from '@/dto/user'
-import Image from 'next/image'
-import React from 'react'
 import chatLogo from '@/assets/chat.svg'
 import { useRouter } from 'next/navigation'
 
@@ -20,8 +20,8 @@ const FriendCard = ({ friend }: FriendCardPropsType) => {
 
     return (
         <div>
-            <div  className='flex justify-between items-center'>
-                <UserCard user={friend}/>
+            <div className='flex justify-between items-center'>
+                <UserCard user={friend} />
                 <Image
                     onClick={() => handleGoToChat(friend.userId)}
                     className='cursor-pointer'

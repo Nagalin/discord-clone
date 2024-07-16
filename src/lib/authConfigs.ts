@@ -2,13 +2,12 @@ import { AuthOptions } from 'next-auth'
 import discordProvider from 'next-auth/providers/discord'
 import googleProvider from 'next-auth/providers/google'
 import { ServerMisconfigurationException } from '@/lib/exception'
-import { getUserInfoWithId, upsertUser } from '@/data-access/user'
+import { getUserInfoById, upsertUser } from '@/data-access/user'
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
 const discordClientId = process.env.DISCORD_CLIENT_ID
 const discordClientSecret = process.env.DISCORD_CLIENT_SECRET
-
 
 if (!googleClientId || !googleClientSecret || !discordClientId || !discordClientSecret)
     throw new ServerMisconfigurationException()
@@ -46,7 +45,7 @@ export const authConfigs: AuthOptions = {
         async session({ session, token }) {
             const userId = token.userId as string
             try {
-                const user = await getUserInfoWithId(userId)
+                const user = await getUserInfoById(userId)
                 if (session.user) {
                     session.user.userId = userId
                     session.user.name = user?.username

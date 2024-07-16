@@ -1,7 +1,7 @@
 import React from 'react'
 import UserCard from '@/components/user-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useMessageStore } from './_zustand/messages-store'
+import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-store'
 
 const MessageCard = () => {
     const { messages } = useMessageStore()

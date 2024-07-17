@@ -11,7 +11,7 @@ const Channels = () => {
   const serverId = params.serverId
   const { data: channels, isFetching } = useQuery({
     queryKey: ['channels', serverId],
-    queryFn: async () => await getChannelsAction({ serverId: '98e7c98a-ce8f-4e86-b415-c8f4d008b60a' })
+    queryFn: async () => await getChannelsAction({ serverId: serverId })
   })
 
   if (isFetching) return

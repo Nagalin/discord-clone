@@ -21,7 +21,7 @@ export async function createChannel(
     })
 }
 
-export async function getChannels(serverId: string, userId: string) {
+export async function getChannelsByserverId(serverId: string, userId: string) {
     const channels = await prisma.channel.findMany({
         where: {
             serverId: serverId,
@@ -33,6 +33,16 @@ export async function getChannels(serverId: string, userId: string) {
         },
     })
     return channels.map(channel => createChannelDTO(channel))
+}
+
+export async function getChannelByName(channelName: string, channelType: 'Text' | 'Voice') {
+    const channel = await prisma.channel.findFirst({
+        where: {
+            channelName: channelName,
+            channelType: channelType
+        }
+    })
+    return channel ? createChannelDTO(channel) : null
 }
 
 export async function addUserToGeneralChannel(channelId: string, friendId: string) {

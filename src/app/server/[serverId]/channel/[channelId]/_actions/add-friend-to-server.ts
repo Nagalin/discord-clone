@@ -1,6 +1,6 @@
 'use server'
 
-import { addUserToGeneralChannel } from "@/data-access/channel"
+import { addUserToGeneralChannel, getChannelByName } from "@/data-access/channel"
 import { addUserToServer } from "@/data-access/server"
 import { getUserIdFromSession } from "@/lib/getUserIdFromSession"
 import { actionClient } from "@/lib/safe-action"
@@ -17,10 +17,10 @@ export const addFriendToServerAction = actionClient
         try {
             await addUserToServer(serverId, friendId)
             await addUserToGeneralChannel(channelId, friendId)
+            const voiceGeneralChannel = await getChannelByName('General', 'Voice')
+            await addUserToGeneralChannel(voiceGeneralChannel!.channelId!, friendId)
         } catch (error) {
             console.error(error)
 
         }
-
-
     })

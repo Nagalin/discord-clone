@@ -12,19 +12,34 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getAvailableFriendsAction } from './_actions/get-available-friends'
 import { useParams } from 'next/navigation'
 import UserCard from '@/components/user-card'
+import { addFriendToServerAction } from './_actions/add-friend-to-server'
 
 const AddPeople = () => {
     const params = useParams()
     const serverId = params.serverId
-    const {data: availableFriends} = useQuery({
+    const channelId = params.channelId
+    const { data: availableFriends } = useQuery({
         queryKey: ['available-friends', serverId],
-        queryFn: async () => await getAvailableFriendsAction({serverId: serverId})
+        queryFn: async () => await getAvailableFriendsAction({ serverId: serverId })
     })
-   
+    const queryClient = useQueryClient()
+
+    const { mutate: addFriendToServer } = useMutation({
+        mutationKey: ['available-friends-mutate', serverId],
+        mutationFn: async (friendId: string) => {
+            await addFriendToServerAction({
+                serverId: serverId,
+                friendId: friendId,
+                channelId: channelId
+            })
+            queryClient.invalidateQueries({queryKey: ['available-friends']})
+        }
+    })
+
 
     return (
         <Dialog >
@@ -38,15 +53,17 @@ const AddPeople = () => {
                     <DialogTitle>Add your friends to your server</DialogTitle>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
-                {availableFriends?.data?.info?.map(curr => (
-                    <div className='flex justify-between'>
-                        <UserCard user={curr}/>
-                        <Button> Add </Button>
-                    </div>
-                ))}
-                   
+                    {availableFriends?.data?.info?.map(curr => (
+                        <div className='flex justify-between'>
+                            <UserCard user={curr} />
+                            <Button onClick={() => addFriendToServer(curr.userId)}>
+                                Add
+                            </Button>
+                        </div>
+                    ))}
+
                 </div>
-                
+
             </DialogContent>
         </Dialog>
     )

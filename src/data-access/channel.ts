@@ -34,3 +34,20 @@ export async function getChannels(serverId: string, userId: string) {
     })
     return channels.map(channel => createChannelDTO(channel))
 }
+
+export async function addUserToGeneralChannel(channelId: string, friendId: string) {
+    await prisma.channel.update({
+        where: { 
+            channelId: channelId,
+        },
+
+        data: {
+            members: {
+                connect: { 
+                    userId: friendId
+                }
+            }
+        }
+    })
+}
+  

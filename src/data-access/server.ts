@@ -39,6 +39,7 @@ export async function getServerMember(serverId: string) {
     })
     return server
 }
+
 export async function createServer(
     ownerId: string, serverName: string, serverImage: string
 ) {
@@ -55,4 +56,22 @@ export async function createServer(
         }
     })
     return createServerDTO(server)
+}
+
+export async function addUserToServer(serverId: string, friendId: string) {
+    const server = await prisma.server.update({
+        where: {
+            serverId: serverId
+        },
+        data: {
+            members: {
+                connect: {
+                    userId: friendId
+                }
+            }
+
+        }
+    })
+
+    
 }

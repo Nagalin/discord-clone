@@ -4,6 +4,7 @@ import {
     createPendingFriendRequestDTO, 
     createUserFriendDTO 
 } from '@/dto/friendship'
+import { getServerMember } from './server'
 
 export async function createFriendship(requesterId: string, recipientId: string) {
     await prisma.friendship.create({
@@ -73,6 +74,19 @@ export async function getPendingFriendship(requesterId: string) {
         }
     })
     return createPendingFriendRequestDTO(pendingFriendRequests, requesterId)
+}
+
+export async function getAvailableFriends(serverId: string, ownerId: string) {
+    const friends = await getFriendsByUserId(ownerId)
+    const server = await getServerMember(serverId)
+    console.log(friends)
+
+    // Filter out friends who are already members of the server
+    const availableFriends = friends.filter(currFriend => {
+        return !server?.members.some(currMember => currMember.userId === currFriend.userId)
+    })
+
+    return availableFriends
 }
 
 export async function updateFriendship(

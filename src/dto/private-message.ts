@@ -46,6 +46,6 @@ export function createUnreadMessagesDTO(unreadMessages: PrivateMessageType[]) {
         }
     })
 
-    return createUserUnreadMessagesDTO(Object.values(userUnreadMessagesMap))
+    return Object.values(userUnreadMessagesMap)
 }
 

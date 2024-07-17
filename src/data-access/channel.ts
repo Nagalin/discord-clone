@@ -32,6 +32,5 @@ export async function getChannels(serverId: string, userId: string) {
             }
         },
     })
-
     return channels.map(channel => createChannelDTO(channel))
 }

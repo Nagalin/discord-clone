@@ -26,6 +26,7 @@ model User {
   messagesender    PrivateMessage[] @relation("message-sender-relation")
   messagerecipient PrivateMessage[] @relation("message-recipient-relation")
   chatParticipants PrivateChat[] 
+  channelSender ChannelMessage[]
 }
 
 enum StatusType {
@@ -64,8 +65,19 @@ model Channel {
   server Server @relation(fields: [serverId], references: [serverId])
   serverId String
   members User[]
+  channelMessage ChannelMessage[]
 }
 
+model ChannelMessage {
+  channelMessageId String @id @default(uuid())
+  sender User  @relation(fields: [senderId], references: [userId])
+  senderId String
+  content String
+  channel Channel @relation(fields: [channelId], references: [channelId])
+  channelId String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
 model PrivateChat {
   privateChatId  String           @id @default(uuid())
   privateMessage PrivateMessage[]

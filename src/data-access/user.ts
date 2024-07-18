@@ -32,7 +32,7 @@ export async function getUserInfoById(userId: string) {
 export async function getUserInfoByName(username: string) {
     const user = await prisma.user.findFirst({
         where: {
-            username: username
+            username: username,
         }
     })
     return user ? createUserDTO(user) : null

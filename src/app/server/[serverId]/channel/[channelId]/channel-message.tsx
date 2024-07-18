@@ -1,11 +1,12 @@
+'use client'
+
 import React from 'react'
 import UserCard from '@/components/user-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zustand/message-store'
+import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-store'
 
-const MessageCard = () => {
-    const messages = useMessageStore(state => state.messages)
-
+const ChannelMessageCard = () => {
+    const { messages } = useMessageStore()
     return (
         <ScrollArea className='h-[600px] overflow-y-auto'>
             <div className='p-3'>
@@ -36,4 +37,4 @@ const MessageCard = () => {
     )
 }
 
-export default MessageCard
+export default ChannelMessageCard

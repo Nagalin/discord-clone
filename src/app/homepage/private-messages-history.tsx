@@ -18,7 +18,7 @@ const PrivateMessagesHistory = () => {
         <div
             className='bg-discord-direct-message-list w-56 flex flex-col gap-4 p-2'
         >
-            <div className="text-2xl mt-5 mb-5"> Private messages</div>
+            <div className='text-2xl mt-5 mb-5'> Private messages</div>
 
             <div className='flex flex-col gap-2'>
                 {privateMessages?.data?.info?.map(curr => (
@@ -38,27 +38,27 @@ const PrivateMessagesHistory = () => {
 
 const PrivateMessagesHistoryLoading = () => {
     return (
-        <div className="bg-discord-direct-message-list w-56 flex flex-col gap-3 p-2">
-            <div className="text-2xl mt-5 mb-5"> Private messages</div>
+        <div className='bg-discord-direct-message-list w-56 flex flex-col gap-3 p-2'>
+            <div className='text-2xl mt-5 mb-5'> Private messages</div>
 
             <div className='flex items-center gap-3 p-2'>
-                <Skeleton className="h-12 w-12 rounded-full" />
-                <div className="space-y-2">
-                    <Skeleton className="h-4 w-[100px]" />
+                <Skeleton className='h-12 w-12 rounded-full' />
+                <div className='space-y-2'>
+                    <Skeleton className='h-4 w-[100px]' />
                 </div>
             </div>
 
             <div className='flex items-center gap-3 p-2'>
-                <Skeleton className="h-12 w-12 rounded-full" />
-                <div className="space-y-2">
-                    <Skeleton className="h-4 w-[100px]" />
+                <Skeleton className='h-12 w-12 rounded-full' />
+                <div className='space-y-2'>
+                    <Skeleton className='h-4 w-[100px]' />
                 </div>
             </div>
 
             <div className='flex items-center gap-3 p-2'>
-                <Skeleton className="h-12 w-12 rounded-full" />
-                <div className="space-y-2">
-                    <Skeleton className="h-4 w-[100px]" />
+                <Skeleton className='h-12 w-12 rounded-full' />
+                <div className='space-y-2'>
+                    <Skeleton className='h-4 w-[100px]' />
                 </div>
             </div>
 

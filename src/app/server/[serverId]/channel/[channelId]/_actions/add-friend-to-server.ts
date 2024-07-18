@@ -1,10 +1,9 @@
 'use server'
 
-import { addUserToGeneralChannel, getChannelByName } from "@/data-access/channel"
-import { addUserToServer } from "@/data-access/server"
-import { getUserIdFromSession } from "@/lib/getUserIdFromSession"
-import { actionClient } from "@/lib/safe-action"
-import { z } from "zod"
+import { addUserToGeneralChannel, getChannelByName } from '@/data-access/channel'
+import { addUserToServer } from '@/data-access/server'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
 
 const schema = z.object({
     serverId: z.string().uuid(),

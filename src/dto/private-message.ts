@@ -26,26 +26,24 @@ export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
     return privateMessageSchema.parse(privateMessage)
 }
 
-function createUserUnreadMessagesDTO(unreadMessages: UnreadMessagesType[]) {
-    return unreadMessagesSchema.parse(unreadMessages)
-}
-
 export function createUnreadMessagesDTO(unreadMessages: PrivateMessageType[]) {
-    const userUnreadMessagesMap: Record<string, { user: UserType, unreadMessagesCount: number }> = {}
+    // Create an array to hold the unread messages data
+    const userUnreadMessagesArray: { user: UserType, unreadMessagesCount: number }[] = []
 
     unreadMessages.forEach(message => {
         if (message.sender) {
-            const senderId = message.senderId
-            if (!userUnreadMessagesMap[senderId]) {
-                userUnreadMessagesMap[senderId] = {
+            let existingEntry = userUnreadMessagesArray.find(entry => entry.user.userId === message.sender!.userId)
+
+            if (existingEntry) {
+                existingEntry.unreadMessagesCount += 1
+            } else {
+                userUnreadMessagesArray.push({
                     user: message.sender,
-                    unreadMessagesCount: 0
-                }
+                    unreadMessagesCount: 1
+                })
             }
-            userUnreadMessagesMap[senderId].unreadMessagesCount += 1
         }
     })
 
-    return Object.values(userUnreadMessagesMap)
+    return z.array(unreadMessagesSchema).parse(userUnreadMessagesArray)
 }
-

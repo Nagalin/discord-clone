@@ -1,9 +1,9 @@
 'use server'
 
-import { getAvailableFriends } from "@/data-access/friendship"
-import { getUserIdFromSession } from "@/lib/getUserIdFromSession"
-import { actionClient } from "@/lib/safe-action"
-import { z } from "zod"
+import { getAvailableFriends } from '@/data-access/friendship'
+import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
 
 const schema = z.object({
     serverId: z.string().uuid()

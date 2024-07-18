@@ -7,7 +7,10 @@ type ChannelCardPropsType = {
 
 const ChannelCard = ({ channel }: ChannelCardPropsType) => {
   return (
-    <div>{channel.channelName}</div>
+    <div className='ms-5 mt-3 hover:bg-gray-600 rounded p-3 cursor-pointer'>
+      {channel.channelType === 'Text'? '# ': 'voice'}
+      {channel.channelName}
+    </div>
   )
 }
 

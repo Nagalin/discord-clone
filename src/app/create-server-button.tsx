@@ -26,7 +26,7 @@ const CreateServerButton = () => {
                 </Button>
             </DialogTrigger>
 
-            <DialogContent className='bg-discord-server-list sm:max-w-[425px]'>
+            <DialogContent className='sm:max-w-[425px]'>
                 <DialogHeader>
                     <DialogTitle>Create server</DialogTitle>
                 </DialogHeader>

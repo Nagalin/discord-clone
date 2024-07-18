@@ -68,6 +68,7 @@ export async function getPrivateChatHistory(userId: string) {
 
     return privateChats.map(curr => createPrivateChatWithOutSenderInfoDTO(curr, userId))
 }
+
 export async function updatePrivateChatDate(privateChatId: string) {
     await prisma.privateChat.update({
         where: {

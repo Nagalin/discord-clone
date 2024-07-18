@@ -1,22 +1,19 @@
 'use client'
 
 import React from 'react'
-import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+    DialogTrigger
+} from '@/components/ui/dialog'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getAvailableFriendsAction } from './_actions/get-available-friends'
+import { getAvailableFriendsAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/get-available-friends'
 import { useParams } from 'next/navigation'
 import UserCard from '@/components/user-card'
-import { addFriendToServerAction } from './_actions/add-friend-to-server'
+import { addFriendToServerAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/add-friend-to-server'
 
 const AddPeople = () => {
     const params = useParams()
@@ -36,7 +33,7 @@ const AddPeople = () => {
                 friendId: friendId,
                 channelId: channelId
             })
-            queryClient.invalidateQueries({queryKey: ['available-friends']})
+            queryClient.invalidateQueries({ queryKey: ['available-friends'] })
         }
     })
 
@@ -48,11 +45,11 @@ const AddPeople = () => {
                     Add people
                 </div>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className='sm:max-w-[425px]'>
                 <DialogHeader>
                     <DialogTitle>Add your friends to your server</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
+                <div className='grid gap-4 py-4'>
                     {availableFriends?.data?.info?.map(curr => (
                         <div className='flex justify-between'>
                             <UserCard user={curr} />

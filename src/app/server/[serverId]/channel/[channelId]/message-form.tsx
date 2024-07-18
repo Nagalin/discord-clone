@@ -6,7 +6,7 @@ import { getPrivateMessagesAction } from '@/app/homepage/chat/[userId]/_actions/
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import useSendMessage from '@/app/homepage/chat/[userId]/_hooks/use-send-message'
-import MessageCard from '@/app/homepage/chat/[userId]/message-card'
+import MessageCard from '@/components/message-card'
 import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-store'
 import { Skeleton } from '@/components/ui/skeleton'
 

@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import MessageCard from '@/app/homepage/chat/[userId]/message-card'
+import MessageCard from '@/components/message-card'
 import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zustand/message-store'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useParams } from 'next/navigation'
@@ -17,7 +17,6 @@ type FormType = {
 }
 
 const ChannelMessageForm = () => {
-    const queryClient = useQueryClient()
     const setMessages = useMessageStore(state => state.setMessages)
     const params = useParams()
     const channelId = params.channelId

@@ -21,6 +21,7 @@ const CreateServerButton = () => {
                 <Button
                     onClick={() => setDialogOpen(!open)}
                     className='w-14 h-14 rounded-full text-4xl'
+                    data-cy='create-server-dialog-button'
                 >
                     +
                 </Button>
@@ -74,7 +75,7 @@ const CreateServerForm = ({ closeDialog }: CreateServerFormPropsType) => {
                 />
             </div>
 
-            <Button disabled={isPending} type='submit'>
+            <Button data-cy='create-server-submit' disabled={isPending} type='submit'>
                 {isPending ? 'Creating ...' : 'Create server'}
             </Button>
         </form>

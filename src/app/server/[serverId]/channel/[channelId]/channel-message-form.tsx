@@ -10,7 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useParams } from 'next/navigation'
 import { getChannelMessageAction } from './_actions/get-channel-message'
 import { useForm } from 'react-hook-form'
-import { sendMessageAction } from './_actions/send-message'
+import useSendMessage from './hooks/use-send-message'
 
 type FormType = {
     message: string
@@ -19,8 +19,7 @@ type FormType = {
 const ChannelMessageForm = () => {
     const setMessages = useMessageStore(state => state.setMessages)
     const params = useParams()
-    const channelId = params.channelId
-    const { handleSubmit, register } = useForm<FormType>()
+    const channelId = params.channelId as string
 
     const { data: initialMessages, isFetching } = useQuery({
         queryKey: ['channel-messages'],
@@ -35,17 +34,14 @@ const ChannelMessageForm = () => {
         }
     })
 
-    // const { onSubmit, register } = useSendMessage(privateChatId, recipientId)
+    const { onSubmit, register } = useSendMessage(channelId)
 
     if (isFetching) return <MessageFormLoading />
     if (initialMessages?.data?.error) return
 
     return (
 
-        <form onSubmit={handleSubmit(data => sendMessageAction({
-            message: data.message,
-            channelId: channelId
-        }))}>
+        <form onSubmit={onSubmit}>
             <MessageCard />
             <Input
                 className='w-3/4 ms-4'

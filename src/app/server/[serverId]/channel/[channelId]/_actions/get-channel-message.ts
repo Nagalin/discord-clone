@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { getChannelMessages } from '@/data-access/channel-message'
 import { actionClient } from '@/lib/safe-action'
+import { pusherServer } from '@/lib/pusher'
 
 const schema = z.object({
     channelId: z.string().uuid()

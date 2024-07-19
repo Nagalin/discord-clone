@@ -14,11 +14,14 @@ export async function getChannelMessages(channelId: string) {
 }
 
 export async function createChannelMessage(senderId: string, channelId: string, message: string) {
-    await prisma.channelMessage.create({
+    return await prisma.channelMessage.create({
         data: {
             channelId: channelId,
             senderId: senderId,
             content: message
+        },
+        include: {
+            sender: true
         }
     })
 }

@@ -8,11 +8,7 @@ import {
     TooltipTrigger
 } from '@/components/ui/tooltip'
 
-type ServerCardPropsType = {
-    server: ServerType
-}
-
-const ServerCard = ({ server }: ServerCardPropsType) => {
+const ServerCard = ({ server }: { server: ServerType }) => {
     return (
         <TooltipProvider>
             <Tooltip>

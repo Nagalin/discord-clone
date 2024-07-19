@@ -2,9 +2,9 @@
 
 import { z } from 'zod'
 import { createFriendship, getFriendship } from '@/data-access/friendship'
-import { getUserInfoByName } from '@/data-access/user'
 import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
 import { actionClient } from '@/lib/safe-action'
+import { getUserInfoByName } from '@/data-access/user'
 
 const schema = z.object({
     username: z.string()

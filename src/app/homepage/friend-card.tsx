@@ -7,11 +7,7 @@ import { UserType } from '@/dto/user'
 import chatLogo from '@/assets/chat.svg'
 import { useRouter } from 'next/navigation'
 
-type FriendCardPropsType = {
-    friend: UserType
-}
-
-const FriendCard = ({ friend }: FriendCardPropsType) => {
+const FriendCard = ({ friend }: { friend: UserType }) => {
     const router = useRouter()
 
     const handleGoToChat = async (recipientId: string) => {

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { SessionProvider } from 'next-auth/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EdgeStoreProvider } from '@/lib/edgestore'
-import ServerList from '@/app/server-list'
+import Servers from '@/app/servers'
 import { Toaster } from '@/components/ui/toaster'
 import AuthProvider from '@/contexts/auth-provider'
 import OnlineUserProvider from '@/contexts/online-user-provider'
@@ -37,7 +37,8 @@ export default function RootLayout({
                   <OnlineUserProvider>
 
                     <div className='flex'>
-                      {pathname !== '/' &&
+                      {
+                        pathname !== '/' &&
                         <div
                           className='
                           bg-discord-server-list relative h-screen w-20 
@@ -45,7 +46,7 @@ export default function RootLayout({
                         >
                           <DiscordLogo />
                           <NotificationMessage />
-                          <ServerList />
+                          <Servers />
                           <Profile />
                         </div>
                       }

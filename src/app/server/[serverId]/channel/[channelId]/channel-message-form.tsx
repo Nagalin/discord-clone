@@ -4,7 +4,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import MessageCard from '@/components/message-card'
+import MessageCard from '@/app/server/[serverId]/channel/[channelId]/message-card'
 import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zustand/message-store'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useParams } from 'next/navigation'
@@ -36,7 +36,6 @@ const ChannelMessageForm = () => {
     })
 
     // const { onSubmit, register } = useSendMessage(privateChatId, recipientId)
-    console.log(initialMessages)
 
     if (isFetching) return <MessageFormLoading />
     if (initialMessages?.data?.error) return

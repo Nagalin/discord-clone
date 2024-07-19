@@ -60,5 +60,3 @@ export async function addUserToGeneralChannel(channelId: string, friendId: strin
         }
     })
 }
-
-

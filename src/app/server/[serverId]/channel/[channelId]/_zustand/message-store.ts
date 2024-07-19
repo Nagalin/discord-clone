@@ -1,16 +1,16 @@
 import { create } from 'zustand'
-import { ChannelMessageType } from '@/dto/channel-message'
+import { ChannelMessageWithSenderInfoType } from '@/dto/channel-message'
 
 type MessageStoreType = {
-    messages: ChannelMessageType[]
-    setMessages: (newMessages: ChannelMessageType[]) => void
-    addMessage: (newMessage: ChannelMessageType) => void
+    messages: ChannelMessageWithSenderInfoType[]
+    setMessages: (newMessages: ChannelMessageWithSenderInfoType[]) => void
+    addMessage: (newMessage: ChannelMessageWithSenderInfoType) => void
 }
 
 export const useMessageStore = create<MessageStoreType>(set => ({
     messages: [],
-    setMessages: (initialMessage: ChannelMessageType[]) => set({ messages: initialMessage }),
-    addMessage: (newMessage: ChannelMessageType) => set(state => ({
+    setMessages: (initialMessage: ChannelMessageWithSenderInfoType[]) => set({ messages: initialMessage }),
+    addMessage: (newMessage: ChannelMessageWithSenderInfoType) => set(state => ({
         messages: [...state.messages, newMessage]
     }))
 }))

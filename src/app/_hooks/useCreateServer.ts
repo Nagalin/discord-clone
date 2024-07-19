@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
 import { useEdgeStore } from '@/lib/edgestore'
 import { createServerAction } from '@/app/_actions/create-server'
-import { useForm } from 'react-hook-form'
 import { useToast } from '@/components/ui/use-toast'
 
 type CreateServerFormType = {

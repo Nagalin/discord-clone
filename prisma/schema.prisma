@@ -18,8 +18,8 @@ model User {
   username String
   image String
   email String
-  requester Friendship[] @relation("requester-relation")
-  recipient Friendship[] @relation("recipient-relation")
+  sendFriendRequestTo Friendship[] @relation("requester-relation")
+  recievedFriendRequestFrom Friendship[] @relation("recipient-relation")
   serversOwned Server[] @relation("server-owner-relation")
   serverMembers Server[]
   channelMembers Channel[]

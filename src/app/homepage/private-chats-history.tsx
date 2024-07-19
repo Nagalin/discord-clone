@@ -1,16 +1,16 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { getPrivateMessagesListAction } from '@/app/homepage/_actions/get-private-chat-history'
-import UserCard from '@/components/user-card'
 import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query'
+import { getPrivateChatHistoryAction } from '@/app/homepage/_actions/get-private-chat-history'
+import UserCard from '@/components/user-card'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const PrivateMessagesHistory = () => {
-    const { data: privateMessages, isFetching } = useQuery({
+    const { data: privateChatsHistory, isFetching } = useQuery({
         queryKey: ['private-messages-list'],
-        queryFn: async () => await getPrivateMessagesListAction({})
+        queryFn: async () => await getPrivateChatHistoryAction({})
     })
     if (isFetching) return <PrivateMessagesHistoryLoading />
 
@@ -21,7 +21,7 @@ const PrivateMessagesHistory = () => {
             <div className='text-2xl mt-5 mb-5'> Private messages</div>
 
             <div className='flex flex-col gap-2'>
-                {privateMessages?.data?.info?.map(curr => (
+                {privateChatsHistory?.data?.info?.map(curr => (
                     <Link
                         className='hover:bg-gray-600 rounded p-3'
                         href='/homepage/chat/[userId]'

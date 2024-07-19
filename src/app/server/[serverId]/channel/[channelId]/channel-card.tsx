@@ -1,11 +1,7 @@
-import { ChannelType } from '@/dto/channel'
 import React from 'react'
+import { ChannelType } from '@/dto/channel'
 
-type ChannelCardPropsType = {
-  channel: ChannelType
-}
-
-const ChannelCard = ({ channel }: ChannelCardPropsType) => {
+const ChannelCard = ({ channel }: { channel: ChannelType }) => {
   return (
     <div className='ms-5 mt-3 hover:bg-gray-600 rounded p-3 cursor-pointer'>
       {channel.channelType === 'Text'? '# ': 'voice'}

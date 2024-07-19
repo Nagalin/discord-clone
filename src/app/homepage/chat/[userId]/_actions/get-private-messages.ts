@@ -10,14 +10,13 @@ const schema = z.object({
 })
 
 export const getPrivateMessagesAction = actionClient
-.schema(schema).action(async ({parsedInput: {privateChatId}}) => {
-    try {
-        const recipientId = await getUserIdFromSession()
-        const privateMessages = await getPrivateMessages(privateChatId)
-        privateMessages.map(async curr => await updatePrivateMessage(curr.privateMessageId, recipientId))
-        return { info: privateMessages}
-    } catch (error) {
-        return {error: 'Error occurs'}
-        
-    }
-})
+    .schema(schema).action(async ({ parsedInput: { privateChatId } }) => {
+        try {
+            const recipientId = await getUserIdFromSession()
+            const privateMessages = await getPrivateMessages(privateChatId)
+            privateMessages.map(async curr => await updatePrivateMessage(curr.privateMessageId, recipientId))
+            return { info: privateMessages }
+        } catch (error) {
+            return { error: 'Error occurs' }
+        }
+    })

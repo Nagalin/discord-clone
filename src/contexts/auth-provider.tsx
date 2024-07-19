@@ -1,16 +1,10 @@
 import React, { createContext, ReactNode, useContext } from 'react'
-import { AuthException } from '@/lib/exception'
 import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
+import { AuthException } from '@/lib/exception'
+import { UserType } from '@/dto/user'
 
-type AuthContextType = {
-    userId: string,
-    username: string,
-    image: string,
-    email: string
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const AuthContext = createContext<UserType | undefined>(undefined)
 
 export const useAuthContext = () => {
     const context = useContext(AuthContext)
@@ -29,7 +23,7 @@ const AuthProvider = ({ children }: AuthProviderPropsType) => {
 
     if (pathname === '/')
         return <>{children}</>
-    if(status === 'loading') return
+    if (status === 'loading') return
     if (!session) throw new AuthException()
 
     const user = session.user

@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Skeleton } from '@/components/ui/skeleton'
 import { getPendingFriendRequestsAction } from '@/app/homepage/pending/_actions/get-pending-friend-requests'
 import SentFriendRequestCard from '@/app/homepage/pending/sent-friend-request-card'
 import ReceiveFriendRequestCard from '@/app/homepage/pending/received-friend-request-card'
+import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
 
 const PendingFriendRequestPage = () => {
@@ -46,7 +46,8 @@ const PendingFriendRequestPage = () => {
                         <SentFriendRequestCard
                             friendshipId={curr.friendshipId}
                             user={curr.recipient}
-                        />}
+                        />
+                    }
                 </div>
             ))}
 

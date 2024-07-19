@@ -1,8 +1,8 @@
 'use server'
 
-import { getServer } from '@/data-access/server'
-import { actionClient } from '@/lib/safe-action'
 import { z } from 'zod'
+import { actionClient } from '@/lib/safe-action'
+import { getServerInfo } from '@/data-access/server'
 
 const schema = z.object({
     serverId: z.string().uuid()
@@ -11,7 +11,7 @@ const schema = z.object({
 export const getServerAction = actionClient
 .schema(schema).action(async ({parsedInput: {serverId}}) => {
     try {
-        const server = await getServer(serverId)
+        const server = await getServerInfo(serverId)
         return { info: server}
     } catch (error) {
         console.error(error)

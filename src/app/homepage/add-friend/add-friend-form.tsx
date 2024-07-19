@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
+import { AlertCircle } from 'lucide-react'
+import useAddFriend from '@/app/homepage/add-friend/_hooks/use-add-friend'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Alert, AlertTitle } from '@/components/ui/alert'
-import { AlertCircle } from 'lucide-react'
-import useAddFriend from '@/app/homepage/add-friend/_hooks/use-add-friend'
 
 const AddFriendForm = () => {
     const { register, onSubmit, isSubmitting, errors } = useAddFriend()

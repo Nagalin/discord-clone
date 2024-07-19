@@ -3,19 +3,17 @@
 import React from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getPrivateMessagesAction } from '@/app/homepage/chat/[userId]/_actions/get-private-messages'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import useSendMessage from '@/app/homepage/chat/[userId]/_hooks/use-send-message'
-import MessageCard from '@/components/message-card'
+import MessageCard from '@/app/homepage/chat/[userId]/message-card'
 import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-store'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 
-type MessagePropsType = {
+const MessageForm = ({ privateChatId, recipientId }: {
     privateChatId: string
     recipientId: string
-}
-
-const MessageForm = ({ privateChatId, recipientId }: MessagePropsType) => {
+}) => {
     const queryClient = useQueryClient()
     const setMessages = useMessageStore(state => state.setMessages)
 

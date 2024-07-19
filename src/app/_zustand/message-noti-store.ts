@@ -8,14 +8,14 @@ type MessageNotiStoreType = {
     incrementUnreadMessageCount: (sender: UserType) => void
 }
 
-export const useMessageNotiStore = create<MessageNotiStoreType>((set) => ({
+export const useMessageNotiStore = create<MessageNotiStoreType>(set => ({
     unreadMessages: [],
     setUnreadMessage: (initialUnreadMessages: UnreadMessagesType[]) =>
         set({ unreadMessages: initialUnreadMessages }),
     incrementUnreadMessageCount: (sender: UserType) =>
         set(state => {
             const existingUnreadMessage = state.unreadMessages.find(
-                unreadMessage => unreadMessage.user.userId === sender.userId
+                curr => curr.user.userId === sender.userId
             )
 
             if (existingUnreadMessage) {
@@ -36,10 +36,7 @@ export const useMessageNotiStore = create<MessageNotiStoreType>((set) => ({
                     },
                     unreadMessagesCount: 1,
                 }
-
                 return { unreadMessages: [...state.unreadMessages, newUnreadMessage] }
             }
         })
-
-
 }))

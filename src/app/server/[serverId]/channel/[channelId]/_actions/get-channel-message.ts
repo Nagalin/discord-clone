@@ -1,8 +1,8 @@
 'use server'
 
-import { getChannelMessages } from "@/data-access/channel-message"
-import { actionClient } from "@/lib/safe-action"
-import { z } from "zod"
+import { z } from 'zod'
+import { getChannelMessages } from '@/data-access/channel-message'
+import { actionClient } from '@/lib/safe-action'
 
 const schema = z.object({
     channelId: z.string().uuid()
@@ -17,7 +17,5 @@ export const getChannelMessageAction = actionClient
         } catch (error) {
             console.error(error)
             return { error: 'Error occurs' }
-
         }
-
     })

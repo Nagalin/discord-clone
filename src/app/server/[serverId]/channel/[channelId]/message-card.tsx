@@ -5,6 +5,7 @@ import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zu
 
 const MessageCard = () => {
     const messages = useMessageStore(state => state.messages)
+    console.log(messages)
 
     return (
         <ScrollArea className='h-[600px] overflow-y-auto'>
@@ -31,8 +32,6 @@ const MessageCard = () => {
                 })}
             </div>
         </ScrollArea>
-
-
     )
 }
 

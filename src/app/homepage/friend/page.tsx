@@ -3,16 +3,17 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
-import { Skeleton } from '@/components/ui/skeleton'
-import Alert from '@/components/alert'
 import FriendCard from '@/app/homepage/friend-card'
 import FriendsHeader from '@/app/homepage/friend/friends-header'
+import { Skeleton } from '@/components/ui/skeleton'
+import Alert from '@/components/alert'
 
 const FriendPage = () => {
   const { data: friends, isFetching } = useQuery({
     queryKey: ['all-friends'],
     queryFn: async () => getFriendsAction({})
   })
+  console.log(friends)
 
   if (isFetching) return <FriendLoading />
   if (friends?.data?.error)
@@ -55,7 +56,7 @@ const FriendLoading = () => {
           <Skeleton className='h-4 w-[200px]' />
         </div>
       </div>
-      
+
     </div>
   )
 

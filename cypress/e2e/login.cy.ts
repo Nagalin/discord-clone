@@ -1,13 +1,13 @@
 
-describe("Create server", () => {
+describe('Create server', () => {
 
   before(() => {
     cy.task('serverCleanup')
   })
 
-  it("should create server", () => {
+  it('should create server', () => {
     cy.setCookie('next-auth.session-token', Cypress.env('next-auth-cookie'))
-    cy.visit("http://localhost:3000/homepage")
+    cy.visit('http://localhost:3000/homepage')
 
     cy.get('[data-cy="create-server-dialog-button"]').click()
     cy.get('input[type="text"]').type('mocked-server')

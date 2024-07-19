@@ -20,9 +20,16 @@ const UserCard = ({ user }: UserPropsType) => {
 
             {
                 isOnline ?
-                    <div className='absolute bg-green-500 rounded-full w-4 h-4 left-6 top-6' />
+                    <div
+                        className='absolute bg-green-500 rounded-full 
+                        w-4 h-4 left-6 top-6'
+                    />
                     :
-                    <div className='absolute bg-gray-500 rounded-full w-4 h-4 left-6 top-6' />}
+                    <div
+                        className='absolute bg-gray-500 rounded-full 
+                        w-4 h-4 left-6 top-6'
+                    />
+            }
 
             <div>{user.username}</div>
         </div>

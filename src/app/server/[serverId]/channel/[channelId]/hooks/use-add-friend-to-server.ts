@@ -1,5 +1,5 @@
-import { addFriendToServerAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/add-friend-to-server'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { addFriendToServerAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/add-friend-to-server'
 
 const useAddFriendToServer = (serverId: string, channelId: string) => {
     const queryClient = useQueryClient()
@@ -18,7 +18,7 @@ const useAddFriendToServer = (serverId: string, channelId: string) => {
     return {
         addFriendToServer
     }
-  
+
 }
 
 export default useAddFriendToServer

@@ -6,12 +6,11 @@ import UserCard from '@/components/user-card'
 import { Button } from '@/components/ui/button'
 import useCancelFriendRequests from '@/app/homepage/pending/_hooks/use-cancel-friend-requests'
 
-type SentFriendRequestCardPropsType = {
+
+const SentFriendRequestCard = ({ friendshipId, user }: {
     friendshipId: string
     user: Omit<UserType, 'email'>
-}
-
-const SentFriendRequestCard = ({ friendshipId, user }: SentFriendRequestCardPropsType) => {
+}) => {
     const { handleCancelFriendRequest } = useCancelFriendRequests()
 
     return (

@@ -1,16 +1,12 @@
 import React, { ReactNode } from 'react'
-import PrivateMessagesHistory from '@/app/homepage/private-messages-history'
+import PrivateChatsHistory from '@/app/homepage/private-chats-history'
 import Navbar from '@/app/homepage/navbar'
 import FriendProfile from '@/app/homepage/friend-profile'
 
-type LayoutPropsType = {
-  children: ReactNode
-}
-
-const Layout = ({ children }: LayoutPropsType) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className='flex'>
-      <PrivateMessagesHistory />
+      <PrivateChatsHistory />
 
       <div className='flex flex-col'>
         <Navbar />

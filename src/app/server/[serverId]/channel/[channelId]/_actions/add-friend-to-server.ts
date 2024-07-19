@@ -1,9 +1,9 @@
 'use server'
 
-import { addUserToGeneralChannel, getChannelByName } from '@/data-access/channel'
-import { addUserToServer } from '@/data-access/server'
-import { actionClient } from '@/lib/safe-action'
 import { z } from 'zod'
+import { actionClient } from '@/lib/safe-action'
+import { addUserToChannel, getChannelByName } from '@/data-access/channel'
+import { addUserToServer } from '@/data-access/server'
 
 const schema = z.object({
     serverId: z.string().uuid(),
@@ -15,9 +15,9 @@ export const addFriendToServerAction = actionClient
     .schema(schema).action(async ({ parsedInput: { serverId, friendId, channelId } }) => {
         try {
             await addUserToServer(serverId, friendId)
-            await addUserToGeneralChannel(channelId, friendId)
+            await addUserToChannel(channelId, friendId)
             const voiceGeneralChannel = await getChannelByName('General', 'Voice')
-            await addUserToGeneralChannel(voiceGeneralChannel!.channelId!, friendId)
+            await addUserToChannel(voiceGeneralChannel!.channelId!, friendId)
         } catch (error) {
             console.error(error)
 

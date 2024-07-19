@@ -1,18 +1,15 @@
 'use client'
 
 import React from 'react'
+import useHandleFriendRequests from '@/app/homepage/pending/_hooks/use-handle-friend-requests'
 import UserCard from '@/components/user-card'
 import { Button } from '@/components/ui/button'
 import { UserType } from '@/dto/user'
-import useHandleFriendRequests from '@/app/homepage/pending/_hooks/use-handle-friend-requests'
 
-type ReceivedFriendRequestCardPropsType = {
+const ReceiveFriendRequestCard = ({ friendshipId, requester }: {
     friendshipId: string
     requester: Omit<UserType, 'email'>
-
-}
-
-const ReceiveFriendRequestCard = ({ friendshipId, requester }: ReceivedFriendRequestCardPropsType) => {
+}) => {
     const { handleFriendRequest } = useHandleFriendRequests()
 
     return (

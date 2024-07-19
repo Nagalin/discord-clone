@@ -1,11 +1,8 @@
 import React from 'react'
 
-type FriendsHeaderPropsType = {
-    hasFriend: boolean
-    friendsNum: number
-}
-
-const FriendsHeader = ({ hasFriend, friendsNum }: FriendsHeaderPropsType) => {
+const FriendsHeader = ({ hasFriend, friendsNum }: { 
+    hasFriend: boolean, friendsNum: number 
+}) => {
     return (
         <div>
             {

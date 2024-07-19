@@ -77,12 +77,12 @@ const CreateChannel = () => {
                         <label>Notify me about...</label>
                         <RadioGroup className='flex flex-col space-y-1'>
                             <div className='flex items-center space-x-3 space-y-0'>
-                                <Input type="radio" id="textChannel" value="Text" {...register('type')} defaultChecked={selectedType === 'Text'} />
-                                <label htmlFor="textChannel" className='font-normal'>Text channel</label>
+                                <Input type='radio' id='textChannel' value='Text' {...register('type')} defaultChecked={selectedType === 'Text'} />
+                                <label htmlFor='textChannel' className='font-normal'>Text channel</label>
                             </div>
                             <div className='flex items-center space-x-3 space-y-0'>
-                                <Input type="radio" id="voiceChannel" value="Voice" {...register('type')} defaultChecked={selectedType === 'Voice'} />
-                                <label htmlFor="voiceChannel" className='font-normal'>Voice channel</label>
+                                <Input type='radio' id='voiceChannel' value='Voice' {...register('type')} defaultChecked={selectedType === 'Voice'} />
+                                <label htmlFor='voiceChannel' className='font-normal'>Voice channel</label>
                             </div>
                         </RadioGroup>
                         {errors.type && <p>{errors.type.message}</p>}

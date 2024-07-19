@@ -4,11 +4,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { getServerAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/get-server'
-import AddPeople from '@/app/server/[serverId]/channel/[channelId]/add-people'
-
-type ServerHeader = {
-  serverName: string
-}
+import AddFriendToServerButton from '@/app/server/[serverId]/channel/[channelId]/add-friend-to-server-button'
 
 const ServerHeader = () => {
   const params = useParams()
@@ -19,12 +15,13 @@ const ServerHeader = () => {
   })
 
   if (isFetching) return null
+
   return (
     <div className='flex flex-col'>
       <div className='text-2xl text-center border-b-2 border-black pb-3 mb-3'>
         {server?.data?.info?.serverName}
       </div>
-      <AddPeople />
+      <AddFriendToServerButton />
     </div>
   )
 }

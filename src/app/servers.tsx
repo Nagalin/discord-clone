@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import { getServersAction } from '@/app/_actions/get-servers'
 import CreateServerButton from '@/app/create-server-button'
+import ServerCard from '@/app/server-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useToast } from '@/components/ui/use-toast'
-import ServerCard from '@/app/server-card'
+import Link from 'next/link'
 
-const ServerList = () => {
-  const router = useRouter()
+const Servers = () => {
   const { toast } = useToast()
   const { data: servers, isFetching } = useQuery({
     queryKey: ['servers'],
@@ -31,17 +31,19 @@ const ServerList = () => {
 
   return (
     <div
-      className='bg-discord-server-list h-screen w-20 flex flex-col  gap-2 items-center'
+      className='bg-discord-server-list 
+      h-screen w-20 flex flex-col  gap-2 items-center'
     >
       {servers?.data?.info?.map(currServer => (
-        <div
-          onClick={() => router.push(`/server/${currServer.serverId}/channel/${currServer.generalChannelId}`)}
+        <Link
+          href='/server/[serverId]/channel/[channelId]'
+          as={`/server/${currServer.serverId}/channel/${currServer.generalChannelId}`}
           key={currServer.serverId}
         >
           <ServerCard
             server={currServer}
           />
-        </div>
+        </Link>
       ))}
 
       <CreateServerButton />
@@ -67,4 +69,4 @@ const ServerListLoading = () => {
   )
 }
 
-export default ServerList
+export default Servers

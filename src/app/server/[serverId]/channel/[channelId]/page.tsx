@@ -1,7 +1,7 @@
 import React from 'react'
 import Channels from '@/app/server/[serverId]/channel/[channelId]/channels'
 import ServerHeader from '@/app/server/[serverId]/channel/[channelId]/server-header'
-import ChannelMessageForm from './channel-message-form'
+import ChannelMessageForm from '@/app/server/[serverId]/channel/[channelId]/channel-message-form'
 
 const ServerPage = () => {
 

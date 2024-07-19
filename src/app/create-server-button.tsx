@@ -38,11 +38,7 @@ const CreateServerButton = () => {
     )
 }
 
-type CreateServerFormPropsType = {
-    closeDialog: () => void
-}
-
-const CreateServerForm = ({ closeDialog }: CreateServerFormPropsType) => {
+const CreateServerForm = ({ closeDialog }: { closeDialog: () => void }) => {
     const {
         onSubmit,
         register,

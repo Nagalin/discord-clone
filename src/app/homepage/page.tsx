@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
 import FriendCard from '@/app/homepage/friend-card'
 import OnlineFriendHeader from '@/app/homepage/online-friend-header'
-import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const Homepage = () => {
@@ -33,7 +33,6 @@ const Homepage = () => {
             <div>
               {userOnline && <FriendCard friend={currFriends} />}
             </div>
-
           )
         })}
       </div>

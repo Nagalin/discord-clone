@@ -4,6 +4,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPrivateChatIdAction } from '@/app/homepage/_actions/get-private-chat-id'
 import MessageForm from '@/app/homepage/chat/[userId]/message-form'
+import FriendProfile from '../../friend-profile'
 
 const PrivateMessagePage = ({ params }: {
     params: {
@@ -18,11 +19,16 @@ const PrivateMessagePage = ({ params }: {
 
     if (isFetching) return
     return (
-        <div>
+        <div className='flex'>
+
             <MessageForm
                 privateChatId={privateChat?.data?.info!}
                 recipientId={params.userId}
             />
+
+            <div>
+                <FriendProfile />
+            </div>
         </div>
     )
 }

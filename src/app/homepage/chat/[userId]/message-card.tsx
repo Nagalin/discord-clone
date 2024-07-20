@@ -5,10 +5,9 @@ import { useMessageStore } from '@/app/homepage/chat/[userId]/_zustand/messages-
 
 const MessageCard = () => {
     const messages = useMessageStore(state => state.messages)
-    console.log(messages)
 
     return (
-        <ScrollArea className='h-[600px] overflow-y-auto'>
+        <ScrollArea className='h-[600px] w-[calc(100vw-42rem)] overflow-y-auto'>
             <div className='p-3'>
                 {messages.map((curr, index) => {
                     const showSenderInfo = index === 0 || messages[index].sender?.userId !== messages[index - 1].sender?.userId

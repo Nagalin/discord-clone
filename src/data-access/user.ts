@@ -65,3 +65,15 @@ export async function getUserInfoByName(username: string) {
         }
     })
 }
+
+export async function getChannelMembers(channelId: string) {
+    return await prisma.user.findMany({
+        where: {
+            channelMembers: {
+                some: {
+                    channelId: channelId
+                }
+            }
+        }
+    })
+}

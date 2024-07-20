@@ -41,10 +41,10 @@ const ChannelMessageForm = () => {
 
     return (
 
-        <form onSubmit={onSubmit}>
+        <form className='h-screen' onSubmit={onSubmit}>
             <MessageCard />
             <Input
-                className='w-3/4 ms-4'
+                className='w-3/4 ms-4 mt-10'
                 {...register('message')}
                 required
                 placeholder='Send your messages'

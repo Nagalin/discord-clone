@@ -8,7 +8,7 @@ const MessageCard = () => {
     console.log(messages)
 
     return (
-        <ScrollArea className='h-[600px] overflow-y-auto'>
+        <ScrollArea className='h-[600px] w-[calc(100vw-34rem)] overflow-y-auto'>
             <div className='p-3'>
                 {messages.map((curr, index) => {
                     const showSenderInfo = index === 0 || messages[index].sender?.userId !== messages[index - 1].sender?.userId

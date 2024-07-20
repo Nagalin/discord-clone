@@ -30,7 +30,7 @@ const Channels = () => {
 
       </div>
 
-      <div className='mt-16'>
+      <div className='bg-discord-direct-message-list mt-16'>
         <ChannelHeader> Voice channel</ChannelHeader>
 
         {voiceChannels?.map(currTextChannel => (

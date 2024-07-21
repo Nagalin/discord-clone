@@ -14,7 +14,7 @@ const Homepage = () => {
     queryFn: async () => await getFriendsAction({})
   })
 
-  const { isUserOnline } = useOnlineUserContext()
+  const { isUserOnline  } = useOnlineUserContext()
 
   if (isFetching) return <HomepageLoading />
   if (friends?.data?.error)
@@ -28,7 +28,7 @@ const Homepage = () => {
         {friends?.data?.info?.map(currFriends => {
 
           const userOnline = isUserOnline(currFriends.userId)
-
+          
           return (
             <div>
               {userOnline && <FriendCard friend={currFriends} />}

@@ -4,14 +4,13 @@ import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import React from 'react'
 
 const OnlineFriendHeader = () => {
-  const { getUserOnlineNum } = useOnlineUserContext()
-
+  const { onlineFriendNum } = useOnlineUserContext()
   return (
     <div>
       {
-        !!getUserOnlineNum() ? (
+        !!onlineFriendNum ? (
           <div className='text-2xl mb-3'>
-            Online friends: {getUserOnlineNum()}
+            Online friends: {onlineFriendNum}
           </div>
         ) : (
           <div className='text-2xl mb-3'>

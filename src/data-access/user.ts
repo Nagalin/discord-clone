@@ -77,3 +77,22 @@ export async function getChannelMembers(channelId: string) {
         }
     })
 }
+
+export async function getAvailableMembers(serverId: string, channelId: string) {
+    return await prisma.user.findMany({
+        where: {
+            serverMembers: {
+                some: {
+                    serverId: serverId
+                }
+            },
+            NOT: {
+                channelMembers: {
+                    some: {
+                        channelId: channelId
+                    }
+                }
+            }
+        }
+    })
+}

@@ -45,7 +45,7 @@ export async function getChannelByName(channelName: string, channelType: 'Text' 
     return channel ? createChannelDTO(channel) : null
 }
 
-export async function addUserToGeneralChannel(channelId: string, friendId: string) {
+export async function addUserToChannel(channelId: string, friendId: string) {
     await prisma.channel.update({
         where: { 
             channelId: channelId,

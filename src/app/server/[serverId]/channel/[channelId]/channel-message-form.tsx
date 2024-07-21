@@ -44,7 +44,7 @@ const ChannelMessageForm = () => {
         <form className='h-screen' onSubmit={onSubmit}>
             <MessageCard />
             <Input
-                className='w-3/4 ms-4 mt-10'
+                className='w-3/4 ms-4'
                 {...register('message')}
                 required
                 placeholder='Send your messages'

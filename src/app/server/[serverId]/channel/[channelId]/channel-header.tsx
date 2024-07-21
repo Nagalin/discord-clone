@@ -3,7 +3,7 @@ import CreateChannel from './create-channel'
 
 const ChannelHeader = ({ children }: { children: ReactNode }) => {
     return (
-        <div className='text-2xl flex gap-4'>
+        <div className='text-xl flex gap-4 items-center'>
             {children}
             <CreateChannel />
         </div>

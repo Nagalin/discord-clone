@@ -1,6 +1,8 @@
 import React, {
     createContext,
+    Dispatch,
     ReactNode,
+    SetStateAction,
     useContext,
     useEffect,
     useState
@@ -8,6 +10,7 @@ import React, {
 import { UserType } from '@/dto/user'
 import { pusherClient } from '@/lib/pusher'
 import { useSession } from 'next-auth/react'
+import { getFriends } from '@/data-access/user'
 
 type ChannelInfoType = {
     members: { [key: string]: MemberInfoType }
@@ -29,7 +32,8 @@ type MemberInfoType = {
 type OnlineUserContextType = {
     onlineUsers: Omit<UserType, 'email'>[]
     isUserOnline: (userId: string) => boolean
-    getUserOnlineNum: () => number
+    onlineFriendNum: number,
+    setOnlineFriendNum: Dispatch<SetStateAction<number>>
 }
 
 const OnlineUserContext = createContext<OnlineUserContextType | undefined>(undefined)
@@ -46,6 +50,7 @@ type PusherProviderPropsType = {
 }
 
 const PusherProvider = ({ children }: PusherProviderPropsType) => {
+    const [onlineFriendNum, setOnlineFriendNum] = useState(0)
     const [isSubscribed, setIsSubscribed] = useState(false)
     const [onlineUsers, setOnlineUsers] = useState<Omit<UserType, 'email'>[]>([])
     const { data: session } = useSession()
@@ -54,8 +59,7 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
         return !!onlineUsers.find(currOnlineUser => currOnlineUser.userId === userId)
     }
 
-    const getUserOnlineNum = () => onlineUsers.length - 1
-
+    
     useEffect(() => {
         if (!session || isSubscribed) return
 
@@ -69,7 +73,8 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
                 setOnlineUsers(prev => {
                     return [...prev, { ...member, userId: memberId }]
                 })
-
+                console.log(channelInfo.count - 1)
+                setOnlineFriendNum( (channelInfo.count - 1))
             })
         })
 
@@ -77,12 +82,16 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
             setOnlineUsers(prev => {
                 return [...prev, { ...newMember.info, userId: newMember.id }]
             })
+            console.log('here')
+            setOnlineFriendNum(prev => prev + 1)
         })
 
         presenceChannel.bind('pusher:member_removed', (member: MemberType) => {
             setOnlineUsers(prev => {
                 return prev.filter(user => user.userId !== member.id)
             })
+            setOnlineFriendNum(prev => prev - 1)
+
         })
 
         return () => {
@@ -93,7 +102,7 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
     }, [])
 
     return (
-        <OnlineUserContext.Provider value={{ onlineUsers, isUserOnline, getUserOnlineNum }}>
+        <OnlineUserContext.Provider value={{ onlineUsers, isUserOnline, onlineFriendNum, setOnlineFriendNum }}>
             {children}
         </OnlineUserContext.Provider>
     )

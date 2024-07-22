@@ -18,7 +18,7 @@ const MessageForm = ({ privateChatId, recipientId }: {
     const setMessages = useMessageStore(state => state.setMessages)
 
     const { data: initialMessages, isFetching } = useQuery({
-        queryKey: ['private-messages'],
+        queryKey: ['private-messages', privateChatId],
         queryFn: async () => {
             const messages = await getPrivateMessagesAction({
                 privateChatId: privateChatId

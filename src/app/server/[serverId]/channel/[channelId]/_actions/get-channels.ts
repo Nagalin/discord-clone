@@ -17,6 +17,6 @@ export const getChannelsAction = actionClient
             return { info: channels }
         } catch (error) {
             console.error(error)
-            return { error: 'Error occurs' }
+            return { error: 'Failed to get channel ...' }
         }
     })

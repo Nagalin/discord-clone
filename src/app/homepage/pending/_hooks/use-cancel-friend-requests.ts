@@ -10,8 +10,8 @@ const useCancelFriendRequests = () => {
         queryClient.invalidateQueries({ queryKey: ['pending-friend-requests'] })
     }
 
-    return { 
-        handleCancelFriendRequest 
+    return {
+        handleCancelFriendRequest
     }
 }
 

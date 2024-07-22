@@ -18,7 +18,7 @@ export function createPrivateChatDTO(privateChat: PrivateChatType) {
     return PrivateChatSchemaBase.parse(privateChat)
 }
 
-export function createPrivateChatWithOutSenderInfoDTO(privateChat: PrivateChatWithParticipantsInfoType, senderId: string) {
+export function createPrivateChatWithParticipantInfoDTO(privateChat: PrivateChatWithParticipantsInfoType, senderId: string) {
     privateChat.participants = privateChat.participants?.filter(curr => curr.userId !== senderId)
     return PrivateChatWithParticipantsInfoSchema.parse(privateChat)
 }

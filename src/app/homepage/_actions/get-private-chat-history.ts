@@ -8,10 +8,10 @@ export const getPrivateChatHistoryAction = actionClient
     .action(async () => {
         try {
             const userId = await getUserIdFromSession()
-            const privateChatList = await getPrivateChatHistory(userId)
-            return { info: privateChatList }
+            const privateChatHistory = await getPrivateChatHistory(userId)
+            return { info: privateChatHistory }
         } catch (error) {
             console.error(error)
-            return { error: 'Error occurs' }
+            return { error: 'Failed to get data ...' }
         }
     })

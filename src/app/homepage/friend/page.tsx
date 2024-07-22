@@ -3,7 +3,7 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
-import FriendCard from '@/app/homepage/friend-card'
+import FriendCard from '@/components/friend-card'
 import FriendsHeader from '@/app/homepage/friend/friends-header'
 import { Skeleton } from '@/components/ui/skeleton'
 import Alert from '@/components/alert'
@@ -34,7 +34,7 @@ const FriendPage = () => {
         {friends?.data?.info?.map(currFriend => {
           return (
             <div key={currFriend.userId}>
-              <FriendCard friend={currFriend} />
+              <FriendCard user={currFriend} />
             </div>
           )
         })}

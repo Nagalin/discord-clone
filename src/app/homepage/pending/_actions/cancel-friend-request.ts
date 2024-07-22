@@ -1,9 +1,9 @@
 'use server'
 
 import { z } from 'zod'
-import { deleteFriendship } from '@/data-access/friendship'
 import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
+import { deleteFriendship } from '@/data-access/friendship'
 
 const schema = z.object({
     friendshipId: z.string().uuid(),

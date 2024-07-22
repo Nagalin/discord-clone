@@ -1,4 +1,4 @@
-import { createPrivateChatWithOutSenderInfoDTO } from '@/dto/private-chat'
+import { createPrivateChatDTO, createPrivateChatWithParticipantInfoDTO } from '@/dto/private-chat'
 import prisma from '@/lib/prisma'
 
 export async function createPrivateChat(senderId: string, recipientId: string) {
@@ -12,14 +12,10 @@ export async function createPrivateChat(senderId: string, recipientId: string) {
                 }]
             }
         },
-
-        include: {
-            participants: true
-        }
     })
 
     return privateChat ?
-        createPrivateChatWithOutSenderInfoDTO(privateChat, senderId) : null
+        createPrivateChatDTO(privateChat) : null
 }
 
 export async function getPrivateChat(senderId: string, recipientId: string) {
@@ -48,7 +44,7 @@ export async function getPrivateChat(senderId: string, recipientId: string) {
     })
 
     return privateChat ?
-        createPrivateChatWithOutSenderInfoDTO(privateChat, senderId) : null
+        createPrivateChatWithParticipantInfoDTO(privateChat, senderId) : null
 }
 
 export async function getPrivateChatHistory(userId: string) {
@@ -70,7 +66,7 @@ export async function getPrivateChatHistory(userId: string) {
         }
     })
 
-    return privateChats.map(curr => createPrivateChatWithOutSenderInfoDTO(curr, userId))
+    return privateChats.map(curr => createPrivateChatWithParticipantInfoDTO(curr, userId))
 }
 
 export async function updatePrivateChatDate(privateChatId: string) {

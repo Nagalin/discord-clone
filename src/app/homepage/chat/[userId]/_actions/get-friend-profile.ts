@@ -1,8 +1,8 @@
 'use server'
 
+import { z } from 'zod'
 import { getUserInfoById } from '@/data-access/user'
 import { actionClient } from '@/lib/safe-action'
-import { z } from 'zod'
 
 const schema = z.object({
     friendId: z.string()

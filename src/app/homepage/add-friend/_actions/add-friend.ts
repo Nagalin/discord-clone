@@ -1,9 +1,9 @@
 'use server'
 
 import { z } from 'zod'
-import { createFriendship, getFriendship } from '@/data-access/friendship'
 import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
+import { createFriendship, getFriendship } from '@/data-access/friendship'
 import { getUserInfoByName } from '@/data-access/user'
 
 const schema = z.object({

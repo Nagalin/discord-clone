@@ -2,8 +2,8 @@
 
 import { z } from 'zod'
 import { actionClient } from '@/lib/safe-action'
-import { getAvailableFriends } from '@/data-access/friendship'
 import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
+import { getAvailableFriends } from '@/data-access/user'
 
 const schema = z.object({
     serverId: z.string().uuid()
@@ -18,6 +18,6 @@ export const getAvailableFriendsAction = actionClient
 
         } catch (error) {
             console.error('Error getting available friends: ', error)
-            return { error: 'Error occurs' }
+            return { error: 'Failed to get friends list ...' }
         }
     })

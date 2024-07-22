@@ -57,17 +57,6 @@ export async function getPendingFriendship(userId: string) {
     return createPendingFriendRequestDTO(pendingFriendRequests, userId)
 }
 
-export async function getAvailableFriends(serverId: string, ownerId: string) {
-    const friends = await getFriends(ownerId)
-    const server = await getServerMember(serverId)
-
-    const availableFriends = friends.filter(currFriend => {
-        return !server?.members.some(currMember => currMember.userId === currFriend.userId)
-    })
-
-    return availableFriends
-}
-
 export async function updateFriendship(
     friendshipId: string, requesterId: string, recipientId: string
 ) {

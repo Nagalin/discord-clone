@@ -17,7 +17,7 @@ export const getAvailableMembersAction = actionClient
         
     } catch (error) {
         console.error(error)
-        return { error : 'Error occurs'} 
+        return { error : 'Failed to get member in server ...'} 
         
     }
 

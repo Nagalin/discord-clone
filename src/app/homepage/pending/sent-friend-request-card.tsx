@@ -1,11 +1,10 @@
 'use client'
 
 import React from 'react'
-import { UserType } from '@/dto/user'
+import useCancelFriendRequests from '@/app/homepage/pending/_hooks/use-cancel-friend-requests'
 import UserCard from '@/components/user-card'
 import { Button } from '@/components/ui/button'
-import useCancelFriendRequests from '@/app/homepage/pending/_hooks/use-cancel-friend-requests'
-
+import { UserType } from '@/dto/user'
 
 const SentFriendRequestCard = ({ friendshipId, user }: {
     friendshipId: string

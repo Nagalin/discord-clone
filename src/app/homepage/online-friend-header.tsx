@@ -1,7 +1,7 @@
 'use client'
 
-import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import React from 'react'
+import { useOnlineUserContext } from '@/contexts/online-user-provider'
 
 const OnlineFriendHeader = () => {
   const { onlineFriendNum } = useOnlineUserContext()

@@ -9,9 +9,9 @@ const useHandleFriendRequests = () => {
     const handleFriendRequest = async (
         action: 'Accept' | 'Reject', friendshipId: string, requesterId: string
     ) => {
-        const actionFunction = action === 'Accept' ? 
-        acceptFriendRequestAction : rejectFriendRequestAction
-        
+        const actionFunction = action === 'Accept' ?
+            acceptFriendRequestAction : rejectFriendRequestAction
+
         const res = await actionFunction({
             friendshipId: friendshipId, requesterId: requesterId
         })

@@ -27,7 +27,7 @@ const PrivateMessagesHistory = () => {
                         href='/homepage/chat/[userId]'
                         as={`/homepage/chat/${curr.participants![0].userId}`}
                     >
-                        <UserCard user={curr.participants![0]!} />
+                        <UserCard user={curr.participants[0]} />
                     </Link>
                 ))}
             </div>

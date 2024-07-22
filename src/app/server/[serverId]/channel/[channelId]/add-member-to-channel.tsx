@@ -1,7 +1,12 @@
 'use client'
 
 import React from 'react'
+import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { getAvailableMembersAction } from './_actions/get-available-members'
+import UserCard from '@/components/user-card'
+import { addMemberToChannelAction } from './_actions/add-member-to-channel'
 import {
     Dialog,
     DialogContent,
@@ -9,14 +14,9 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { getAvailableMembersAction } from './_actions/get-available-members'
-import UserCard from '@/components/user-card'
-import { useParams } from 'next/navigation'
-import { addMemberToChannelAction } from './_actions/add-member-to-channel'
 
 const AddMemberToChannel = ({ channelId }: { channelId: string }) => {
-    const queryClient  = useQueryClient()
+    const queryClient = useQueryClient()
     const params = useParams()
     const { serverId } = params
     const { data: availableMembers } = useQuery({
@@ -25,10 +25,10 @@ const AddMemberToChannel = ({ channelId }: { channelId: string }) => {
     })
 
     const handleAddMember = async (userId: string) => {
-        await addMemberToChannelAction({channelId, userId})
-        queryClient.invalidateQueries({ queryKey: ['available-members', channelId]})
-
+        await addMemberToChannelAction({ channelId, userId })
+        queryClient.invalidateQueries({ queryKey: ['available-members', channelId] })
     }
+
     return (
         <Dialog >
             <DialogTrigger asChild>

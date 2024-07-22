@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getPrivateChatIdAction } from '@/app/homepage/_actions/get-private-chat-id'
+import { getPrivateChatIdAction } from '@/app/homepage/chat/[userId]/_actions/get-private-chat-id'
 import MessageForm from '@/app/homepage/chat/[userId]/message-form'
-import FriendProfile from '../../friend-profile'
+import FriendProfile from '@/app/homepage/chat/[userId]/friend-profile'
 
 const PrivateMessagePage = ({ params }: {
     params: {

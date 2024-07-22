@@ -1,8 +1,8 @@
-import { PresenceChannelData, UserChannelData } from 'pusher'
-import { authConfigs } from '@/lib/auth-configs'
-import { pusherServer } from '@/lib/pusher'
 import { getServerSession } from 'next-auth'
 import { NextRequest, NextResponse } from 'next/server'
+import { PresenceChannelData } from 'pusher'
+import { authConfigs } from '@/lib/auth-configs'
+import { pusherServer } from '@/lib/pusher'
 
 export async function POST(req: NextRequest) {
     try {
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         const session = await getServerSession(authConfigs)
         if (!session) return NextResponse.json('Unauthorized user', { status: 403 })
 
-        const { userId, name, image } = session?.user
+        const { userId, name, image } = session.user
 
         const userData: PresenceChannelData = {
             user_id: userId,

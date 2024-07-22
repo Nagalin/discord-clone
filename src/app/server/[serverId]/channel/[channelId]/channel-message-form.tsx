@@ -1,20 +1,15 @@
 'use client'
 
 import React from 'react'
+import { useParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import MessageCard from '@/app/server/[serverId]/channel/[channelId]/message-card'
 import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zustand/message-store'
-import { Skeleton } from '@/components/ui/skeleton'
-import { useParams } from 'next/navigation'
 import { getChannelMessageAction } from './_actions/get-channel-message'
-import { useForm } from 'react-hook-form'
 import useSendMessage from './hooks/use-send-message'
-
-type FormType = {
-    message: string
-}
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const ChannelMessageForm = () => {
     const setMessages = useMessageStore(state => state.setMessages)
@@ -29,7 +24,6 @@ const ChannelMessageForm = () => {
             })
 
             setMessages(messages?.data?.info!)
-
             return messages
         }
     })

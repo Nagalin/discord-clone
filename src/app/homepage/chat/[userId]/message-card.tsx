@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import UserCard from '@/components/user-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -24,7 +26,7 @@ const MessageCard = () => {
                             }
                             <div className='ps-[50px]'>
 
-                            {curr.content}
+                                {curr.content}
                             </div>
                         </div>
                     )

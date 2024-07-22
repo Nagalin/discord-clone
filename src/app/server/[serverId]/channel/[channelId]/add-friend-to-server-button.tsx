@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@/components/ui/button'
-import UserCard from '@/components/user-card'
-import { useQuery } from '@tanstack/react-query'
-import { getAvailableFriendsAction } from './_actions/get-available-friends'
-import useAddFriendToServer from './hooks/use-add-friend-to-server'
 import { useParams } from 'next/navigation'
+import { useQuery } from '@tanstack/react-query'
+import { Button } from '@/components/ui/button'
+import { getAvailableFriendsAction } from '@/app/server/[serverId]/channel/[channelId]/_actions/get-available-friends'
+import useAddFriendToServer from '@/app/server/[serverId]/channel/[channelId]/hooks/use-add-friend-to-server'
+import UserCard from '@/components/user-card'
 import {
     Dialog,
     DialogContent,

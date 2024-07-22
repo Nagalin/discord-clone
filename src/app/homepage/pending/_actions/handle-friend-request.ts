@@ -17,7 +17,7 @@ export const acceptFriendRequestAction = actionClient
             await updateFriendship(friendshipId, requesterId, recipientId)
         } catch (error) {
             console.error('Error accepting friend request: ', error)
-            return { error: 'Something went wrong, please try again' }
+            return { error: 'Failed to accept friend request ...' }
         }
     })
 
@@ -28,6 +28,6 @@ export const rejectFriendRequestAction = actionClient
             await deleteFriendship(friendshipId, requesterId, recipientId)
         } catch (error) {
             console.error('Error accepting friend request: ', error)
-            return { error: 'Something went wrong, please try again' }
+            return { error: 'Failed to reject friend request ...' }
         }
     })

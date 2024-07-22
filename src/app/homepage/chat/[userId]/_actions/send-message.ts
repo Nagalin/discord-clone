@@ -15,18 +15,17 @@ const schema = z.object({
 })
 
 export const sendMessageAction = actionClient
-    .schema(schema)
-    .action(async ({ parsedInput: { privateChatId, recipientId, message } }) => {
+    .schema(schema).action(async ({ parsedInput: { privateChatId, recipientId, message } }) => {
         try {
             const senderId = await getUserIdFromSession()
-            const newMessage =  await createPrivateMessage(privateChatId, senderId, recipientId, message)
+            const newMessage = await createPrivateMessage(privateChatId, senderId, recipientId, message)
             await updatePrivateChatDate(privateChatId)
 
             const payload: PrivateMessageType = {
                 ...newMessage
             }
-            pusherServer.trigger(`channel-${privateChatId}`, 'incoming-message',payload)  
-            pusherServer.trigger(`notification-${recipientId}`, 'noti-message', {sender: newMessage.sender})
+            pusherServer.trigger(`channel-${privateChatId}`, 'incoming-message', payload)
+            pusherServer.trigger(`notification-${recipientId}`, 'noti-message', { sender: newMessage.sender })
         } catch (error) {
             console.error(error)
         }

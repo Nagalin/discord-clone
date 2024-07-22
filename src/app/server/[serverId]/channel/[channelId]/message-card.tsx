@@ -1,7 +1,7 @@
 import React from 'react'
+import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zustand/message-store'
 import UserCard from '@/components/user-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zustand/message-store'
 
 const MessageCard = () => {
     const messages = useMessageStore(state => state.messages)
@@ -24,7 +24,7 @@ const MessageCard = () => {
                             }
                             <div className='ps-[50px]'>
 
-                            {curr.content}
+                                {curr.content}
                             </div>
                         </div>
                     )

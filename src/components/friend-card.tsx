@@ -2,24 +2,20 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import chatLogo from '@/assets/chat.svg'
 import UserCard from '@/components/user-card'
 import { UserType } from '@/dto/user'
-import chatLogo from '@/assets/chat.svg'
-import { useRouter } from 'next/navigation'
 
-const FriendCard = ({ friend }: { friend: UserType }) => {
+const FriendCard = ({ user }: { user: UserType }) => {
     const router = useRouter()
-
-    const handleGoToChat = async (recipientId: string) => {
-        router.push(`/homepage/chat/${recipientId}`)
-    }
 
     return (
         <div>
             <div className='flex justify-between items-center'>
-                <UserCard user={friend} />
+                <UserCard user={user} />
                 <Image
-                    onClick={() => handleGoToChat(friend.userId)}
+                    onClick={() => router.push(`/homepage/chat/${user.userId}`)}
                     className='cursor-pointer'
                     width={25}
                     height={25}

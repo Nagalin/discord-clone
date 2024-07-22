@@ -4,7 +4,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useOnlineUserContext } from '@/contexts/online-user-provider'
 import { getFriendsAction } from '@/app/homepage/_actions/get-friends'
-import FriendCard from '@/app/homepage/friend-card'
+import FriendCard from '@/components/friend-card'
 import OnlineFriendHeader from '@/app/homepage/online-friend-header'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -14,7 +14,7 @@ const Homepage = () => {
     queryFn: async () => await getFriendsAction({})
   })
 
-  const { isUserOnline  } = useOnlineUserContext()
+  const { isUserOnline } = useOnlineUserContext()
 
   if (isFetching) return <HomepageLoading />
   if (friends?.data?.error)
@@ -28,10 +28,10 @@ const Homepage = () => {
         {friends?.data?.info?.map(currFriends => {
 
           const userOnline = isUserOnline(currFriends.userId)
-          
+
           return (
             <div>
-              {userOnline && <FriendCard friend={currFriends} />}
+              {userOnline && <FriendCard user={currFriends} />}
             </div>
           )
         })}

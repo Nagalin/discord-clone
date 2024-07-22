@@ -7,7 +7,7 @@ export const ChannelSchemaBase = z.object({
     serverId: z.string().uuid(),
 })
 
-type ChannelType = z.infer<typeof ChannelSchemaBase>
+export type ChannelType = z.infer<typeof ChannelSchemaBase>
 
 export function createChannelDTO(channel: ChannelType) {
     return ChannelSchemaBase.parse(channel)

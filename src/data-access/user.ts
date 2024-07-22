@@ -62,6 +62,43 @@ export async function getChannelMembers(channelId: string) {
     return channelMembers.map(currChannelMembers => createUserDTO(currChannelMembers))
 }
 
+export async function getAvailableFriends(serverId: string, ownerId: string) {
+    const availableFriends =  await prisma.user.findMany({
+        where: {
+            OR: [
+                {
+                    recievedFriendRequestFrom: {
+                        some: {
+                            requesterId: ownerId,
+                            status: 'Friend'
+                        }
+                    }
+                },
+
+                {
+                    sendFriendRequestTo: {
+                        some: {
+                            recipientId: ownerId,
+                            status: 'Friend'
+
+                        }
+                    }
+                }
+            ],
+
+            NOT: {
+                serverMembers: {
+                    some: {
+                        serverId: serverId
+                    }
+                }
+            }
+        }
+    })
+
+    return availableFriends.map(curr => createUserDTO(curr))
+}
+
 export async function getAvailableMembers(serverId: string, channelId: string) {
     const availableMembers = await prisma.user.findMany({
         where: {

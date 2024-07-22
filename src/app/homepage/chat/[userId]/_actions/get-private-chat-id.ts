@@ -22,6 +22,6 @@ export const getPrivateChatIdAction = actionClient
 
         } catch (error) {
             console.error('Error getting chat id: ', error)
-            return { error: 'Error occurs' }
+            return { error: 'Something went wrong ...' }
         }
     })

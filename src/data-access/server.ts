@@ -19,7 +19,7 @@ export async function getServers(userId: string) {
 }
 
 export async function getServerInfo(serverId: string) {
-    const server = await prisma.server.findFirst({
+    const server = await prisma.server.findUnique({
         where: {
             serverId: serverId
         }

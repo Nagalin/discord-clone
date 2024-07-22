@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import React from 'react'
-import { getFriendProfileAction } from './_actions/get-friend-profile'
+import { getFriendProfileAction } from '@/app/homepage/chat/[userId]/_actions/get-friend-profile'
 import UserCard from '@/components/user-card'
 
 const FriendProfile = () => {

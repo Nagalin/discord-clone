@@ -16,7 +16,7 @@ export const getAvailableMembersAction = actionClient
         return { info: members }
         
     } catch (error) {
-        console.error(error)
+        console.error('Error getting available friends: ', error)
         return { error : 'Failed to get member in server ...'} 
         
     }

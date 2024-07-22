@@ -27,6 +27,7 @@ export const sendMessageAction = actionClient
             pusherServer.trigger(`channel-${privateChatId}`, 'incoming-message', payload)
             pusherServer.trigger(`notification-${recipientId}`, 'noti-message', { sender: newMessage.sender })
         } catch (error) {
-            console.error(error)
+            console.error('Error sending message: ', error)
+            return { error: 'Failed to send message ...'}
         }
     })

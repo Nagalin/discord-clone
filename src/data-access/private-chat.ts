@@ -1,5 +1,8 @@
-import { createPrivateChatDTO, createPrivateChatWithParticipantInfoDTO } from '@/dto/private-chat'
 import prisma from '@/lib/prisma'
+import {
+    createPrivateChatDTO,
+    createPrivateChatWithParticipantInfoDTO
+} from '@/dto/private-chat'
 
 export async function createPrivateChat(senderId: string, recipientId: string) {
     const privateChat = await prisma.privateChat.create({

@@ -22,8 +22,8 @@ export const sendMessageAction = actionClient
             pusherServer.trigger(`channel-${channelId}`, 'incoming-message', payload)
 
         } catch (error) {
-            console.error(error)
-            return { error: 'Error occurs' }
+            console.error('Error sending messaeg: ', error)
+            return { error: 'Failed to send message ...' }
 
         }
 

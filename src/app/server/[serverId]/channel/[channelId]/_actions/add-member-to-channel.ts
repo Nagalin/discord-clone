@@ -14,9 +14,9 @@ export const addMemberToChannelAction = actionClient
     try {
         await addUserToChannel(channelId, userId)
         
-        
     } catch (error) {
-        console.error(error)
+        console.error('Error adding member to channel: ', error)
+        return { error: 'Failed to add this member to channel ...'}
         
     }
 

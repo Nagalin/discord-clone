@@ -14,7 +14,7 @@ export const getChannelMessageAction = actionClient
             const channelMessages = await getChannelMessages(channelId)
             return { info: channelMessages }
         } catch (error) {
-            console.error(error)
+            console.error('Error getting channel message:', error)
             return { error: 'Failed to get message from this channel' }
         }
     })

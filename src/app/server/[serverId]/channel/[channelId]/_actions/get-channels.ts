@@ -16,7 +16,7 @@ export const getChannelsAction = actionClient
             const channels = await getChannelsByserverId(serverId, userId)
             return { info: channels }
         } catch (error) {
-            console.error(error)
+            console.error('Error getting channels: ', error)
             return { error: 'Failed to get channel ...' }
         }
     })

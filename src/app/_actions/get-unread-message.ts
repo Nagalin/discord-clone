@@ -11,7 +11,7 @@ export const getUnreadMessagesAction = actionClient
             const unreadMessages = await getUnreadMessages(userId)
             return { info: unreadMessages }
         } catch (error) {
-            console.error(error)
-            return { error: 'Failed to get unread message notification' }
+            console.error('Error getting unread message: ',error)
+            return { error: 'Failed to get unread message notification ...' }
         }
     })

@@ -1,6 +1,4 @@
 import prisma from '@/lib/prisma'
-import { getServerMember } from '@/data-access/server'
-import { getFriends } from '@/data-access/user'
 import { 
     createFriendshipDTO, 
     createPendingFriendRequestDTO, 

@@ -19,7 +19,8 @@ export const addFriendToServerAction = actionClient
             const voiceGeneralChannel = await getChannelByName('General', 'Voice')
             await addUserToChannel(voiceGeneralChannel!.channelId!, friendId)
         } catch (error) {
-            console.error(error)
+            console.error('Error adding friend to server: ', error)
+            return { error: 'Failed to add this user to server ...'}
 
         }
     })

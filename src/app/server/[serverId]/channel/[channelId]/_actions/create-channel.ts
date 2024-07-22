@@ -18,6 +18,7 @@ export const createChannelAction = actionClient
             await createChannel(serverId, ownerId, channelName, channelType)
 
         } catch (error) {
-            console.error(error)
+            console.error('Error creating channel: ', error)
+            return { error: 'Failed to create channel ...'}
         }
     })

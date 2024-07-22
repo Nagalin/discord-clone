@@ -11,7 +11,7 @@ export const getPrivateChatHistoryAction = actionClient
             const privateChatHistory = await getPrivateChatHistory(userId)
             return { info: privateChatHistory }
         } catch (error) {
-            console.error(error)
+            console.error('Error getting private chat history: ', error)
             return { error: 'Failed to get data ...' }
         }
     })

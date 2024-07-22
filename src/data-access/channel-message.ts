@@ -1,3 +1,4 @@
+import { createChannelMessageWithSenderInfoDTO } from '@/dto/channel-message'
 import prisma from '@/lib/prisma'
 
 export async function getChannelMessages(channelId: string) {
@@ -10,11 +11,11 @@ export async function getChannelMessages(channelId: string) {
             sender: true
         }
     })
-    return channelMessage
+    return channelMessage.map(curr => createChannelMessageWithSenderInfoDTO(curr))
 }
 
 export async function createChannelMessage(senderId: string, channelId: string, message: string) {
-    return await prisma.channelMessage.create({
+    const channelMessage = await prisma.channelMessage.create({
         data: {
             channelId: channelId,
             senderId: senderId,
@@ -24,4 +25,5 @@ export async function createChannelMessage(senderId: string, channelId: string, 
             sender: true
         }
     })
+    createChannelMessageWithSenderInfoDTO(channelMessage)
 }

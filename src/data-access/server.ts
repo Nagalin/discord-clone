@@ -27,18 +27,6 @@ export async function getServerInfo(serverId: string) {
     return server ? createServerDTO(server) : null
 }
 
-export async function getServerMember(serverId: string) {
-    const server = await prisma.server.findFirst({
-        where: {
-            serverId: serverId
-        },
-        include: {
-            members: true
-        }
-    })
-    return server
-}
-
 export async function createServer(
     ownerId: string, serverName: string, serverImage: string
 ) {
@@ -58,7 +46,7 @@ export async function createServer(
 }
 
 export async function addUserToServer(serverId: string, friendId: string) {
-    const server = await prisma.server.update({
+    await prisma.server.update({
         where: {
             serverId: serverId
         },

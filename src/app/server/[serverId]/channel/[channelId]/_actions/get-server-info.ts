@@ -14,7 +14,7 @@ export const getServerInfoAction = actionClient
             const server = await getServerInfo(serverId)
             return { info: server }
         } catch (error) {
-            console.error(error)
+            console.error('Error getting info on this server', error)
             return { error: 'Failed to get server info ...' }
         }
     })

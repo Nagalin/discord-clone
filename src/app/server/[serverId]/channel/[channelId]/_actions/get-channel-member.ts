@@ -15,8 +15,8 @@ export const getChannelMemberAction = actionClient
         return { info: channelMembers }
         
     } catch (error) {
-        console.error(error)
-        return { error: 'Error occurs'}
+        console.error('Error getting channel members: ',error)
+        return { error: 'Failed to get members on this channel'}
         
     }
 })

@@ -1,10 +1,10 @@
 import { z } from 'zod'
 import { channelSchema } from './channel'
-import { userSchemaBase } from './user'
+import { UserSchemaBase } from './user'
 
 const channelMessageSchema = z.object({
     channelMessageId: z.string().uuid(),
-    sender: userSchemaBase.optional(),
+    sender: UserSchemaBase.optional(),
     senderId: z.string(),
     content: z.string(),
     channel: channelSchema.optional(),

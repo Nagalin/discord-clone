@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { userSchemaBase } from '@/dto/user'
+import { UserSchemaBase } from '@/dto/user'
 
 const friendshipSchemaBase = z.object({
     friendshipId: z.string().uuid(),
@@ -8,12 +8,12 @@ const friendshipSchemaBase = z.object({
     status: z.enum(['Friend', 'Pending']),
 })
 
-const friendshipWithUserInfoDTOSchema = friendshipSchemaBase.extend({
-    requester: userSchemaBase.optional(),
-    recipient: userSchemaBase.optional()
+const friendshipWithUserInfoSchema = friendshipSchemaBase.extend({
+    requester: UserSchemaBase.optional(),
+    recipient: UserSchemaBase.optional()
 })
 
-type FriendshipWithUserInfoType = Required<z.infer<typeof friendshipWithUserInfoDTOSchema>>
+type FriendshipWithUserInfoType = Required<z.infer<typeof friendshipWithUserInfoSchema>>
 type FriendshipType = z.infer<typeof friendshipSchemaBase>
 
 export function createFriendshipDTO(friendship: FriendshipType) {
@@ -42,6 +42,6 @@ export function createPendingFriendRequestDTO(
                 status: curr.status
             }
         }
-        return friendshipWithUserInfoDTOSchema.parse(pendingRequest)
+        return friendshipWithUserInfoSchema.parse(pendingRequest)
     })
 }

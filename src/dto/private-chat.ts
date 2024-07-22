@@ -1,11 +1,11 @@
 import { z } from 'zod'
-import { userSchemaBase } from '@/dto/user'
+import { UserSchemaBase } from '@/dto/user'
 
 const privateChatSchema = z.object({
     privateChatId: z.string().uuid(),
     createdAt: z.date(),
     updatedAt: z.date(),
-    participants: userSchemaBase.array().optional()
+    participants: UserSchemaBase.array().optional()
 })
 
 export type PrivateChatType = z.infer<typeof privateChatSchema>

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { userSchemaBase, UserType } from '@/dto/user'
+import { UserSchemaBase, UserType } from '@/dto/user'
 
 export const privateMessageSchema = z.object({
     privateMessageId: z.string().uuid(),
@@ -7,14 +7,14 @@ export const privateMessageSchema = z.object({
     createdAt: z.date(),
     updatedAt: z.date(),
     read: z.boolean(),
-    sender: userSchemaBase.optional(),
+    sender: UserSchemaBase.optional(),
     senderId: z.string(),
     recipientId: z.string(),
-    recipient: userSchemaBase.optional()
+    recipient: UserSchemaBase.optional()
 })
 
 const unreadMessagesSchema = z.object({
-    user: userSchemaBase,
+    user: UserSchemaBase,
     unreadMessagesCount: z.number()
 
 })

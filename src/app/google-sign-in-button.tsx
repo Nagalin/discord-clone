@@ -1,19 +1,27 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
+import { Button } from '@/components/ui/button'
 
 const GoogleSignInButton = () => {
     return (
         <Button
             onClick={() => signIn('google', { callbackUrl: '/homepage' })}
             aria-label='Sign in with Google'
-            className='flex items-center gap-3 bg-google-button-blue rounded-md p-0.5 pr-3 transition-colors duration-300 hover:bg-google-button-blue-hover'
+            className='flex items-center gap-3 bg-google-button-blue 
+            rounded-md p-0.5 pr-3 transition-colors duration-300 
+            hover:bg-google-button-blue-hover'
         >
-            <div className='flex items-center justify-center bg-white w-9 h-9 rounded-l'>
+            <div
+                className='flex items-center justify-center bg-white w-9 h-9 rounded-l'
+            >
 
-                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' className='w-5 h-5'>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    className='w-5 h-5'
+                >
                     <title>Sign in with Google</title>
                     <desc>Google G Logo</desc>
                     <path
@@ -36,7 +44,9 @@ const GoogleSignInButton = () => {
 
             </div>
 
-            <span className='text-sm text-white tracking-wider'>Sign in with Google</span>
+            <span className='text-sm text-white tracking-wider'>
+                Sign in with Google
+            </span>
         </Button>
     )
 }

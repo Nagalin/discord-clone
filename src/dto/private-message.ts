@@ -14,26 +14,25 @@ export const PrivateMessageSchemaBase = z.object({
 })
 
 
-export const PrivateMessageSchemaWithUserInfoSchema = PrivateMessageSchemaBase.extend({
+export const PrivateMessageSchemaWithSenderInfoSchema = PrivateMessageSchemaBase.extend({
     sender: UserSchemaBase,
-    recipient: UserSchemaBase
 })
 
-const unreadMessagesSchema = z.object({
+const UnreadMessagesSchema = z.object({
     user: UserSchemaBase,
     unreadMessagesCount: z.number()
 
 })
 
 export type PrivateMessageType = z.infer<typeof PrivateMessageSchemaBase>
-export type UnreadMessagesType = z.infer<typeof unreadMessagesSchema>
-export type PrivateMessageSchemaWithUserInfoType = z.infer<typeof PrivateMessageSchemaWithUserInfoSchema>
+export type UnreadMessagesType = z.infer<typeof UnreadMessagesSchema>
+export type PrivateMessageSchemaWithSenderInfoType = z.infer<typeof PrivateMessageSchemaWithSenderInfoSchema>
 
 export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
     return PrivateMessageSchemaBase.parse(privateMessage)
 }
 
-export function createUnreadMessagesDTO(unreadMessages: PrivateMessageSchemaWithUserInfoType[]) {
+export function createUnreadMessagesDTO(unreadMessages: PrivateMessageSchemaWithSenderInfoType[]) {
     const userUnreadMessagesArray: { user: UserType, unreadMessagesCount: number }[] = []
 
     unreadMessages.forEach(message => {
@@ -51,5 +50,5 @@ export function createUnreadMessagesDTO(unreadMessages: PrivateMessageSchemaWith
         }
     })
 
-    return z.array(unreadMessagesSchema).parse(userUnreadMessagesArray)
+    return UnreadMessagesSchema.array().parse(userUnreadMessagesArray)
 }

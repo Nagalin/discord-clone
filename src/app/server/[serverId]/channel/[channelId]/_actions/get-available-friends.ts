@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { actionClient } from '@/lib/safe-action'
 import { getAvailableFriends } from '@/data-access/friendship'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 
 const schema = z.object({
     serverId: z.string().uuid()

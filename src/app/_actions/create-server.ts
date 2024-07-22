@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { createChannel } from '@/data-access/channel'
 import { createServer } from '@/data-access/server'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
 
 const schema = z.object({

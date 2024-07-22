@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { getPrivateMessages, updatePrivateMessage } from '@/data-access/private-messages'
 import { actionClient } from '@/lib/safe-action'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 
 const schema = z.object({
     privateChatId: z.string().uuid()

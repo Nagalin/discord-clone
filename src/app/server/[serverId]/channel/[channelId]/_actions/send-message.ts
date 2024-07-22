@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { createChannelMessage } from '@/data-access/channel-message'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
 import { pusherServer } from '@/lib/pusher'
 

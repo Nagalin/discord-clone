@@ -19,7 +19,6 @@ export async function getUserInfoByName(username: string) {
     return user ? createUserDTO(user) : null
 }
 
-
 export async function getFriends(userId: string) {
     const friends = await prisma.user.findMany({
         where: {

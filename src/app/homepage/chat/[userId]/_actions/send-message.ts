@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { updatePrivateChatDate } from '@/data-access/private-chat'
 import { createPrivateMessage } from '@/data-access/private-messages'
 import { PrivateMessageType } from '@/dto/private-message'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { pusherServer } from '@/lib/pusher'
 import { actionClient } from '@/lib/safe-action'
 

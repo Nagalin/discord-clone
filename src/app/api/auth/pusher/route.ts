@@ -1,5 +1,5 @@
 import { PresenceChannelData, UserChannelData } from 'pusher'
-import { authConfigs } from '@/lib/authConfigs'
+import { authConfigs } from '@/lib/auth-configs'
 import { pusherServer } from '@/lib/pusher'
 import { getServerSession } from 'next-auth'
 import { NextRequest, NextResponse } from 'next/server'

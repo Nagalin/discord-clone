@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { createPrivateChat, getPrivateChat } from '@/data-access/private-chat'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
 
 const schema = z.object({

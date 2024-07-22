@@ -6,14 +6,14 @@ import { useQuery } from '@tanstack/react-query'
 import { getUnreadMessagesAction } from '@/app/_actions/get-unread-message'
 import { useMessageNotiStore } from '@/app/_zustand/message-noti-store'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useToast }  from '@/components/ui/use-toast'
+import { useToast } from '@/components/ui/use-toast'
 
 const NotificationMessage = () => {
   const unreadMessage = useMessageNotiStore(state => state.unreadMessages)
   const setUnreadMessage = useMessageNotiStore(state => state.setUnreadMessage)
-  const {toast} = useToast()
+  const { toast } = useToast()
 
-  const { data: unreadMessages, isFetching } = useQuery({
+  const { data: unreadMessages } = useQuery({
     queryKey: ['unread-messages'],
     queryFn: async () => {
       const res = await getUnreadMessagesAction({})
@@ -31,11 +31,13 @@ const NotificationMessage = () => {
       })
     }
   }, [unreadMessages, toast])
-  
+
   return (
     <div className='flex flex-col gap-2'>
+
       {unreadMessage?.map(curr => (
         <div className='relative'>
+          
           <Link href='/homepage/chat/[userId]' as={`/homepage/chat/${curr.user.userId}`}>
             <Avatar className='w-12 h-12'>
               <AvatarImage src={curr.user.image} />
@@ -52,6 +54,7 @@ const NotificationMessage = () => {
           </div>
         </div>
       ))}
+
     </div>
   )
 }

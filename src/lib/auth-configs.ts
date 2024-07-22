@@ -46,19 +46,10 @@ export const authConfigs: AuthOptions = {
             const userId = token.userId as string
             try {
                 const user = await getUserInfoById(userId)
-                if (session.user) {
                     session.user.userId = userId
                     session.user.name = user?.username
                     session.user.email = user?.email
                     session.user.image = user?.image
-                } else {
-                    session.user = {
-                        userId: userId,
-                        name: user?.username,
-                        email: user?.email,
-                        image: user?.image
-                    }
-                }
             } catch (error) {
                 console.error('Error fetching user info: ', error)
             }

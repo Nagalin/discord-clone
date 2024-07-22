@@ -1,16 +1,13 @@
 import React, {
     createContext,
-    Dispatch,
     ReactNode,
-    SetStateAction,
     useContext,
     useEffect,
     useState
 } from 'react'
-import { UserType } from '@/dto/user'
-import { pusherClient } from '@/lib/pusher'
 import { useSession } from 'next-auth/react'
-import { getFriends } from '@/data-access/user'
+import { pusherClient } from '@/lib/pusher'
+import { UserType } from '@/dto/user'
 
 type ChannelInfoType = {
     members: { [key: string]: MemberInfoType }
@@ -33,7 +30,6 @@ type OnlineUserContextType = {
     onlineUsers: Omit<UserType, 'email'>[]
     isUserOnline: (userId: string) => boolean
     onlineFriendNum: number,
-    setOnlineFriendNum: Dispatch<SetStateAction<number>>
 }
 
 const OnlineUserContext = createContext<OnlineUserContextType | undefined>(undefined)
@@ -45,11 +41,7 @@ export const useOnlineUserContext = () => {
     return context
 }
 
-type PusherProviderPropsType = {
-    children: ReactNode
-}
-
-const PusherProvider = ({ children }: PusherProviderPropsType) => {
+const PusherProvider = ({ children }: { children: ReactNode }) => {
     const [onlineFriendNum, setOnlineFriendNum] = useState(0)
     const [isSubscribed, setIsSubscribed] = useState(false)
     const [onlineUsers, setOnlineUsers] = useState<Omit<UserType, 'email'>[]>([])
@@ -59,7 +51,7 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
         return !!onlineUsers.find(currOnlineUser => currOnlineUser.userId === userId)
     }
 
-    
+
     useEffect(() => {
         if (!session || isSubscribed) return
 
@@ -67,13 +59,15 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
 
         const presenceChannel = pusherClient.subscribe('presence-online-user')
 
-        presenceChannel.bind('pusher:subscription_succeeded', (channelInfo: ChannelInfoType) => {
+        presenceChannel.bind('pusher:subscription_succeeded', (
+            channelInfo: ChannelInfoType
+        ) => {
             Object.keys(channelInfo.members).forEach(memberId => {
                 const member = channelInfo.members[memberId]
                 setOnlineUsers(prev => {
                     return [...prev, { ...member, userId: memberId }]
                 })
-                setOnlineFriendNum( (channelInfo.count - 1))
+                setOnlineFriendNum((channelInfo.count - 1))
             })
         })
 
@@ -100,7 +94,7 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
     }, [])
 
     return (
-        <OnlineUserContext.Provider value={{ onlineUsers, isUserOnline, onlineFriendNum, setOnlineFriendNum }}>
+        <OnlineUserContext.Provider value={{ onlineUsers, isUserOnline, onlineFriendNum }}>
             {children}
         </OnlineUserContext.Provider>
     )

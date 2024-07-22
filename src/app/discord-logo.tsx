@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import discord from '@/assets/discord.svg'
 import Image from 'next/image'
+import discord from '@/assets/discord.svg'
 import {
     Tooltip,
     TooltipContent,

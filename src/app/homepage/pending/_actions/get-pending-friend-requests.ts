@@ -1,6 +1,6 @@
 'use server'
 
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
 import { getPendingFriendship } from '@/data-access/friendship'
 

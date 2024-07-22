@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div
       className='bg-discord-profile flex 
-    items-center ps-2 absolute bottom-0 left-20 w-56 h-14'
+      items-center ps-2 absolute bottom-0 left-20 w-56 h-14'
     >
       <UserCard user={user} />
     </div>

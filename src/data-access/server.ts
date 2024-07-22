@@ -16,7 +16,6 @@ export async function getServers(userId: string) {
         }
     })
     return createServerWithGeneralChannelIdDTO(servers)
-
 }
 
 export async function getServerInfo(serverId: string) {
@@ -72,6 +71,4 @@ export async function addUserToServer(serverId: string, friendId: string) {
 
         }
     })
-
-    
 }

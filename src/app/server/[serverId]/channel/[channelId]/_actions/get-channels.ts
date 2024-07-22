@@ -1,7 +1,7 @@
 'use server'
 
 import { z } from 'zod'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
 import { getChannelsByserverId } from '@/data-access/channel'
 

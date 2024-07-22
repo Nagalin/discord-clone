@@ -1,14 +1,13 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import { getServersAction } from '@/app/_actions/get-servers'
 import CreateServerButton from '@/app/create-server-button'
 import ServerCard from '@/app/server-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useToast } from '@/components/ui/use-toast'
-import Link from 'next/link'
 
 const Servers = () => {
   const { toast } = useToast()

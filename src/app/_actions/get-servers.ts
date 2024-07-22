@@ -1,8 +1,8 @@
 'use server'
 
-import { getServers } from '@/data-access/server'
-import { getUserIdFromSession } from '@/lib/getUserIdFromSession'
+import { getUserIdFromSession } from '@/lib/get-user-id-from-session'
 import { actionClient } from '@/lib/safe-action'
+import { getServers } from '@/data-access/server'
 
 export const getServersAction = actionClient.action(async () => {
     try {

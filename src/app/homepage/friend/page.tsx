@@ -13,7 +13,6 @@ const FriendPage = () => {
     queryKey: ['all-friends'],
     queryFn: async () => getFriendsAction({})
   })
-  console.log(friends)
 
   if (isFetching) return <FriendLoading />
   if (friends?.data?.error)

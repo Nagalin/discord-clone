@@ -1,35 +1,47 @@
 import { z } from 'zod'
-import { createUserDTO, userSchema } from '@/dto/user'
+import { userSchemaBase } from '@/dto/user'
 
-const friendshipSchema = z.object({
+const friendshipSchemaBase = z.object({
     friendshipId: z.string().uuid(),
     requesterId: z.string(),
     recipientId: z.string(),
     status: z.enum(['Friend', 'Pending']),
-    requester: userSchema.optional(),
-    recipient: userSchema.optional()
 })
 
-type FriendshipType = z.infer<typeof friendshipSchema>
+const friendshipWithUserInfoDTOSchema = friendshipSchemaBase.extend({
+    requester: userSchemaBase.optional(),
+    recipient: userSchemaBase.optional()
+})
+
+type FriendshipWithUserInfoType = Required<z.infer<typeof friendshipWithUserInfoDTOSchema>>
+type FriendshipType = z.infer<typeof friendshipSchemaBase>
 
 export function createFriendshipDTO(friendship: FriendshipType) {
-    return friendshipSchema.parse(friendship)
+    return friendshipSchemaBase.parse(friendship)
 }
 
-export function createUserFriendDTO(friendship: FriendshipType[], userId: string) {
-    return friendship.map(currFriend => {
-        const isRequester = currFriend.requesterId === userId
-        return isRequester ?
-            createUserDTO(currFriend.recipient!) : createUserDTO(currFriend.requester!)
-    })
-}
-
-export function createPendingFriendRequestDTO(pendingFriendRequests: FriendshipType[], requesterId: string) {
+export function createPendingFriendRequestDTO(
+    pendingFriendRequests: FriendshipWithUserInfoType[], userId: string
+) {
     return pendingFriendRequests.map(curr => {
-        curr.requesterId === requesterId ?
-            delete curr.requester :
-            delete curr.recipient
-            
-        return createFriendshipDTO(curr)
+        let pendingRequest
+        if (curr.requesterId === userId) {
+            pendingRequest = {
+                friendshipId: curr.friendshipId,
+                requesterId: curr.requesterId,
+                recipientId: curr.recipientId,
+                recipient: curr.recipient,
+                status: curr.status
+            }
+        } else {
+            pendingRequest = {
+                friendshipId: curr.friendshipId,
+                requesterId: curr.requesterId,
+                recipientId: curr.recipientId,
+                requester: curr.requester,
+                status: curr.status
+            }
+        }
+        return friendshipWithUserInfoDTOSchema.parse(pendingRequest)
     })
 }

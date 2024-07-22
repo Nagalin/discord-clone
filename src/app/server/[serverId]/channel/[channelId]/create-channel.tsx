@@ -17,7 +17,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { createChannelAction } from './_actions/create-channel';
+import { createChannelAction } from './_actions/create-channel'
 
 const FormSchema = z.object({
     type: z.enum(['Text', 'Voice'], {
@@ -46,7 +46,7 @@ const CreateChannel = () => {
 
     })
 
-    const selectedType = watch('type');
+    const selectedType = watch('type')
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
         // Perform your server action or react-query mutation here

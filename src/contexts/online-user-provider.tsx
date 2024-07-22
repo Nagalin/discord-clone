@@ -73,7 +73,6 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
                 setOnlineUsers(prev => {
                     return [...prev, { ...member, userId: memberId }]
                 })
-                console.log(channelInfo.count - 1)
                 setOnlineFriendNum( (channelInfo.count - 1))
             })
         })
@@ -82,7 +81,6 @@ const PusherProvider = ({ children }: PusherProviderPropsType) => {
             setOnlineUsers(prev => {
                 return [...prev, { ...newMember.info, userId: newMember.id }]
             })
-            console.log('here')
             setOnlineFriendNum(prev => prev + 1)
         })
 

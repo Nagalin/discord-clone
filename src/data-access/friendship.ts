@@ -1,9 +1,9 @@
 import prisma from '@/lib/prisma'
 import { getServerMember } from '@/data-access/server'
+import { getFriends } from '@/data-access/user'
 import { 
     createFriendshipDTO, 
     createPendingFriendRequestDTO, 
-    createUserFriendDTO 
 } from '@/dto/friendship'
 
 export async function createFriendship(requesterId: string, recipientId: string) {
@@ -36,34 +36,15 @@ export async function getFriendship(
     return friendship ? createFriendshipDTO(friendship) : null
 }
 
-export async function getFriendsByUserId(userId: string) {
-    const friends = await prisma.friendship.findMany({
-        where: {
-            OR: [
-                { requesterId: userId },
-                { recipientId: userId },
-            ],
-            status: 'Friend'
-        },
-
-        include: {
-            requester: true,
-            recipient: true  
-        }
-    })
-
-    return createUserFriendDTO(friends, userId)
-}
-
-export async function getPendingFriendship(requesterId: string) {
+export async function getPendingFriendship(userId: string) {
     const pendingFriendRequests = await prisma.friendship.findMany({
         where: {
             OR: [
                 {
-                    requesterId: requesterId,
+                    requesterId: userId,
                 },
                 {
-                    recipientId: requesterId
+                    recipientId: userId
                 }],
             status: 'Pending'
         },
@@ -73,11 +54,11 @@ export async function getPendingFriendship(requesterId: string) {
             recipient: true
         }
     })
-    return createPendingFriendRequestDTO(pendingFriendRequests, requesterId)
+    return createPendingFriendRequestDTO(pendingFriendRequests, userId)
 }
 
 export async function getAvailableFriends(serverId: string, ownerId: string) {
-    const friends = await getFriendsByUserId(ownerId)
+    const friends = await getFriends(ownerId)
     const server = await getServerMember(serverId)
 
     const availableFriends = friends.filter(currFriend => {

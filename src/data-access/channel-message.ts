@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
 
 export async function getChannelMessages(channelId: string) {
     const channelMessage = await prisma.channelMessage.findMany({

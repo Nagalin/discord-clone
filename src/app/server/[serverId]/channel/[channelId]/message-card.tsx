@@ -5,7 +5,6 @@ import { useMessageStore } from '@/app/server/[serverId]/channel/[channelId]/_zu
 
 const MessageCard = () => {
     const messages = useMessageStore(state => state.messages)
-    console.log(messages)
 
     return (
         <ScrollArea className='h-[650px] w-[calc(100vw-34rem)]'>

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { userSchema } from '@/dto/user'
+import { userSchemaBase } from '@/dto/user'
 import { serverSchema } from '@/dto/server'
 
 const channelSchemaBase = z.object({
@@ -7,7 +7,7 @@ const channelSchemaBase = z.object({
     channelName: z.string(),
     channelType: z.enum(['Text', 'Voice']),
     serverId: z.string().uuid(),
-    members: z.array(userSchema).optional()
+    members: z.array(userSchemaBase).optional()
 })
 
 type channelSchemaBaaseType = z.infer<typeof channelSchemaBase> & {

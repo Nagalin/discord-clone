@@ -1,8 +1,8 @@
 'use server'
 
-import { getChannelMembers } from "@/data-access/user"
-import { actionClient } from "@/lib/safe-action"
-import { z } from "zod"
+import { getChannelMembers } from '@/data-access/user'
+import { actionClient } from '@/lib/safe-action'
+import { z } from 'zod'
 
 const schema = z.object({
     channelId: z.string().uuid()

@@ -10,27 +10,18 @@ export async function getUserInfoById(userId: string) {
     return user ? createUserDTO(user) : null
 }
 
-export async function upsertUser(
-    userId: string, username: string, email: string, image: string
-) {
-    await prisma.user.upsert({
+export async function getUserInfoByName(username: string) {
+    const user = await prisma.user.findFirst({
         where: {
-            userId: userId
-        },
-
-        create: {
-            userId: userId,
-            username: username,
-            email: email,
-            image: image,
-        },
-
-        update: {}
+            username: username
+        }
     })
+    return user ? createUserDTO(user) : null
 }
 
+
 export async function getFriends(userId: string) {
-    return await prisma.user.findMany({
+    const friends = await prisma.user.findMany({
         where: {
             OR: [
                 {
@@ -56,18 +47,11 @@ export async function getFriends(userId: string) {
 
         }
     })
-}
-
-export async function getUserInfoByName(username: string) {
-    return await prisma.user.findFirst({
-        where: {
-            username: username
-        }
-    })
+    return friends.map(currFriend => createUserDTO(currFriend))
 }
 
 export async function getChannelMembers(channelId: string) {
-    return await prisma.user.findMany({
+    const channelMembers = await prisma.user.findMany({
         where: {
             channelMembers: {
                 some: {
@@ -76,10 +60,11 @@ export async function getChannelMembers(channelId: string) {
             }
         }
     })
+    return channelMembers.map(currChannelMembers => createUserDTO(currChannelMembers))
 }
 
 export async function getAvailableMembers(serverId: string, channelId: string) {
-    return await prisma.user.findMany({
+    const availableMembers = await prisma.user.findMany({
         where: {
             serverMembers: {
                 some: {
@@ -94,5 +79,25 @@ export async function getAvailableMembers(serverId: string, channelId: string) {
                 }
             }
         }
+    })
+    return availableMembers.map(currAvailableMembers => createUserDTO(currAvailableMembers))
+}
+
+export async function upsertUser(
+    userId: string, username: string, email: string, image: string
+) {
+    await prisma.user.upsert({
+        where: {
+            userId: userId
+        },
+
+        create: {
+            userId: userId,
+            username: username,
+            email: email,
+            image: image,
+        },
+
+        update: {}
     })
 }

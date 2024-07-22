@@ -14,7 +14,6 @@ const ChannelMember = () => {
     queryFn: async () => getChannelMemberAction({ channelId: channelId })
   })
 
-  console.log(channelMembers)
   return (
     <div className='bg-discord-server-info h-screen w-60 flex flex-col gap-5 pt-5'>
       {channelMembers?.data?.info?.map(curr => (

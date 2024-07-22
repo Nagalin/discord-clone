@@ -17,7 +17,7 @@ const useHandleFriendRequests = () => {
         })
 
         if (!res?.data?.error) {
-            queryClient.invalidateQueries({ queryKey: ['pendingFriendRequests'] })
+            queryClient.invalidateQueries({ queryKey: ['pending-friend-requests'] })
         } else {
             toast({
                 title: 'Oops ...',

@@ -11,6 +11,10 @@ export async function createPrivateChat(senderId: string, recipientId: string) {
                     userId: recipientId
                 }]
             }
+        },
+
+        include: {
+            participants: true
         }
     })
 

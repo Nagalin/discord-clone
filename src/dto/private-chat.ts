@@ -1,20 +1,24 @@
 import { z } from 'zod'
 import { UserSchemaBase } from '@/dto/user'
 
-const privateChatSchema = z.object({
+const PrivateChatSchemaBase = z.object({
     privateChatId: z.string().uuid(),
     createdAt: z.date(),
     updatedAt: z.date(),
-    participants: UserSchemaBase.array().optional()
 })
 
-export type PrivateChatType = z.infer<typeof privateChatSchema>
+const PrivateChatWithParticipantsInfoSchema = PrivateChatSchemaBase.extend({
+    participants: UserSchemaBase.array()
+})
+
+export type PrivateChatType = z.infer<typeof PrivateChatSchemaBase>
+export type PrivateChatWithParticipantsInfoType = z.infer<typeof PrivateChatWithParticipantsInfoSchema>
 
 export function createPrivateChatDTO(privateChat: PrivateChatType) {
-    return privateChatSchema.parse(privateChat)
+    return PrivateChatSchemaBase.parse(privateChat)
 }
 
-export function createPrivateChatWithOutSenderInfoDTO(privateChat: PrivateChatType, senderId: string) {
+export function createPrivateChatWithOutSenderInfoDTO(privateChat: PrivateChatWithParticipantsInfoType, senderId: string) {
     privateChat.participants = privateChat.participants?.filter(curr => curr.userId !== senderId)
-    return createPrivateChatDTO(privateChat)
+    return PrivateChatWithParticipantsInfoSchema.parse(privateChat)
 }

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { UserSchemaBase, UserType } from '@/dto/user'
 
-export const privateMessageSchema = z.object({
+export const PrivateMessageSchemaBase = z.object({
     privateMessageId: z.string().uuid(),
     content: z.string(),
     createdAt: z.date(),
@@ -13,26 +13,32 @@ export const privateMessageSchema = z.object({
     recipient: UserSchemaBase.optional()
 })
 
+
+export const PrivateMessageSchemaWithUserInfoSchema = PrivateMessageSchemaBase.extend({
+    sender: UserSchemaBase,
+    recipient: UserSchemaBase
+})
+
 const unreadMessagesSchema = z.object({
     user: UserSchemaBase,
     unreadMessagesCount: z.number()
 
 })
 
-export type PrivateMessageType = z.infer<typeof privateMessageSchema>
+export type PrivateMessageType = z.infer<typeof PrivateMessageSchemaBase>
 export type UnreadMessagesType = z.infer<typeof unreadMessagesSchema>
+export type PrivateMessageSchemaWithUserInfoType = z.infer<typeof PrivateMessageSchemaWithUserInfoSchema>
 
 export function createPrivateMessageDTO(privateMessage: PrivateMessageType) {
-    return privateMessageSchema.parse(privateMessage)
+    return PrivateMessageSchemaBase.parse(privateMessage)
 }
 
-export function createUnreadMessagesDTO(unreadMessages: PrivateMessageType[]) {
-    // Create an array to hold the unread messages data
+export function createUnreadMessagesDTO(unreadMessages: PrivateMessageSchemaWithUserInfoType[]) {
     const userUnreadMessagesArray: { user: UserType, unreadMessagesCount: number }[] = []
 
     unreadMessages.forEach(message => {
         if (message.sender) {
-            let existingEntry = userUnreadMessagesArray.find(entry => entry.user.userId === message.sender!.userId)
+            let existingEntry = userUnreadMessagesArray.find(entry => entry.user.userId === message.sender.userId)
 
             if (existingEntry) {
                 existingEntry.unreadMessagesCount += 1

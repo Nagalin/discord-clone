@@ -62,7 +62,7 @@ model Channel {
   channelId String @id @default(uuid())
   channelName String
   channelType ChannelType
-  server Server @relation(fields: [serverId], references: [serverId])
+  server Server @relation(fields: [serverId], references: [serverId], onDelete: Cascade)
   serverId String
   members User[]
   channelMessage ChannelMessage[]

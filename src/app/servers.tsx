@@ -8,6 +8,7 @@ import CreateServerButton from '@/app/create-server-button'
 import ServerCard from '@/app/server-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useToast } from '@/components/ui/use-toast'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const Servers = () => {
   const { toast } = useToast()
@@ -29,24 +30,27 @@ const Servers = () => {
   if (isFetching) return <ServerListLoading />
 
   return (
-    <div
-      className='bg-discord-server-list 
-      h-screen w-20 flex flex-col  gap-2 items-center'
+    <ScrollArea
+      className='bg-discord-server-list h-screen w-20'
     >
-      {servers?.data?.info?.map(currServer => (
-        <Link
-          href='/server/[serverId]/channel/[channelId]'
-          as={`/server/${currServer.serverId}/channel/${currServer.generalChannelId}`}
-          key={currServer.serverId}
-        >
-          <ServerCard
-            server={currServer}
-          />
-        </Link>
-      ))}
 
-      <CreateServerButton />
-    </div>
+      <div className='flex flex-col  gap-2 items-center'>
+
+        {servers?.data?.info?.map(currServer => (
+          <Link
+            href='/server/[serverId]/channel/[channelId]'
+            as={`/server/${currServer.serverId}/channel/${currServer.generalChannelId}`}
+            key={currServer.serverId}
+          >
+            <ServerCard
+              server={currServer}
+            />
+          </Link>
+        ))}
+
+        <CreateServerButton />
+      </div>
+    </ScrollArea>
   )
 }
 
